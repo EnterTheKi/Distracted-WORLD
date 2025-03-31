@@ -476,3 +476,13 @@ body, .gallery-page-container {
     .gallery-page-container #full-blog-post-view h1 { font-size: 1.8rem; }
     .gallery-page-container .post-meta { font-size: 0.85rem; }
 }
+
+/* FORCES the border to appear */
+.about-main-image {
+    border: 3px solid #5c5752 !important; /* Dark vintage border */
+    padding: 8px !important;
+    background: #e8e4d9 !important; /* Old paper color inside border */
+    box-shadow: 
+        0 4px 10px rgba(0,0,0,0.15),
+        inset 0 0 15px rgba(0,0,0,0.1) !important;
+}
