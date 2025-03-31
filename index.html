@@ -1,0 +1,1208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Distracted WORLD</title>
+
+    <!-- 1. Font Links (Google Fonts + Font Awesome) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com"/>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous"/>
+    <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,700;1,400&family=Limelight&family=Oswald:wght@400;700&display=swap" rel="stylesheet"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <!-- 2. CSS Styles -->
+    <style>
+        /* Basic Reset & Box Sizing */
+        .gallery-page-container *,
+        .gallery-page-container *::before,
+        .gallery-page-container *::after {
+            margin: 0; padding: 0; box-sizing: border-box;
+        }
+
+        /* Define accent variables */
+        .gallery-page-container {
+            --header-footer-bg: #2a2725;
+            --header-footer-border: #4a4642;
+            --body-bg: #f7f5f0;
+            --text-color: #3f3a36;
+            --text-color-light: #e8e4d9;
+            --subtle-border-color: #c8c4bc;
+            --hover-border-color: #5c5752;
+            --active-nav-bg: #3a3633; /* Dark background for active button */
+            --active-nav-text: #f7f5f0; /* Light text for active button */
+        }
+
+        /* Base styles */
+        .gallery-page-container {
+            font-family: 'EB Garamond', serif; line-height: 1.7; background-color: var(--body-bg); color: var(--text-color); font-weight: 400; padding-bottom: 20px; overflow-x: hidden; position: relative;
+        }
+
+        /* --- Custom Cursors --- */
+        .gallery-page-container {
+            cursor: url('assets/cursors/glove-default.png') 4 2, default; /* Adjust path if needed */
+        }
+        .gallery-page-container a,
+        .gallery-page-container button,
+        .gallery-page-container .filter-btn,
+        .gallery-page-container .read-more-btn,
+        .gallery-page-container .page-link,
+        .gallery-page-container .cartoon-card,
+        .gallery-page-container .blog-post-card,
+        .gallery-page-container .social-icons-container a,
+        .gallery-page-container .search-toggle-btn,
+        .gallery-page-container .search-result-item,
+        .gallery-page-container .back-to-blog-btn,
+        .gallery-page-container .card-image-placeholder img,
+        .gallery-page-container .blog-image-placeholder img,
+        .gallery-page-container .fullscreen-overlay,
+        .gallery-page-container .fullscreen-image,
+        .gallery-page-container [onclick],
+        .gallery-page-container [data-filter],
+        .gallery-page-container [data-post-id] {
+            cursor: url('assets/cursors/glove-pointer.png') 0 0, pointer; /* Adjust path if needed */
+        }
+        .gallery-page-container input[type="search"],
+        .gallery-page-container input[type="text"],
+        .gallery-page-container textarea {
+            cursor: text;
+        }
+        /* --- End Custom Cursors --- */
+
+
+        /* --- Vintage Effects --- */
+        .gallery-page-container::before {
+            content: ""; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: radial-gradient(ellipse at center, rgba(0,0,0,0) 0%, rgba(0,0,0,0) 50%, rgba(0,0,0,0.15) 100%);
+            opacity: 0.8; pointer-events: none; z-index: 9999;
+        }
+        .gallery-page-container::after {
+            content: ""; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background-image: url('assets/textures/film-grain.png'); /* Adjust path if needed */
+            background-repeat: repeat; opacity: 0.06; pointer-events: none; z-index: 10000;
+            animation: grain-flicker 0.2s infinite steps(1);
+        }
+        @keyframes grain-flicker { 0% { transform: translate(0, 0); } 25% { transform: translate(-1px, 1px); } 50% { transform: translate(1px, -1px); } 75% { transform: translate(-1px, 0); } 100% { transform: translate(0, 1px); } }
+        /* --- End Vintage Effects --- */
+
+
+        /* Header Styling */
+        .gallery-page-container header {
+             background-color: var(--header-footer-bg); padding: 25px 0; text-align: center; margin-bottom: 35px;
+             border-bottom: 5px solid var(--header-footer-border); border-top: 5px solid var(--header-footer-border);
+             box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+        .gallery-page-container header h1 {
+             font-family: 'Limelight', cursive; color: #ffffff !important; font-size: 5.2rem; font-weight: normal;
+             text-shadow: 3px 3px 0px var(--header-footer-border), 6px 6px 8px rgba(0, 0, 0, 0.5);
+             margin: 0 !important; padding: 0 !important; letter-spacing: 4px; line-height: 1.1;
+        }
+
+
+        /* Navigation Bar */
+        .gallery-page-container .filter-nav { display: flex; justify-content: center; align-items: center; flex-wrap: wrap; gap: 20px; padding: 20px 30px !important; margin-bottom: 35px !important; max-width: 1200px; margin-left: auto !important; margin-right: auto !important; border-bottom: 1px solid var(--subtle-border-color); }
+        .gallery-page-container .filter-buttons { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; }
+        .gallery-page-container .filter-nav .filter-btn {
+            padding: 10px 20px; font-size: 0.95rem; font-family: 'Oswald', sans-serif; cursor: pointer; border-radius: 3px;
+            transition: color 0.3s ease, background-color 0.3s ease, border-color 0.3s ease, transform 0.2s ease, box-shadow 0.2s ease;
+            text-transform: uppercase; letter-spacing: 0.5px; font-weight: 700; white-space: nowrap;
+            border: 1px solid var(--hover-border-color); background-color: var(--body-bg); color: var(--text-color);
+            box-shadow: 1px 1px 3px rgba(0,0,0,0.1);
+            text-decoration: none; /* Needed if using <a> styled as button */
+            display: inline-block; /* Needed if using <a> styled as button */
+        }
+        /* Hover style only applies if the button is NOT active */
+        .gallery-page-container .filter-nav .filter-btn:hover:not(.active) {
+             background-color: #e8e4d9; border-color: var(--hover-border-color); color: #111;
+             transform: translateY(-2px); box-shadow: 2px 2px 4px rgba(0,0,0,0.15);
+        }
+        /* Active style for the currently selected button */
+        .gallery-page-container .filter-nav .filter-btn.active {
+            background-color: var(--active-nav-bg); color: var(--active-nav-text) !important; border-color: var(--active-nav-bg);
+            text-shadow: none;
+            transform: none; /* Override hover transform */
+            box-shadow: 1px 1px 3px rgba(0,0,0,0.1); /* Reset hover shadow */
+        }
+
+
+        /* Main Content Area */
+        .gallery-page-container .main-content-area { max-width: 1200px; margin: 0 auto !important; padding: 0 20px !important; }
+
+        /* Gallery Grid (WALL view) */
+        .gallery-page-container .gallery-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; padding-bottom: 20px !important; }
+        .gallery-page-container .cartoon-card {
+             background-color: #fff; border-radius: 3px; overflow: hidden;
+             transition: border-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
+             display: flex; flex-direction: column; border: 1px solid var(--subtle-border-color);
+             box-shadow: 0 4px 10px rgba(0,0,0,0.12);
+        }
+        .gallery-page-container .cartoon-card:hover {
+             border-color: var(--hover-border-color); box-shadow: 0 8px 18px rgba(0,0,0,0.2);
+             transform: translateY(-8px) scale(1.02);
+        }
+        .gallery-page-container .card-image-placeholder { height: 200px; background-color: #e8e8e0; display: flex; justify-content: center; align-items: center; text-align: center; margin-bottom: 0; border-bottom: 1px solid var(--subtle-border-color); position: relative; overflow: hidden; }
+        .gallery-page-container .card-image-placeholder img {
+             display: block; width: 100%; height: 100%; object-fit: cover;
+             filter: grayscale(80%) contrast(110%) brightness(100%);
+             transition: filter 0.4s ease, transform 0.4s ease;
+             cursor: pointer;
+        }
+         .gallery-page-container .cartoon-card:hover .card-image-placeholder img {
+             filter: grayscale(0%) contrast(100%) brightness(100%);
+             transform: scale(1.03);
+         }
+        .gallery-page-container .card-image-placeholder h2 { position: absolute; left: -9999px; }
+        .gallery-page-container .card-details { padding: 15px !important; flex-grow: 1; }
+        .gallery-page-container .card-details h3 { font-family: 'Oswald', sans-serif; font-size: 1.2rem; margin-bottom: 8px !important; font-weight: 700; color: var(--text-color) !important; text-transform: uppercase; }
+        .gallery-page-container .card-details p { font-family: inherit; font-size: 0.95rem; color: #555 !important; margin-bottom: 15px !important; font-weight: 400; line-height: 1.6; }
+
+
+        /* Fullscreen overlay styles */
+        .gallery-page-container .fullscreen-overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background-color: rgba(0, 0, 0, 0.9); display: flex; justify-content: center; align-items: center;
+            z-index: 10001; /* Above grain */
+        }
+        .gallery-page-container .fullscreen-image {
+            max-width: 90%; max-height: 90%; object-fit: contain;
+        }
+
+        /* Page Content Styles (General style for content divs) */
+        .gallery-page-container .page-content {
+            max-width: 850px; margin: 20px auto !important; padding: 30px 40px !important; background-color: #fff;
+            border-radius: 2px; border: 1px solid var(--subtle-border-color);
+            box-shadow: inset 0px 0px 10px rgba(0, 0, 0, 0.1), 0 4px 10px rgba(0,0,0,0.12);
+        }
+        .gallery-page-container .page-content h1,
+        .gallery-page-container .page-content h2 {
+             font-family: 'Limelight', cursive; font-weight: normal; text-transform: uppercase; color: #282828 !important;
+             margin-top: 30px !important; margin-bottom: 20px !important; text-align: center; letter-spacing: 1.5px;
+             text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+        }
+        .gallery-page-container .page-content h1 { font-size: 2.8rem; }
+        .gallery-page-container .page-content h2 { font-size: 2rem; }
+        .gallery-page-container .page-content p {
+            font-family: inherit; font-weight: 400; font-size: 1.1rem; color: var(--text-color) !important;
+            line-height: 1.85; margin-bottom: 20px !important; text-align: justify; hyphens: auto;
+        }
+
+
+        /* --- Drop Cap Styling --- */
+        .gallery-page-container .page-content h1 + p::first-letter,
+        .gallery-page-container .page-content h2 + p::first-letter,
+        .gallery-page-container .page-content img + p::first-letter,
+        .gallery-page-container .page-content .centered-text + p::first-letter,
+        .gallery-page-container .page-content .about-section-separator + h2 + p::first-letter,
+        .gallery-page-container #distracted-content > p:first-of-type::first-letter,
+        .gallery-page-container #full-blog-post-view p:first-of-type::first-letter,
+        .gallery-page-container #about-content p:nth-of-type(1)::first-letter
+         {
+            font-family: 'EB Garamond', serif; font-size: 4em; font-weight: 700; line-height: 0.75;
+            padding-top: 0.1em; color: #444 !important; float: left; margin-right: 0.1em; margin-bottom: -0.1em;
+        }
+        .gallery-page-container .page-content .post-meta::first-letter,
+        #about-content p:nth-of-type(3)::first-letter,
+        #distracted-content > p:not(:first-of-type)::first-letter,
+        #distracted-content h1 + p:not(:first-of-type)::first-letter,
+        #distracted-content h2 + p:not(:first-of-type)::first-letter,
+        #distracted-content img + p:not(:first-of-type)::first-letter,
+        #distracted-content div + p:not(:first-of-type)::first-letter
+        {
+            all: initial !important;
+        }
+        /* --- End Drop Cap Styling --- */
+
+
+        /* General placeholder image style */
+        .gallery-page-container .page-content img.placeholder-image {
+            display: block; width: 80%; max-width: 500px; height: auto; aspect-ratio: 16 / 9; object-fit: cover; background-color: #e8e8e0;
+            border: 1px dashed #b0b0a0; margin: 30px auto 40px auto !important;
+            filter: grayscale(80%) contrast(110%) brightness(100%);
+            transition: filter 0.4s ease, transform 0.4s ease;
+        }
+        .gallery-page-container .page-content a:hover img.placeholder-image {
+            filter: grayscale(0%) contrast(100%) brightness(100%);
+            transform: scale(1.03);
+        }
+        .gallery-page-container #about-content img.about-main-image { /* Target specific image if needed */
+            display: block; width: 100%; max-width: 100%; height: auto; aspect-ratio: unset;
+            object-fit: contain; border: 1px solid var(--subtle-border-color);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.15); filter: none; background-color: transparent;
+            margin: 30px auto 45px auto !important; transition: none;
+        }
+         .gallery-page-container #about-content img.about-main-image:hover {
+            filter: none; transform: none;
+         }
+
+
+        .gallery-page-container .centered-text { text-align: center; font-family: 'EB Garamond', serif; font-size: 1.3rem; margin: 40px 0 !important; line-height: 1.9; font-weight: 400; color: var(--text-color) !important; }
+        .gallery-page-container .centered-text strong { font-weight: 700; color: #000 !important; }
+        .gallery-page-container .page-link { /* For links styled as buttons within content */
+            display: block; width: fit-content; margin: 40px auto !important; padding: 12px 30px !important; background-color: #444; color: var(--text-color-light) !important; text-decoration: none !important; font-family: 'Oswald', sans-serif; font-weight: 700; text-transform: uppercase; border-radius: 3px; transition: color 0.3s ease, background-color 0.3s ease, border-color 0.3s ease, transform 0.2s ease, box-shadow 0.2s ease; letter-spacing: 1px; box-shadow: 1px 1px 3px rgba(0,0,0,0.2); border: 1px solid #444; }
+        .gallery-page-container .page-link:hover { background-color: #111; transform: scale(1.05); border-color: var(--hover-border-color); }
+        .gallery-page-container .about-section-separator {
+             border-top: none; border-bottom: 2px solid #bbb; opacity: 0.7;
+             margin: 60px auto !important; width: 50%;
+        }
+
+        /* Styles for ABOUT View (#about-content div) */
+        .gallery-page-container #about-content { max-width: 950px; padding-top: 10px !important; }
+        .gallery-page-container .about-intro-header { font-family: 'Limelight', cursive; font-size: 2.0rem; text-align: center; margin-bottom: 15px !important; color: #444 !important; font-weight:normal; letter-spacing: 1px; }
+        .gallery-page-container .preview-section { /* For sections within About page */
+             background-color: #fff; padding: 25px 30px !important; margin-bottom: 30px !important; border-radius: 3px;
+             border: 1px solid var(--subtle-border-color); box-shadow: 0 4px 10px rgba(0,0,0,0.12);
+        }
+        .gallery-page-container .preview-section h3 { font-family: 'Limelight', cursive; font-size: 1.8rem; font-weight: normal; color: var(--text-color) !important; margin-bottom: 15px !important; text-align: left; text-transform: uppercase; letter-spacing: 1px; }
+        .gallery-page-container .preview-section p { font-family: 'EB Garamond', serif; font-size: 1.05rem; color: #444 !important; line-height: 1.7; margin-bottom: 20px !important; text-align: justify; }
+        .gallery-page-container .preview-section p::first-letter { all: unset !important; }
+        .gallery-page-container .read-more-btn { /* For buttons within preview sections */
+             display: inline-block; padding: 8px 20px !important; background-color: #555; color: var(--text-color-light) !important; text-decoration: none !important; font-family: 'Oswald', sans-serif; font-weight: 400; text-transform: uppercase; border-radius: 3px; transition: color 0.3s ease, background-color 0.3s ease, border-color 0.3s ease, transform 0.2s ease, box-shadow 0.2s ease; letter-spacing: 0.5px; font-size: 0.9rem; cursor: pointer; border: 1px solid #555;
+             /* Ensure it looks like a button */
+             appearance: button; -webkit-appearance: button; -moz-appearance: button;
+        }
+        .gallery-page-container .read-more-btn:hover { background-color: #333; border-color: #333; }
+
+        /* Styles for BLOG List View (#blog-content div) */
+        .gallery-page-container .blog-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 35px; padding-bottom: 20px !important; }
+        .gallery-page-container .blog-post-card {
+             background-color: #fff; border-radius: 3px; overflow: hidden;
+             transition: border-color 0.4s ease, transform 0.4s cubic-bezier(0.25, 0.8, 0.25, 1), box-shadow 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+             display: flex; flex-direction: column; border: 1px solid var(--subtle-border-color);
+             box-shadow: 0 4px 10px rgba(0,0,0,0.12);
+        }
+        .gallery-page-container .blog-card-link-wrapper { /* This is the <a> tag wrapping the card */
+             text-decoration: none !important; color: inherit; display: flex; flex-direction: column; height: 100%;
+        }
+        .gallery-page-container .blog-post-card:hover {
+             transform: translateY(-12px) rotate(1deg); box-shadow: 0 12px 25px rgba(0, 0, 0, 0.2);
+             border-color: var(--hover-border-color);
+        }
+        .gallery-page-container .blog-image-placeholder { height: 180px; background-color: #e0e0d4; display: flex; justify-content: center; align-items: center; text-align: center; color: #999; font-style: italic; font-family: 'EB Garamond', serif; border-bottom: 1px solid var(--subtle-border-color); overflow: hidden; }
+        .gallery-page-container .blog-image-placeholder img {
+             display: block; width: 100%; height: 100%; object-fit: cover;
+             filter: grayscale(80%) contrast(110%) brightness(100%);
+             transition: filter 0.4s ease, transform 0.4s ease;
+        }
+        .gallery-page-container .blog-post-card:hover .blog-image-placeholder img {
+             filter: grayscale(0%) contrast(100%) brightness(100%); transform: scale(1.03);
+        }
+        .gallery-page-container .blog-image-placeholder span { font-size: 1.1rem; position: absolute; left:-9999px; }
+        .gallery-page-container .blog-card-details { padding: 20px !important; flex-grow: 1; }
+        .gallery-page-container .blog-card-details h3 { font-family: 'Oswald', sans-serif; font-size: 1.4rem; margin-bottom: 12px !important; font-weight: 700; color: #282828 !important; text-transform: uppercase; line-height: 1.3; }
+        .gallery-page-container .blog-card-details p { font-family: 'EB Garamond', serif; font-size: 1rem; color: #444 !important; line-height: 1.6; margin-bottom: 0 !important; text-align: left; }
+        .gallery-page-container .blog-card-details p::first-letter { all: unset !important; }
+
+
+        /* Styles for Full Blog Post View (#full-blog-post-view div) */
+        .gallery-page-container #full-blog-post-view { animation: fadeIn 0.6s ease-out forwards; }
+        .gallery-page-container #full-blog-post-view h1 { margin-top: 10px !important; font-size: 2.5rem; letter-spacing: 1.5px; text-shadow: 1px 1px 2px rgba(0,0,0,0.1); }
+        .gallery-page-container .post-meta { font-family: 'EB Garamond', serif; font-style: italic; text-align: center; color: #777 !important; font-size: 0.95rem; margin-bottom: 30px !important; }
+        .gallery-page-container .back-to-blog-btn { display: inline-block; margin-bottom: 25px !important; font-family: 'Oswald', sans-serif; font-size: 0.9rem; color: #555 !important; text-decoration: none !important; border: none; background: none; cursor: pointer; padding: 5px 0 !important; transition: color 0.3s ease, transform 0.2s ease; }
+        .gallery-page-container .back-to-blog-btn:hover { color: #000 !important; transform: translateX(-3px); }
+
+       /* === Search Widget Styles === */
+        .search-widget-container { position: fixed !important; top: 20px; right: 20px; z-index: 1001; display: flex; align-items: center; }
+        .search-toggle-btn { background-color: #fff; color: #333; border: 1px solid #aaa; border-radius: 50%; width: 45px; height: 45px; display: flex; justify-content: center; align-items: center; cursor: pointer; box-shadow: 0 2px 5px rgba(0,0,0,0.2); transition: background-color 0.3s ease, color 0.3s ease, transform 0.2s ease; font-size: 1.2rem; order: 2; z-index: 999; padding: 0; margin: 0; }
+        .search-toggle-btn:hover { background-color: #eee; color: #000; transform: scale(1.15) rotate(-5deg); transition: transform 0.2s cubic-bezier(0.68, -0.55, 0.27, 1.55), background-color 0.2s ease, color 0.2s ease; }
+        .search-input-wrapper { position: relative; order: 1; }
+        #pageSearchInput { width: 0; opacity: 0; padding: 0; border: none; height: 45px; vertical-align: middle; border-radius: 22px; font-family: 'Oswald', sans-serif; font-size: 1rem; outline: none; background-color: #fff; color: #333; box-shadow: 0 2px 5px rgba(0,0,0,0.1); pointer-events: none; transform: scaleX(0.1); transform-origin: right center; transition: width 0.5s cubic-bezier(0.68, -0.55, 0.27, 1.55), opacity 0.2s 0.1s ease-out, padding 0.5s cubic-bezier(0.68, -0.55, 0.27, 1.55), transform 0.5s cubic-bezier(0.68, -0.55, 0.27, 1.55), border-color 0.3s ease, box-shadow 0.3s ease; box-sizing: border-box; }
+        #pageSearchInput::placeholder { color: #aaa; font-style: italic; opacity: 1; }
+        .search-widget-container.expanded #pageSearchInput { width: 250px; opacity: 1; padding: 0 15px; border: 1px solid #aaa; pointer-events: auto; transform: scaleX(1); box-shadow: 0 4px 10px rgba(0,0,0,0.15); }
+        .search-results { position: absolute; top: 105%; left: 0; right: 0; background-color: #fff; border: 1px solid #ccc; border-radius: 3px; box-shadow: 0 4px 8px rgba(0,0,0,0.15); max-height: 300px; overflow-y: auto; display: none; z-index: 998; padding: 0; margin: 0; list-style: none; }
+        .search-results.visible { display: block; animation: resultsAppear 0.3s ease forwards; }
+        @keyframes resultsAppear { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
+        .search-result-section { padding: 8px 15px; background-color: #f0f0f0; font-family: 'Oswald', sans-serif; font-weight: bold; color: #333; border-bottom: 1px solid #ddd; font-size: 0.9rem; text-transform: uppercase; }
+        .search-result-item { padding: 10px 15px; border-bottom: 1px solid #eee; font-size: 0.95rem; cursor: pointer; transition: background-color 0.2s ease; display: block; color: #444; }
+        .search-result-item:last-child { border-bottom: none; }
+        .search-result-item:hover { background-color: #e8e8e0; }
+        .search-result-item strong { font-weight: 700; color: #000; background-color: rgba(150, 150, 150, 0.2); padding: 0 2px; border-radius: 1px; }
+        .search-result-item em { font-style: italic; color: #555; font-size: 0.9em; display: block; margin-top: 2px; }
+       /* === End Search Widget Styles === */
+
+
+        /* Highlight Styles */
+        .search-highlight { background-color: #FF0000; color: white; font-weight: bold; padding: 0 1px; border-radius: 2px; display: inline; box-decoration-break: clone; -webkit-box-decoration-break: clone; }
+        .search-highlight-current { background-color: #FF9800; color: #000; padding: 0 2px; border-radius: 2px; font-weight: bold; display: inline; box-decoration-break: clone; -webkit-box-decoration-break: clone; }
+
+
+        /* Fade-In Animation */
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        /* Apply animation to content sections when they become visible */
+        .gallery-page-container #about-content:not(.hidden),
+        .gallery-page-container #gallery-grid:not(.hidden),
+        .gallery-page-container #distracted-content:not(.hidden),
+        .gallery-page-container #organized-content:not(.hidden),
+        .gallery-page-container #blog-content:not(.hidden),
+        .gallery-page-container #full-blog-post-view:not(.hidden) {
+             animation: fadeIn 0.6s ease-out forwards;
+        }
+
+        /* Social Media Icons */
+        .gallery-page-container .social-icons-container { text-align: center; padding: 25px 0 !important; margin: 30px auto 20px auto !important; max-width: 1100px; border-top: 1px solid var(--subtle-border-color); }
+        .gallery-page-container .social-icons-container a { display: inline-flex; align-items: center; justify-content: center; text-decoration: none !important; color: var(--text-color-light) !important; background-color: #000 !important; width: 55px; height: 55px; border-radius: 50%; margin: 0 12px !important; transition: color 0.3s ease, background-color 0.3s ease, transform 0.2s ease, box-shadow 0.2s ease; box-shadow: 0 2px 5px rgba(0,0,0,0.2); }
+        .gallery-page-container .social-icons-container a i { font-size: 1.8rem; line-height: 1; transition: color 0.3s ease; }
+        .gallery-page-container .social-icons-container a:hover {
+             transform: translateY(-4px) scale(1.1); background-color: #fff !important; color: #000 !important; box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+        }
+        .gallery-page-container .social-icons-container a:hover i { color: #000 !important; }
+
+
+        /* Footer Styling */
+        .gallery-page-container footer {
+             margin-top: 0 !important; padding: 15px 0 !important; background-color: var(--header-footer-bg); text-align: center;
+             border-top: 5px solid var(--header-footer-border); border-bottom: 5px solid var(--header-footer-border);
+        }
+        .gallery-page-container footer p { font-family: 'EB Garamond', serif; color: var(--text-color-light) !important; font-size: 0.85rem; letter-spacing: 0.5px; font-weight: 400; text-shadow: none; margin: 0 !important; }
+
+
+        /* Class to hide elements */
+        .gallery-page-container .hidden { display: none !important; visibility: hidden !important; height: 0 !important; overflow: hidden !important; border: none !important; padding: 0 !important; margin: 0 !important; }
+
+
+        /* Button Press Effect */
+         .gallery-page-container .filter-btn:active,
+         .gallery-page-container .read-more-btn:active,
+         .gallery-page-container .page-link:active,
+         .gallery-page-container .social-icons-container a:active,
+         .search-toggle-btn:active
+          {
+             transform: translateY(2px) scale(0.97); box-shadow: inset 1px 1px 5px rgba(0,0,0,0.2);
+             transition-duration: 0.05s !important;
+         }
+
+        /* --- RESPONSIVE ADJUSTMENTS --- */
+        @media (max-width: 768px) {
+            .gallery-page-container header h1 { font-size: 4.0rem; text-shadow: 2px 2px 0px var(--header-footer-border), 4px 4px 6px rgba(0, 0, 0, 0.5); letter-spacing: 3px; }
+            .gallery-page-container .filter-nav { flex-direction: column; padding: 0 20px !important; gap: 15px; }
+            .gallery-page-container .gallery-grid { grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 20px; }
+            .gallery-page-container footer p { font-size: 0.8rem; }
+            .gallery-page-container .card-details h3 { font-size: 1.1rem; }
+            .gallery-page-container .page-content { padding: 20px !important; } /* #about-content already covered */
+            .gallery-page-container .page-content h1 { font-size: 2.2rem; } /* #about-content h1 covered */
+            .gallery-page-container .page-content h2 { font-size: 1.6rem; } /* #about-content h2 covered */
+            .gallery-page-container .page-content p, .gallery-page-container .preview-section p, .gallery-page-container .blog-card-details p { font-size: 1rem; line-height: 1.7; }
+            .gallery-page-container .preview-section h3 { font-size: 1.5rem; }
+            .gallery-page-container .blog-card-details h3 { font-size: 1.3rem; }
+            .gallery-page-container .centered-text { font-size: 1.1rem; margin: 30px 0 !important;}
+            /* Adjust drop cap size */
+            .gallery-page-container #about-content p:nth-of-type(1)::first-letter { font-size: 3.5em; }
+            .gallery-page-container .social-icons-container a { width: 50px; height: 50px; margin: 5px 8px !important; }
+            .gallery-page-container .social-icons-container a i { font-size: 1.6rem; }
+            .search-widget-container { top: 15px; right: 15px; }
+            .search-widget-container.expanded #pageSearchInput { width: 180px; }
+            .search-toggle-btn { width: 40px; height: 40px; font-size: 1.1rem;}
+            #pageSearchInput { height: 40px; border-radius: 20px; }
+            .gallery-page-container #full-blog-post-view h1 { font-size: 2rem; }
+        }
+
+        @media (max-width: 480px) {
+            .gallery-page-container header h1 { font-size: 3.0rem; text-shadow: 1px 1px 0px var(--header-footer-border), 3px 3px 5px rgba(0, 0, 0, 0.5); letter-spacing: 2px; }
+            .gallery-page-container footer p { font-size: 0.75rem; }
+            .gallery-page-container .card-details h3 { font-size: 1rem; }
+            .gallery-page-container .filter-buttons { gap: 5px; }
+            .gallery-page-container .filter-nav .filter-btn { padding: 8px 12px; font-size: 0.85rem; }
+            .gallery-page-container .gallery-grid { grid-template-columns: 1fr; gap: 15px; }
+            .gallery-page-container .page-content { padding: 15px !important; } /* #about-content covered */
+            .gallery-page-container .page-content h1 { font-size: 2rem; } /* #about-content h1 covered */
+            .gallery-page-container .page-content h2 { font-size: 1.4rem; } /* #about-content h2 covered */
+            .gallery-page-container .page-content p, .gallery-page-container .preview-section p, .gallery-page-container .blog-card-details p { font-size: 0.95rem; line-height: 1.6; }
+            .gallery-page-container .preview-section h3 { font-size: 1.3rem; }
+            .gallery-page-container .blog-card-details h3 { font-size: 1.2rem; }
+            .gallery-page-container .centered-text { font-size: 1rem; margin: 25px 0 !important; }
+            .gallery-page-container .page-link { padding: 10px 20px !important; font-size: 0.9rem;}
+             /* Adjust drop cap size */
+             .gallery-page-container #about-content p:nth-of-type(1)::first-letter { font-size: 3em; }
+            .gallery-page-container .social-icons-container a { width: 45px; height: 45px; margin: 5px 6px !important;}
+            .gallery-page-container .social-icons-container a i { font-size: 1.4rem; }
+            .search-widget-container.expanded #pageSearchInput { width: calc(100vw - 70px); }
+            .search-widget-container { top: 10px; right: 10px; }
+            #pageSearchInput { height: 40px; border-radius: 20px; }
+            .gallery-page-container #full-blog-post-view h1 { font-size: 1.8rem; }
+            .gallery-page-container .post-meta { font-size: 0.85rem; }
+        }
+    </style>
+
+</head>
+<body>
+
+    <!-- 3. HTML Structure -->
+    <div class="gallery-page-container">
+
+        <!-- Search Widget (Fixed Position) -->
+        <div class="search-widget-container" id="search-widget">
+             <div class="search-input-wrapper">
+                 <input type="search" id="pageSearchInput" class="search-input-field" placeholder="Search Site..." autocomplete="off"/>
+                 <div class="search-results" id="searchResults"></div>
+             </div>
+             <button class="search-toggle-btn" id="searchToggle" aria-label="Toggle Search">
+                 <i class="fa-solid fa-magnifying-glass"></i>
+             </button>
+        </div>
+
+        <header>
+            <h1>Distracted WORLD</h1>
+        </header>
+
+        <!-- Navigation: Using BUTTONS with data-filter for SPA behavior -->
+        <nav class="filter-nav">
+            <div class="filter-buttons">
+                <button class="filter-btn active" data-filter="about">ABOUT</button>
+                <button class="filter-btn" data-filter="distracted">Distracted WORLD</button>
+                <button class="filter-btn" data-filter="organized">Organized WORLD</button>
+                <button class="filter-btn" data-filter="blog">Blog</button>
+                <button class="filter-btn" data-filter="wall">Wall</button>
+            </div>
+        </nav>
+
+        <main class="main-content-area">
+
+            <!-- ABOUT Content - Should be VISIBLE by default -->
+            <div id="about-content" class="page-content">
+                 <h2 class="about-intro-header">Welcome, Traveler, to a World… Distracted.</h2>
+                 <img src="assets/images/distracted-world-main.jpg" <!-- UPDATE PATH IF NEEDED -->
+                      alt="Distracted WORLD illustration with globe head character"
+                      class="placeholder-image about-main-image">
+                 <p style="text-align: center; font-style: italic; margin-top: 30px;">
+                     Imagine going back in time, like in old black-and-white cartoons! Radios played jazz, but just like today, people often felt lost because of *distractions*.
+                 </p>
+                 <p>
+                     This website is like a map to help you find your way when your brain feels pulled everywhere at once. Here, we learn how to quiet the noise around us, focus our minds, and get to know ourselves better.
+                 </p>
+                 <p><strong>what is 'Distracted World'?</strong> It's a special way to think about how we can *wake up* and escape the things that stop us from doing our best work or reaching our goals. Things like getting easily side-tracked or spending too much time scrolling can really hold us back.</p>
+                 <p>This site is full of ideas and information to help you improve yourself and grow. Becoming great isn't instant magic! It comes from the small, good choices and actions you take every single day.</p>
+                 <p>Sometimes, it feels like our minds are always buzzing, looking for the next notification or exciting thing. This can make it hard to concentrate. But you *can* get your focus back! You can reset your mind and become the amazing person you're meant to be. It's time to level up!</p>
+                 <p>Meet <strong>Di-Mind</strong>! He's a special character here to help you on this journey. Want to know more about him and how he helps organize thoughts? Check out the <strong>'Organized WORLD'</strong> section!</p>
+                 <div class="about-section-separator" style="width: 40%; margin: 40px auto !important;"></div>
+                 <!-- Preview Sections Below - Buttons use data-target-filter for JS -->
+                 <section class="preview-section"> <h3>Distracted WORLD</h3> <p>In a Distracted world, people often escape their day-to-day struggles by being preoccupied with the wrong things...</p> <button class="read-more-btn" data-target-filter="distracted">Read More</button> </section>
+                 <section class="preview-section"> <h3>Organized WORLD (Meet Di-Mind)</h3> <p>In the black-and-white world of the 1930s, where jazz tunes float through the air... Meet Di-Mind...</p> <button class="read-more-btn" data-target-filter="organized">Read More</button> </section>
+                 <section class="preview-section"> <h3>Blog</h3> <p>Latest thoughts, insights, and updates from the world of Ki, focus, and escaping distractions...</p> <button class="read-more-btn" data-target-filter="blog">Read More</button> </section>
+                 <section class="preview-section" style="text-align:center;"> <p style="text-align:center; margin-bottom: 15px !important;">Looking for wallpapers?</p> <button class="read-more-btn" data-target-filter="wall">Go to Wall</button> </section>
+            </div>
+
+            <!-- Card Grid (Wall Content) - HIDDEN by default -->
+            <div class="gallery-grid hidden" id="gallery-grid">
+                 <article class="cartoon-card" data-category="wall" data-tags="betty boop bimbo fleischer 1933 wallpaper"> <div class="card-image-placeholder"><img src="https://placehold.co/400x300/E8E8E0/555555/png?text=Betty+Boop" alt="Betty Boop Wallpaper"><h2>Betty Boop</h2></div> <div class="card-details"> <h3>Betty Boop and Bimbo</h3> <p>1933 - Fleischer Studios</p> </div> </article>
+                 <article class="cartoon-card" data-category="wall" data-tags="bosko talk-ink kid harman-ising 1930 wallpaper"> <div class="card-image-placeholder"><img src="https://placehold.co/400x300/E8E8E0/555555/png?text=Bosko" alt="Bosko Wallpaper"><h2>Bosko</h2></div> <div class="card-details"> <h3>Bosko the Talk-Ink Kid</h3> <p>1930 - Harman-Ising</p> </div> </article>
+                 <article class="cartoon-card" data-category="wall" data-tags="felix the cat pat sullivan 1925 wallpaper"> <div class="card-image-placeholder"><img src="https://placehold.co/400x300/E8E8E0/555555/png?text=Felix+The+Cat" alt="Felix The Cat Wallpaper"><h2>Felix The Cat</h2></div> <div class="card-details"> <h3>Felix The Cat</h3> <p>1925 - Pat Sullivan</p> </div> </article>
+                 <article class="cartoon-card" data-category="wall" data-tags="flip the frog ub iwerks 1930 wallpaper"> <div class="card-image-placeholder"><img src="https://placehold.co/400x300/E8E8E0/555555/png?text=Flip+the+Frog" alt="Flip the Frog Wallpaper"><h2>Flip the Frog</h2></div> <div class="card-details"> <h3>Flip the Frog</h3> <p>1930 - Ub Iwerks</p> </div> </article>
+                 <article class="cartoon-card" data-category="wall" data-tags="willie whopper ub iwerks 1933 wallpaper"> <div class="card-image-placeholder"><img src="https://placehold.co/400x300/E8E8E0/555555/png?text=Willie+Whopper" alt="Willie Whopper Wallpaper"><h2>Willie Whopper</h2></div> <div class="card-details"> <h3>Willie Whopper</h3> <p>1933 - Ub Iwerks</p> </div> </article>
+                 <article class="cartoon-card" data-category="wall" data-tags="cubby bear van beuren 1933 wallpaper"> <div class="card-image-placeholder"><img src="https://placehold.co/400x300/E8E8E0/555555/png?text=Cubby+Bear" alt="Cubby Bear Wallpaper"><h2>Cubby Bear</h2></div> <div class="card-details"> <h3>Cubby Bear</h3> <p>1933 - Van Beuren Studios</p> </div> </article>
+                 <article class="cartoon-card" data-category="wall" data-tags="oswald the lucky rabbit disney lantz 1927 wallpaper"> <div class="card-image-placeholder"><img src="https://placehold.co/400x300/E8E8E0/555555/png?text=Oswald" alt="Oswald Wallpaper"><h2>Oswald the Lucky Rabbit</h2></div> <div class="card-details"> <h3>Oswald the Lucky Rabbit</h3> <p>1927 - Disney/Lantz</p> </div> </article>
+                 <article class="cartoon-card" data-category="wall" data-tags="mickey mouse early disney 1928 steamboat willie wallpaper"> <div class="card-image-placeholder"><img src="https://placehold.co/400x300/E8E8E0/555555/png?text=Steamboat+Willie" alt="Steamboat Willie Wallpaper"><h2>Early Mickey Mouse</h2></div> <div class="card-details"> <h3>Steamboat Willie</h3> <p>1928 - Disney</p> </div> </article>
+                 <article class="cartoon-card" data-category="wall" data-tags="silly symphonies disney 1929 skeleton dance wallpaper"> <div class="card-image-placeholder"><img src="https://placehold.co/400x300/E8E8E0/555555/png?text=Silly+Symphonies" alt="Silly Symphonies Wallpaper"><h2>Silly Symphonies</h2></div> <div class="card-details"> <h3>Silly Symphonies</h3> <p>1929 - Disney</p> </div> </article>
+            </div>
+
+            <!-- Distracted World Content - HIDDEN by default -->
+            <div id="distracted-content" class="page-content hidden">
+                  <h1>IN A DISTRACTED WORLD...</h1>
+                  <img src="https://placehold.co/500x281/E8E8E0/777777/png?text=Distraction+Concept" alt="Concept image for Distracted World" class="placeholder-image">
+                  <p>In a Distracted world, people often escape their day-to-day struggles by being preoccupied with the wrong things...</p>
+                  <p>Once people understand that 95% of success is mindset, they realize how little inner work they do...</p>
+                  <p>"Enter The Ki" symbolizes entering the state of Ki...</p>
+                  <h2>You Must Decide Now!</h2>
+                  <p>You must decide now! To become exceptional, focus on inner work...</p>
+                  <p>The Mind and the Body should be in balance... Level up, my friend. Become unfazed. The only thing holding you back is yourself.</p>
+                  <p>We exist in an era full of distractions...</p>
+                  <div class="centered-text"> It's <strong>TIME</strong> To...<br/> <strong>ESCAPE</strong> This <strong>Distracted WORLD</strong><br/> and...<br/> <strong>ENTER</strong> A<br/> New <strong>STATE</strong> of <strong>Consciousness</strong> </div>
+                  <img src="https://placehold.co/500x281/E8E8E0/777777/png?text=Consciousness+Concept" alt="Concept image for Consciousness" class="placeholder-image">
+                  <h2>Is This You?</h2>
+                  <p>Do you feel stuck, not knowing what to do? ...it's time to escape the system designed to distract you!</p>
+                  <!-- Link to Organized World page/section -->
+                  <a href="#" data-target-filter="organized" class="page-link read-more-btn">MEET DI-MIND</a> <!-- Changed to use data-filter -->
+                  <div class="about-section-separator"></div>
+            </div>
+
+            <!-- Organized World Content - HIDDEN by default -->
+            <div id="organized-content" class="page-content hidden">
+                  <h1>Meet <strong>Di-Mind</strong></h1> <img src="https://placehold.co/500x281/E8E8E0/777777/png?text=Di-Mind+Globe+Head+GIF" alt="Di-Mind with Globe Head" class="placeholder-image">
+                  <h2>The Tale of Di-Mind in Distracted WORLD</h2> <p>In the black-and-white world of the 1930s...</p>
+                  <h2>The Switch</h2> <img src="https://placehold.co/500x281/E8E8E0/777777/png?text=Di-Mind+Switch+GIF" alt="Di-Mind flipping a switch" class="placeholder-image">
+                  <h2>The Adventure of <strong>Di-Mind</strong></h2> <p>In the black and white land of Distracted WORLD, there lived <strong>Di-Mind</strong>...</p>
+                  <p>Di-Mind, he was different. He wanted to achieve...</p>
+                  <p>He would start his day with a list of goals...</p>
+                  <p>Until one day, something magical happened... <em>click</em>—the world changed.</p>
+                  <p>Suddenly, the jazz became a rhythm for his work...</p>
+                  <p>Now, Di-Mind could see through the distractions...</p>
+                  <p>Di-Mind became a legend in Distracted WORLD...</p>
+                  <p>And so, in this world where time seemed to stand still...</p>
+                  <p>But the real magic... was <strong>persistence</strong>...</p>
+                  <p>At the heart of this world is <strong>Di-Mind</strong>...</p>
+                  <p>Di-Mind isn't just a character; he's a reminder...</p>
+                  <p style="text-align: center; font-style: italic; margin: 15px 0 !important;"> 1.<br/> 2.<br/> 3.<br/> ...<br/> 10.? </p>
+                  <p>With batteries or a charge, Di-Mind keeps you on track...</p>
+                  <p>If you've succeeded, Di-Mind sings a jolly tune...</p>
+                  <p>In the surreal, exaggerated world of <strong>Distracted WORLD</strong>...</p>
+                  <!-- Example Link (if needed) -->
+                  <!-- <a href="https://dw.typedream.app/" target="_blank" rel="noopener noreferrer" class="page-link">Anti-Brain Rot</a> -->
+            </div>
+
+            <!-- Blog List Content - HIDDEN by default -->
+            <div id="blog-content" class="page-content hidden">
+                 <h1>From The Desk of Di-Mind</h1>
+                 <p style="text-align:center; margin-bottom: 30px !important; font-size: 1.2rem; color: #555 !important;">Insights, ramblings, and blueprints for escaping the noise.</p>
+                 <div class="blog-grid">
+                     <!-- Blog post cards use data-post-id for JS -->
+                     <article class="blog-post-card"> <a href="#" class="blog-card-link-wrapper" data-post-id="post-1"> <div class="blog-image-placeholder"><img src="https://placehold.co/400x225/E0E0D4/666666/png?text=Focus+Rituals" alt="Blog Post Image: Focus Rituals"></div> <div class="blog-card-details"> <h3>Mastering the 'Switch': Daily Focus Rituals</h3> <p>Explore the simple, yet powerful daily habits...</p> </div> </a> </article>
+                     <article class="blog-post-card"> <a href="#" class="blog-card-link-wrapper" data-post-id="post-2"> <div class="blog-image-placeholder"><img src="https://placehold.co/400x225/E0E0D4/666666/png?text=Persistence" alt="Blog Post Image: Persistence"></div> <div class="blog-card-details"> <h3>The Persistence Principle: Why Small Steps Win</h3> <p>Di-Mind didn't transform overnight...</p> </div> </a> </article>
+                     <article class="blog-post-card"> <a href="#" class="blog-card-link-wrapper" data-post-id="post-3"> <div class="blog-image-placeholder"><img src="https://placehold.co/400x225/E0E0D4/666666/png?text=Distractions" alt="Blog Post Image: Distractions"></div> <div class="blog-card-details"> <h3>Decoding Distractions: Know Your Enemy</h3> <p>From the blaring radio to endless notifications...</p> </div> </a> </article>
+                     <article class="blog-post-card"> <a href="#" class="blog-card-link-wrapper" data-post-id="post-4"> <div class="blog-image-placeholder"><img src="https://placehold.co/400x225/E0E0D4/666666/png?text=Intuition" alt="Blog Post Image: Intuition"></div> <div class="blog-card-details"> <h3>Beyond IQ: Tuning Into Your Body's Feedback</h3> <p>Di-Mind learned to listen intuitively...</p> </div> </a> </article>
+                 </div>
+            </div>
+
+            <!-- Full Blog Post View Container - HIDDEN by default, content injected by JS -->
+            <div id="full-blog-post-view" class="page-content hidden">
+                <!-- JS injects post content here -->
+            </div>
+
+            <!-- Hidden Blog Post Content Divs (for JS to copy from) -->
+            <div style="display:none;" id="post-1-content"> <button class="back-to-blog-btn">← Back to Blog List</button> <h1>Mastering the 'Switch': Daily Focus Rituals</h1> <p class="post-meta"><em>Posted on: October 26, 1934 | By: Di-Mind's Chronicle</em></p> <img src="https://placehold.co/600x337/E0E0D4/666666/png?text=Blog+Post+1+Main" alt="Focus Rituals Concept" class="placeholder-image"> <p>Flicking that switch isn't a one-time magic trick...</p> <p>Think of it like winding a clock...</p> <h2>The Morning Anchor</h2> <p>Before anything else pulls at your attention...</p> <h2>Time Blocking, 1930s Style</h2> <p>Assign specific blocks of time...</p> <img src="https://placehold.co/500x281/E0E0D4/666666/png?text=Time+Blocking" alt="Image related to time blocking" class="placeholder-image" style="height: auto; aspect-ratio: 16/9;"> <h2>The Midday Reset</h2> <p>Even the sharpest mind gets dull...</p> <p>These rituals, practiced daily...</p> </div>
+            <div style="display:none;" id="post-2-content"> <button class="back-to-blog-btn">← Back to Blog List</button> <h1>The Persistence Principle: Why Small Steps Win</h1> <p class="post-meta"><em>Posted on: November 12, 1934 | By: Di-Mind's Chronicle</em></p> <img src="https://placehold.co/600x337/E0E0D4/666666/png?text=Blog+Post+2+Main" alt="Persistence Concept" class="placeholder-image"> <p>Ah, persistence! It doesn't arrive with a trumpet fanfare...</p> <p>The grand achievements you see? They're built brick by tiny brick...</p> <h2>The Power of 'Non-Zero Days'</h2> <p>Forget perfection. Aim for progress, however small...</p> <img src="https://placehold.co/500x281/E0E0D4/666666/png?text=Small+Steps" alt="Image related to small steps" class="placeholder-image" style="height: auto; aspect-ratio: 16/9;"> <p>Distracted WORLD loves grand gestures that fizzle out...</p> </div>
+            <div style="display:none;" id="post-3-content"> <button class="back-to-blog-btn">← Back to Blog List</button> <h1>Decoding Distractions: Know Your Enemy</h1> <p class="post-meta"><em>Posted on: November 28, 1934 | By: Di-Mind's Chronicle</em></p> <img src="https://placehold.co/600x337/E0E0D4/666666/png?text=Blog+Post+3+Main" alt="Distractions Concept" class="placeholder-image"> <p>The jazz on the radio, the screaming headlines...</p> <p>Perhaps it's the endless scroll on that glowing rectangle? ...</p> <h2>Identify Your Personal Static</h2> <p>Take a moment. Be honest. What *truly* pulls you away...? </p> <img src="https://placehold.co/500x281/E0E0D4/666666/png?text=Fortress+Focus" alt="Image related to focus" class="placeholder-image" style="height: auto; aspect-ratio: 16/9;"> <h2>Build Your Fortress of Focus</h2> <p>Create an environment that supports...</p> </div>
+            <div style="display:none;" id="post-4-content"> <button class="back-to-blog-btn">← Back to Blog List</button> <h1>Beyond IQ: Tuning Into Your Body's Feedback</h1> <p class="post-meta"><em>Posted on: December 15, 1934 | By: Di-Mind's Chronicle</em></p> <img src="https://placehold.co/600x337/E0E0D4/666666/png?text=Blog+Post+4+Main" alt="Intuition Concept" class="placeholder-image"> <p>The thinkers and theorists focus heavily on the mind...</p> <p>Ignoring this feedback is like driving a motorcar...</p> <h2>The Gut Feeling & Energy Barometer</h2> <p>That "gut feeling" about a decision? ...</p> <img src="https://placehold.co/500x281/E0E0D4/666666/png?text=Body+Feedback" alt="Image related to body feedback" class="placeholder-image" style="height: auto; aspect-ratio: 16/9;"> <h2>Working Intuitively</h2> <p>Intuition isn't mystical mumbo-jumbo...</p> </div>
+
+        </main>
+
+        <!-- Social Media Icons Section -->
+        <div class="social-icons-container">
+             <a href="https://x.com/D_WORLDX" target="_blank" rel="noopener noreferrer" title="X / Twitter"><i class="fa-brands fa-x-twitter"></i></a>
+             <a href="https://youtube.com/@D_WORLDX" target="_blank" rel="noopener noreferrer" title="YouTube"><i class="fa-brands fa-youtube"></i></a>
+             <a href="https://instagram.com/dworldx" target="_blank" rel="noopener noreferrer" title="Instagram"><i class="fa-brands fa-instagram"></i></a>
+             <a href="https://tiktok.com/@dworldx" target="_blank" rel="noopener noreferrer" title="TikTok"><i class="fa-brands fa-tiktok"></i></a>
+        </div>
+
+        <!-- Footer -->
+        <footer>
+            <p>© <span id="copyright-year"></span> Distracted WORLD</p>
+        </footer>
+
+    </div> <!-- end gallery-page-container -->
+
+    <!-- 4. JavaScript - FULL SPA Functionality Restored -->
+    <script>
+(function() {
+    const container = document.querySelector('.gallery-page-container');
+    if (!container) { console.error("Gallery container not found!"); return; }
+
+    // Elements
+    const filterButtons = container.querySelectorAll('.filter-nav .filter-btn');
+    const contentSections = {
+        about: container.querySelector('#about-content'),
+        wall: container.querySelector('#gallery-grid'),
+        distracted: container.querySelector('#distracted-content'),
+        organized: container.querySelector('#organized-content'),
+        blog: container.querySelector('#blog-content'),
+        post: container.querySelector('#full-blog-post-view') // Container for single post view
+    };
+    // Check if all sections exist (important!)
+    for (const key in contentSections) {
+        if (!contentSections[key]) {
+            console.warn(`Content section for '${key}' not found in the HTML.`);
+            // Optionally disable buttons related to missing sections
+        }
+    }
+
+    const cartoonCards = contentSections.wall ? contentSections.wall.querySelectorAll('.cartoon-card') : [];
+    const blogCardLinks = container.querySelectorAll('.blog-card-link-wrapper');
+    const readMoreButtons = container.querySelectorAll('.read-more-btn'); // Includes those inside previews
+
+    // Search Elements (Keep if using the custom search)
+    const searchWidget = container.querySelector('#search-widget');
+    const searchToggleBtn = container.querySelector('#searchToggle');
+    const pageSearchInput = container.querySelector('#pageSearchInput');
+    const searchResultsContainer = container.querySelector('#searchResults');
+
+    // --- Fullscreen Image Functionality ---
+    function setupFullscreenImages() {
+        // Select images within CARDS that should be fullscreen clickable
+        const cardImages = document.querySelectorAll('.card-image-placeholder img, .blog-image-placeholder img');
+        cardImages.forEach(img => {
+             // Check if listener already added to prevent duplicates
+            if (!img.dataset.fullscreenListenerAdded) {
+                img.style.cursor = 'pointer'; // Ensure cursor style
+                img.addEventListener('click', handleImageClick);
+                img.dataset.fullscreenListenerAdded = 'true'; // Mark as added
+            }
+        });
+         // Optional: Add fullscreen capability to images within general page content too
+         // const pageImages = document.querySelectorAll('.page-content img.make-fullscreen'); // Add class 'make-fullscreen' to images you want clickable
+         // pageImages.forEach(img => { ... same listener logic ... });
+    }
+
+    function handleImageClick(e) {
+        e.stopPropagation(); // Prevent triggering clicks on parent elements like cards/links
+        showFullscreenImage(this.src, this.alt);
+    }
+
+    function showFullscreenImage(src, alt) {
+        const existingOverlay = document.querySelector('.fullscreen-overlay');
+        if (existingOverlay) document.body.removeChild(existingOverlay);
+
+        const overlay = document.createElement('div');
+        overlay.className = 'fullscreen-overlay';
+        const fullscreenImg = document.createElement('img');
+        fullscreenImg.className = 'fullscreen-image';
+        fullscreenImg.src = src;
+        fullscreenImg.alt = alt || "Fullscreen Image"; // Provide default alt
+        overlay.appendChild(fullscreenImg);
+        // Click overlay to close
+        overlay.addEventListener('click', () => {
+             if (document.body.contains(overlay)) { // Check if it still exists
+                 document.body.removeChild(overlay);
+             }
+        });
+        document.body.appendChild(overlay);
+    }
+
+    // --- Text Highlighting Functions (for Search) ---
+    function highlightTextInElement(element, searchTerm) {
+        if (!element || !element.textContent || typeof element.textContent !== 'string' || searchTerm.length < 1) return;
+        const text = element.textContent;
+        // Escape special regex characters in search term
+        const escapedSearchTerm = searchTerm.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+        const regex = new RegExp(escapedSearchTerm, 'gi'); // 'g' for global, 'i' for case-insensitive
+
+        // Optimization: Check if the term exists before manipulating DOM
+        if (!regex.test(text)) return;
+
+        const fragment = document.createDocumentFragment();
+        let lastIndex = 0;
+        // Use replace with a function to process matches
+        text.replace(regex, (match, index) => {
+            // Add text node for content before the match
+            fragment.appendChild(document.createTextNode(text.substring(lastIndex, index)));
+            // Create span for the highlighted match
+            const span = document.createElement('span');
+            span.className = 'search-highlight'; // Or search-highlight-current if needed
+            span.textContent = match;
+            fragment.appendChild(span);
+            // Update lastIndex to the end of the match
+            lastIndex = index + match.length;
+        });
+        // Add any remaining text after the last match
+        fragment.appendChild(document.createTextNode(text.substring(lastIndex)));
+
+        // Replace the element's content safely
+        // Use innerHTML = '' first to clear existing listeners/nodes if necessary
+        element.innerHTML = '';
+        element.appendChild(fragment);
+    }
+
+    function removeHighlights() {
+        // Select all highlight spans
+        const highlights = document.querySelectorAll('.search-highlight, .search-highlight-current');
+        highlights.forEach(highlight => {
+            const parent = highlight.parentNode;
+            if (parent) {
+                // Replace the span with its text content
+                parent.replaceChild(document.createTextNode(highlight.textContent), highlight);
+                // Normalize adjacent text nodes (optional but good practice)
+                parent.normalize();
+            }
+        });
+        // Remove the global click listener when highlights are removed
+        document.removeEventListener('click', clickAwayListenerForHighlights);
+    }
+
+    // Specific listener to remove highlights when clicking outside search
+    function clickAwayListenerForHighlights(event) {
+        if (searchWidget && !searchWidget.contains(event.target)) {
+            removeHighlights();
+        }
+    }
+
+    // Helper function to apply highlighting after navigation/search
+    function highlightTextOnDisplay(searchTerm) {
+        // Use setTimeout to allow DOM update after updateDisplay finishes
+        setTimeout(() => {
+            removeHighlights(); // Clear previous highlights first
+            // Find the currently visible content section
+            const currentSection = document.querySelector('.page-content:not(.hidden), .gallery-grid:not(.hidden)');
+            if (currentSection && searchTerm && searchTerm.trim().length > 0) {
+                // Select elements within the visible section to search within
+                const elementsToSearch = currentSection.querySelectorAll('h1, h2, h3, p, .card-details'); // Add more selectors if needed
+                let foundHighlight = false;
+                elementsToSearch.forEach(el => {
+                    // Ensure element is visible before highlighting
+                    if (el.offsetParent !== null) {
+                         highlightTextInElement(el, searchTerm);
+                         // Check if highlighting actually occurred in this element
+                         if (el.querySelector('.search-highlight')) {
+                             foundHighlight = true;
+                         }
+                    }
+                });
+
+                // If highlights were added, add listener to remove them on click away
+                if (foundHighlight) {
+                    // Remove first to prevent duplicates
+                    document.removeEventListener('click', clickAwayListenerForHighlights);
+                    document.addEventListener('click', clickAwayListenerForHighlights);
+                }
+            }
+        }, 100); // Small delay
+    }
+
+    // --- Main Display Function (SPA Logic) ---
+    function updateDisplay(targetFilter = null, postId = null, searchTermToHighlight = null) {
+        let currentFilter = targetFilter;
+        let sectionToShowId = null;
+        let isBlogPostView = false;
+
+        // --- Determine which section to show ---
+        if (postId && contentSections.post) {
+            // Showing a single blog post
+            currentFilter = 'blog'; // Keep 'blog' button active
+            const postContentElement = document.getElementById(postId + '-content');
+            if (postContentElement && contentSections.post) {
+                // Clear previous post content
+                contentSections.post.innerHTML = '';
+                // Clone content to avoid modifying hidden div, add back button
+                const backButton = document.createElement('button');
+                backButton.className = 'back-to-blog-btn';
+                backButton.innerHTML = '← Back to Blog List';
+                backButton.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    updateDisplay('blog'); // Go back to blog list view
+                });
+                contentSections.post.appendChild(backButton);
+                // Append cloned content
+                contentSections.post.appendChild(postContentElement.cloneNode(true));
+                sectionToShowId = 'post'; // Use the ID of the container div
+                isBlogPostView = true;
+                 // Ensure images within the loaded post content are clickable
+                setTimeout(setupFullscreenImages, 50);
+            } else {
+                console.error("Content for post ID '" + postId + "' not found.");
+                // Fallback to blog list if post content missing
+                currentFilter = 'blog';
+                sectionToShowId = 'blog';
+            }
+        } else if (targetFilter && contentSections[targetFilter]) {
+            // Showing a main section (About, Wall, DW, OW, Blog list)
+            sectionToShowId = targetFilter;
+        } else {
+            // Fallback / Initial Load: Find the active button or default to 'about'
+            let foundActive = false;
+            filterButtons.forEach(btn => {
+                if (btn.classList.contains('active') && !foundActive) {
+                    currentFilter = btn.getAttribute('data-filter');
+                    if (contentSections[currentFilter]) {
+                         sectionToShowId = currentFilter;
+                         foundActive = true;
+                    }
+                }
+            });
+            if (!foundActive || !sectionToShowId) {
+                currentFilter = 'about'; // Default section
+                sectionToShowId = 'about';
+            }
+        }
+
+        // --- Update Navigation Button Active State ---
+        filterButtons.forEach(btn => {
+            btn.classList.toggle('active', btn.getAttribute('data-filter') === currentFilter);
+        });
+
+        // --- Hide all content sections initially ---
+        Object.keys(contentSections).forEach(key => {
+            if (contentSections[key]) {
+                contentSections[key].classList.add('hidden');
+                contentSections[key].style.display = 'none'; // Ensure fully hidden
+            }
+        });
+
+        // --- Show the target section ---
+        const sectionToShow = contentSections[sectionToShowId];
+        if (sectionToShow) {
+            sectionToShow.classList.remove('hidden');
+            // Set display based on section type (grid for wall, block for others)
+            sectionToShow.style.display = (sectionToShowId === 'wall') ? 'grid' : 'block';
+
+            // If showing Wall, filter cards and set up images
+            if (sectionToShowId === 'wall') {
+                filterCards(); // Apply search filter if applicable
+                setTimeout(setupFullscreenImages, 50); // Allow grid to render
+            }
+        } else {
+            console.error(`Section '${sectionToShowId}' could not be found or shown.`);
+        }
+
+
+        // --- Handle Search Term Highlighting ---
+        if (searchTermToHighlight) {
+            highlightTextOnDisplay(searchTermToHighlight);
+        } else if (!isBlogPostView) {
+            // Clear highlights if navigating normally (not from search/post)
+             removeHighlights();
+        }
+
+        // --- Handle Search Bar State ---
+        if (!isBlogPostView && !searchTermToHighlight) {
+             // Close search dropdown and clear input when navigating sections normally
+             searchResultsContainer.innerHTML = '';
+             searchResultsContainer.classList.remove('visible');
+             if (searchWidget && searchWidget.classList.contains('expanded')) {
+                 // Optional: close search bar on navigation
+                 // searchWidget.classList.remove('expanded');
+                 // pageSearchInput.value = '';
+             }
+        }
+         // Update placeholder based on current view
+        if (pageSearchInput) {
+             pageSearchInput.placeholder = (currentFilter === 'wall') ? 'Search Wallpapers...' : 'Search Site...';
+        }
+
+        // --- Scroll to appropriate position ---
+        if (!isBlogPostView) {
+            // Scroll to top for main sections
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        } else {
+            // Scroll partway down for blog posts to show title below nav
+            const headerHeight = container.querySelector('header')?.offsetHeight || 80;
+            const navHeight = container.querySelector('.filter-nav')?.offsetHeight || 60;
+            const offset = 20; // Small space above the content
+            window.scrollTo({ top: headerHeight + navHeight - offset, behavior: 'smooth' });
+        }
+    }
+
+    // --- Filter Cards Function (for Wall view search) ---
+    function filterCards() {
+        if (!pageSearchInput || !contentSections.wall || !cartoonCards.length) return;
+        const searchTerm = pageSearchInput.value.toLowerCase().trim();
+
+        cartoonCards.forEach(card => {
+            const cardTags = card.getAttribute('data-tags')?.toLowerCase() || '';
+            const cardTitle = card.querySelector('.card-details h3')?.textContent.toLowerCase() || '';
+            const cardDesc = card.querySelector('.card-details p')?.textContent.toLowerCase() || '';
+            const cardTextContent = `${cardTags} ${cardTitle} ${cardDesc}`;
+
+            const shouldShow = searchTerm === '' || cardTextContent.includes(searchTerm);
+            card.style.display = shouldShow ? 'flex' : 'none'; // Use 'flex' as it's a flex column
+
+            // Highlight text within visible cards
+            const detailsEl = card.querySelector('.card-details');
+            if (detailsEl) {
+                removeHighlightsInElement(detailsEl); // Clear previous highlights in this card
+                if (shouldShow && searchTerm !== '') {
+                    highlightTextInElement(detailsEl.querySelector('h3'), searchTerm);
+                    highlightTextInElement(detailsEl.querySelector('p'), searchTerm);
+                    // Add global listener if highlights were added
+                    if (detailsEl.querySelector('.search-highlight')) {
+                         document.removeEventListener('click', clickAwayListenerForHighlights);
+                         document.addEventListener('click', clickAwayListenerForHighlights);
+                    }
+                }
+            }
+        });
+    }
+
+    // Helper to remove highlights only within a specific element
+    function removeHighlightsInElement(element) {
+        if (!element) return;
+        const highlights = element.querySelectorAll('.search-highlight, .search-highlight-current');
+        highlights.forEach(highlight => {
+            const parent = highlight.parentNode;
+            if (parent) {
+                parent.replaceChild(document.createTextNode(highlight.textContent), highlight);
+                parent.normalize();
+            }
+        });
+    }
+
+    // --- Site Search Function (for Search Widget Dropdown) ---
+    function executeSiteSearch(term) {
+        searchResultsContainer.innerHTML = ''; // Clear previous results
+        removeHighlights(); // Clear previous text highlights
+
+        if (term.length < 2) { // Minimum search term length
+            searchResultsContainer.classList.remove('visible');
+            return;
+        }
+
+        const results = [];
+        const searchTerm = term.toLowerCase();
+        const searchRegex = new RegExp(term.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'gi'); // Case-insensitive
+
+        // --- Define Searchable Areas ---
+        const searchableConfig = [
+            // About Page Content
+            { filter: 'about', name: 'About', selectors: ['#about-content h1', '#about-content h2', '#about-content h3', '#about-content p', '.preview-section p'] },
+            // Distracted World Page Content
+            { filter: 'distracted', name: 'Distracted World', selectors: ['#distracted-content h1', '#distracted-content h2', '#distracted-content p'] },
+            // Organized World Page Content
+            { filter: 'organized', name: 'Organized World', selectors: ['#organized-content h1', '#organized-content h2', '#organized-content p'] },
+             // Blog List (Titles/Snippets)
+            { filter: 'blog', name: 'Blog List', selectors: ['#blog-content h1', '#blog-content .blog-post-card h3', '#blog-content .blog-post-card p'], isBlogList: true },
+            // Wallpapers (Card Details)
+            { filter: 'wall', name: 'Wallpapers', selectors: ['.gallery-grid .cartoon-card'], isWallCard: true }
+             // Hidden Blog Posts (Full Content) - Searched Separately Below
+        ];
+
+        // --- Search Main Content Sections ---
+        searchableConfig.forEach(config => {
+            config.selectors.forEach(selector => {
+                container.querySelectorAll(selector).forEach(el => {
+                    let elementText = '';
+                    let targetFilter = config.filter;
+                    let targetPostId = null;
+
+                    if (config.isWallCard) {
+                        // Extract text from Wall card elements
+                        const title = el.querySelector('h3')?.textContent || '';
+                        const desc = el.querySelector('p')?.textContent || '';
+                        const tags = el.getAttribute('data-tags') || '';
+                        elementText = `${title} ${desc} ${tags}`;
+                    } else if (config.isBlogList) {
+                         // Find parent card to get post ID if applicable
+                        const blogCard = el.closest('.blog-post-card');
+                        if (blogCard) {
+                            targetPostId = blogCard.querySelector('.blog-card-link-wrapper')?.getAttribute('data-post-id');
+                        }
+                        elementText = el.textContent || el.innerText || '';
+                    }
+                    else {
+                        // Standard text content
+                        elementText = el.textContent || el.innerText || '';
+                    }
+
+                    if (elementText && searchRegex.test(elementText)) {
+                        const lowerText = elementText.toLowerCase();
+                        const index = lowerText.indexOf(searchTerm);
+                        const start = Math.max(0, index - 40); // Context before match
+                        const end = Math.min(elementText.length, index + searchTerm.length + 60); // Context after match
+                        let snippet = elementText.substring(start, end).trim();
+                        if (start > 0) snippet = '...' + snippet;
+                        if (end < elementText.length) snippet = snippet + '...';
+
+                        // Highlight the term within the snippet for display
+                        snippet = snippet.replace(searchRegex, match => `<strong>${match}</strong>`);
+
+                        // Avoid duplicate snippets from the same section/card
+                         if (!results.some(r => r.filter === targetFilter && r.postId === targetPostId && r.text.startsWith(snippet.substring(0, 20)))) {
+                            results.push({
+                                section: config.name, // Grouping label
+                                filter: targetFilter,
+                                text: snippet,
+                                postId: targetPostId, // Null if not a blog list item
+                                action: () => {
+                                    // Navigate to the correct section/post and highlight
+                                     updateDisplay(targetPostId ? null : targetFilter, targetPostId, term);
+                                }
+                            });
+                        }
+                    }
+                });
+            });
+        });
+
+         // --- Search Hidden Blog Post Content ---
+        const hiddenBlogPosts = container.querySelectorAll('div[id^="post-"][id$="-content"]');
+        hiddenBlogPosts.forEach(postDiv => {
+             const postIdMatch = postDiv.id.match(/^(post-\d+)-content$/);
+             if (postIdMatch) {
+                 const postId = postIdMatch[1];
+                 const postTitleElement = postDiv.querySelector('h1');
+                 const postTitle = postTitleElement ? postTitleElement.textContent.substring(0, 35) + '...' : 'Blog Post';
+                 const postElements = postDiv.querySelectorAll('h1, h2, p'); // Search headings and paragraphs
+
+                 postElements.forEach(el => {
+                     const elementText = el.textContent || el.innerText || '';
+                     if (elementText && searchRegex.test(elementText)) {
+                         const lowerText = elementText.toLowerCase();
+                         const index = lowerText.indexOf(searchTerm);
+                         const start = Math.max(0, index - 40);
+                         const end = Math.min(elementText.length, index + searchTerm.length + 60);
+                         let snippet = elementText.substring(start, end).trim();
+                         if (start > 0) snippet = '...' + snippet;
+                         if (end < elementText.length) snippet = snippet + '...';
+                         snippet = snippet.replace(searchRegex, match => `<strong>${match}</strong>`);
+
+                         const sectionIdentifier = `Blog Post: ${postTitle}`;
+                         // Avoid duplicates for the same post
+                         if (!results.some(r => r.postId === postId && r.text.startsWith(snippet.substring(0, 20)))) {
+                             results.push({
+                                 section: sectionIdentifier,
+                                 filter: 'blog', // Keep blog nav active
+                                 text: snippet,
+                                 postId: postId, // ID of the post to show
+                                 action: () => updateDisplay(null, postId, term) // Navigate to this post
+                             });
+                         }
+                     }
+                 });
+             }
+        });
+
+
+        // --- Display Search Results ---
+        if (results.length > 0) {
+            const groupedResults = {};
+            // Group results by section name
+            results.forEach(result => {
+                if (!groupedResults[result.section]) groupedResults[result.section] = [];
+                // Limit results per section if desired
+                if (groupedResults[result.section].length < 5) {
+                    groupedResults[result.section].push(result);
+                }
+            });
+
+            // Create DOM elements for results
+            Object.entries(groupedResults).forEach(([sectionName, sectionResults]) => {
+                const sectionHeader = document.createElement('div');
+                sectionHeader.className = 'search-result-section';
+                sectionHeader.textContent = sectionName;
+                searchResultsContainer.appendChild(sectionHeader);
+
+                sectionResults.forEach(result => {
+                    const item = document.createElement('div');
+                    item.className = 'search-result-item';
+                    item.innerHTML = result.text; // Snippet with highlighted term
+                    item.addEventListener('click', () => {
+                        result.action(); // Execute the navigation/highlighting
+                        // Close search widget after selection
+                        searchWidget.classList.remove('expanded');
+                        pageSearchInput.value = ''; // Clear input
+                        searchResultsContainer.classList.remove('visible'); // Hide results
+                         removeHighlights(); // Clear highlights immediately after click if desired
+                    });
+                    searchResultsContainer.appendChild(item);
+                });
+            });
+
+            searchResultsContainer.classList.add('visible'); // Show the results dropdown
+        } else {
+            // Show 'No results' message
+            const noResults = document.createElement('div');
+            noResults.className = 'search-result-item';
+            noResults.textContent = 'No results found for "' + term + '"';
+            searchResultsContainer.appendChild(noResults);
+            searchResultsContainer.classList.add('visible');
+        }
+    }
+
+    // --- Event Listeners ---
+
+    // Main Navigation Button Clicks
+    filterButtons.forEach(button => button.addEventListener('click', e => {
+        e.preventDefault(); // Prevent default button behavior
+        updateDisplay(button.getAttribute('data-filter'));
+    }));
+
+    // "Read More" Button Clicks (within preview sections etc.)
+    readMoreButtons.forEach(button => button.addEventListener('click', e => {
+        e.preventDefault();
+        const filterTarget = button.getAttribute('data-target-filter');
+         const linkTarget = button.getAttribute('data-post-id'); // Check if it targets a post ID
+
+        if (filterTarget) {
+             updateDisplay(filterTarget);
+         } else if (linkTarget){
+             // If a read-more button specifically links to a post (less common)
+             updateDisplay(null, linkTarget);
+         } else if (button.classList.contains('page-link') && button.hasAttribute('data-target-filter')) {
+             // Handle the specific case of the link styled button in Distracted World content
+             updateDisplay(button.getAttribute('data-target-filter'));
+         }
+    }));
+
+    // Blog Card Link Clicks (to view full post)
+    blogCardLinks.forEach(link => link.addEventListener('click', e => {
+        e.preventDefault(); // Prevent default link behavior
+        const postId = link.getAttribute('data-post-id');
+        if (postId) {
+            updateDisplay(null, postId); // Show the specific post
+        }
+    }));
+
+    // Search Widget Interactions
+    if (searchToggleBtn && pageSearchInput && searchWidget && searchResultsContainer) {
+        // Toggle search input visibility
+        searchToggleBtn.addEventListener('click', e => {
+            e.stopPropagation(); // Prevent triggering document click listener
+            const isNowExpanded = searchWidget.classList.toggle('expanded');
+            if (isNowExpanded) {
+                pageSearchInput.focus(); // Focus input when opened
+                // Update placeholder based on current view
+                 let activeFilter = container.querySelector('.filter-btn.active')?.getAttribute('data-filter') || 'about';
+                 pageSearchInput.placeholder = (activeFilter === 'wall') ? 'Search Wallpapers...' : 'Search Site...';
+            } else {
+                // When closing via toggle button:
+                pageSearchInput.value = ''; // Clear input
+                searchResultsContainer.innerHTML = ''; // Clear results dropdown
+                searchResultsContainer.classList.remove('visible'); // Hide dropdown
+                removeHighlights(); // Remove any text highlighting
+                // If on Wall view, re-filter cards based on empty input
+                 if (container.querySelector('.filter-btn[data-filter="wall"].active')) {
+                     filterCards();
+                 }
+            }
+        });
+
+        // Live search on input (with debounce)
+        let searchTimeout;
+        pageSearchInput.addEventListener('input', () => {
+            clearTimeout(searchTimeout);
+            const currentTerm = pageSearchInput.value;
+            const isOnWallView = container.querySelector('.filter-btn[data-filter="wall"].active') !== null;
+
+            if (searchWidget.classList.contains('expanded')) {
+                // If search bar is open, perform site search after a short delay
+                searchTimeout = setTimeout(() => executeSiteSearch(currentTerm), 300);
+            } else if (isOnWallView) {
+                // If search bar is closed BUT we are on the Wall view, filter cards live
+                 filterCards();
+                 // Highlight results on Wall view if term exists
+                 if (currentTerm.trim().length > 0) {
+                     highlightTextOnDisplay(currentTerm);
+                 } else {
+                     removeHighlights(); // Clear if search term is cleared
+                 }
+            }
+        });
+
+        // Prevent search results click from closing the widget immediately
+        searchResultsContainer.addEventListener('mousedown', e => e.preventDefault());
+
+        // Close search widget if clicking outside of it
+        document.addEventListener('click', event => {
+            if (searchWidget && !searchWidget.contains(event.target) && searchWidget.classList.contains('expanded')) {
+                searchWidget.classList.remove('expanded');
+                // pageSearchInput.value = ''; // Optional: clear input on click away
+                searchResultsContainer.classList.remove('visible');
+                // Don't necessarily remove highlights here, user might want them
+            }
+        });
+
+        // Handle Enter key in search input
+        pageSearchInput.addEventListener('keydown', e => {
+            if (e.key === 'Enter' && searchWidget.classList.contains('expanded')) {
+                e.preventDefault(); // Prevent form submission
+                const firstResult = searchResultsContainer.querySelector('.search-result-item');
+                if (firstResult && !firstResult.textContent.startsWith('No results')) {
+                    firstResult.click(); // Simulate click on the first result
+                } else {
+                    // Optionally perform search again if no results or trigger default action
+                    executeSiteSearch(pageSearchInput.value);
+                }
+            } else if (e.key === 'Escape' && searchWidget.classList.contains('expanded')) {
+                 // Close search on Escape key
+                 searchToggleBtn.click(); // Simulate clicking the toggle to close cleanly
+            }
+        });
+    } else {
+        console.warn("Search widget elements not found. Search functionality disabled.");
+    }
+
+    // --- Initial Setup ---
+    const yearSpan = container.querySelector('#copyright-year');
+    if (yearSpan) yearSpan.textContent = new Date().getFullYear();
+
+    // Initial display setup - show 'about' section by default
+    updateDisplay('about');
+
+})();
+</script>
+
+</body>
+</html>
