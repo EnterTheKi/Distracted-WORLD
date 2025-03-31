@@ -57,6 +57,47 @@ body, .gallery-page-container {
 }
 /* --- End Custom Cursors --- */
 
+/* ----- Hinge Hover Effect ----- */
+.vintage-photo-wrapper {
+  position: relative;
+  display: inline-block;
+  perspective: 1000px; /* For 3D effect */
+  margin: 30px 0;
+}
+
+.hinge-hover {
+  border: 10px solid #5c5752 !important;
+  background-color: #e8e4d9 !important;
+  box-shadow: 
+    0 4px 15px rgba(0, 0, 0, 0.3),
+    inset 0 0 25px rgba(0, 0, 0, 0.1);
+  transform-origin: 50% 90%; /* Hinge at bottom */
+  transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1), 
+              box-shadow 0.4s ease;
+}
+
+.hinge-hover:hover {
+  transform: rotateX(15deg) rotateY(5deg) translateY(-10px);
+  box-shadow: 
+    0 15px 30px rgba(0, 0, 0, 0.4),
+    inset 0 0 30px rgba(0, 0, 0, 0.2);
+}
+
+/* Optional: Add faux hinge screws */
+.hinge-hover::before,
+.hinge-hover::after {
+  content: "";
+  position: absolute;
+  bottom: -15px;
+  width: 15px;
+  height: 15px;
+  background: radial-gradient(circle, #8b8685 30%, #5c5752 70%);
+  border-radius: 50%;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+}
+
+.hinge-hover::before { left: 20%; }
+.hinge-hover::after { right: 20%; }
 
 /* --- Vintage Effects --- */
 /* These apply to the container, which should wrap the body content in the HTML */
