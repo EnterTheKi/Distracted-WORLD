@@ -477,12 +477,15 @@ body, .gallery-page-container {
     .gallery-page-container .post-meta { font-size: 0.85rem; }
 }
 
-/* FORCES the border to appear */
 .about-main-image {
-    border: 3px solid #5c5752 !important; /* Dark vintage border */
-    padding: 8px !important;
-    background: #e8e4d9 !important; /* Old paper color inside border */
+    /* Distressed border effect */
+    border: 8px solid transparent !important;
+    padding: 6px !important;
+    background: 
+        linear-gradient(#e8e4d9, #e8e4d9) padding-box,
+        url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><path d="M0 0h100v100H0z" fill="none"/><path d="M20 0v20H0v60h20v20h60v-20h20V20H80V0H20z" fill="%235c5752"/></svg>') border-box !important;
     box-shadow: 
-        0 4px 10px rgba(0,0,0,0.15),
-        inset 0 0 15px rgba(0,0,0,0.1) !important;
+        0 5px 15px rgba(0,0,0,0.2),
+        inset 0 0 20px rgba(0,0,0,0.1) !important;
+    position: relative;
 }
