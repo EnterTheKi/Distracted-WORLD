@@ -122,6 +122,39 @@ body, .gallery-page-container {
     box-shadow: 1px 1px 3px rgba(0,0,0,0.1); /* Reset hover shadow */
 }
 
+/* ----- Vintage Border & Hover Effect ----- */
+.about-main-image.vintage-border {
+    border: 12px double #5c5752 !important; /* Double-line border */
+    padding: 8px !important;
+    background-color: #e8e4d9 !important; /* Old paper tone */
+    box-shadow: 
+        0 0 0 4px #e8e4d9,               /* Inner glow */
+        0 8px 30px rgba(0, 0, 0, 0.25),  /* Soft shadow */
+        inset 0 0 20px rgba(0, 0, 0, 0.1); /* Inner vignette */
+    transition: all 0.4s ease;
+    position: relative;
+}
+
+/* Torn paper edge effect (optional) */
+.about-main-image.vintage-border::after {
+    content: "";
+    position: absolute;
+    top: -15px; left: -15px; right: -15px; bottom: -15px;
+    background: url('assets/textures/grunge-edge.png') center/cover no-repeat;
+    pointer-events: none;
+    opacity: 0.7;
+    z-index: -1;
+}
+
+/* Hover Effect */
+.about-main-image.vintage-border:hover {
+    transform: scale(1.02) rotate(-0.5deg); /* Slight tilt */
+    box-shadow: 
+        0 0 0 4px #e8e4d9,
+        0 12px 40px rgba(0, 0, 0, 0.3),
+        inset 0 0 30px rgba(0, 0, 0, 0.15);
+    filter: sepia(15%) contrast(105%) brightness(98%);
+}
 
 /* Main Content Area */
 .gallery-page-container .main-content-area { max-width: 1200px; margin: 0 auto !important; padding: 0 20px !important; }
