@@ -4,15 +4,23 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Distracted WORLD</title>
+
+    <!-- 1. Font Links (Google Fonts + Font Awesome) -->
     <link rel="preconnect" href="https://fonts.googleapis.com"/>
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous"/>
     <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,700;1,400&family=Limelight&family=Oswald:wght@400;700&display=swap" rel="stylesheet"/>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="stylesheet" href="styles.css">
+
+    <!-- 2. Link to External CSS -->
+    <link rel="stylesheet" href="style.css">
+
 </head>
 <body>
+
+    <!-- 3. HTML Structure -->
     <div class="gallery-page-container">
-        <!-- Search Widget -->
+
+        <!-- Search Widget (Fixed Position) -->
         <div class="search-widget-container" id="search-widget">
              <div class="search-input-wrapper">
                  <input type="search" id="pageSearchInput" class="search-input-field" placeholder="Search Site..." autocomplete="off"/>
@@ -27,22 +35,26 @@
             <h1>Distracted WORLD</h1>
         </header>
 
-        <!-- Navigation -->
+        <!-- Navigation: Using BUTTONS with data-filter for SPA behavior -->
         <nav class="filter-nav">
             <div class="filter-buttons">
-                <a href="https://distractedworld.com/about" class="filter-btn active" data-filter="about">ABOUT</a>
-                <a href="https://distractedworld.com/dw" class="filter-btn" data-filter="distracted">Distracted WORLD</a>
-                <a href="https://distractedworld.com/ow" class="filter-btn" data-filter="organized">Organized WORLD</a>
-                <a href="https://distractedworld.com/blog" class="filter-btn" data-filter="blog">Blog</a>
-                <a href="https://distractedworld.com/wall" class="filter-btn" data-filter="wall">Wall</a>
+                <button class="filter-btn active" data-filter="about">ABOUT</button>
+                <button class="filter-btn" data-filter="distracted">Distracted WORLD</button>
+                <button class="filter-btn" data-filter="organized">Organized WORLD</button>
+                <button class="filter-btn" data-filter="blog">Blog</button>
+                <button class="filter-btn" data-filter="wall">Wall</button>
             </div>
         </nav>
 
         <main class="main-content-area">
-            <!-- ABOUT Content -->
-             <div id="about-content" class="page-content">
+
+            <!-- ABOUT Content - Should be VISIBLE by default -->
+            <div id="about-content" class="page-content">
                  <h2 class="about-intro-header">Welcome, Traveler, to a World… Distracted.</h2>
-                 <img src="assets/images/distracted-world-main.jpg" alt="Distracted WORLD illustration with globe head character" class="placeholder-image about-main-image">
+                 <!-- Make sure this path is correct relative to index.html -->
+                 <img src="assets/images/distracted-world-main.jpg"
+                      alt="Distracted WORLD illustration with globe head character"
+                      class="placeholder-image about-main-image">
                  <p style="text-align: center; font-style: italic; margin-top: 30px;">
                      Imagine going back in time, like in old black-and-white cartoons! Radios played jazz, but just like today, people often felt lost because of *distractions*.
                  </p>
@@ -53,51 +65,98 @@
                  <p>This site is full of ideas and information to help you improve yourself and grow. Becoming great isn't instant magic! It comes from the small, good choices and actions you take every single day.</p>
                  <p>Sometimes, it feels like our minds are always buzzing, looking for the next notification or exciting thing. This can make it hard to concentrate. But you *can* get your focus back! You can reset your mind and become the amazing person you're meant to be. It's time to level up!</p>
                  <p>Meet <strong>Di-Mind</strong>! He's a special character here to help you on this journey. Want to know more about him and how he helps organize thoughts? Check out the <strong>'Organized WORLD'</strong> section!</p>
-
                  <div class="about-section-separator" style="width: 40%; margin: 40px auto !important;"></div>
-                 <!-- Preview Sections -->
+                 <!-- Preview Sections Below - Buttons use data-target-filter for JS -->
                  <section class="preview-section"> <h3>Distracted WORLD</h3> <p>In a Distracted world, people often escape their day-to-day struggles by being preoccupied with the wrong things...</p> <button class="read-more-btn" data-target-filter="distracted">Read More</button> </section>
-                 <section class="preview-section"> <h3>Organized WORLD (Meet Di-Mind)</h3> <p>In the black-and-white world of the 1930s, where jazz tunes float through the air...</p> <button class="read-more-btn" data-target-filter="organized">Read More</button> </section>
+                 <section class="preview-section"> <h3>Organized WORLD (Meet Di-Mind)</h3> <p>In the black-and-white world of the 1930s, where jazz tunes float through the air... Meet Di-Mind...</p> <button class="read-more-btn" data-target-filter="organized">Read More</button> </section>
                  <section class="preview-section"> <h3>Blog</h3> <p>Latest thoughts, insights, and updates from the world of Ki, focus, and escaping distractions...</p> <button class="read-more-btn" data-target-filter="blog">Read More</button> </section>
                  <section class="preview-section" style="text-align:center;"> <p style="text-align:center; margin-bottom: 15px !important;">Looking for wallpapers?</p> <button class="read-more-btn" data-target-filter="wall">Go to Wall</button> </section>
-             </div>
-
-             <!-- Gallery Grid (WALL view) -->
-             <div class="gallery-grid hidden" id="gallery-grid">
-                 <article class="cartoon-card" data-category="wall" data-tags="betty boop bimbo fleischer 1933 wallpaper"> <div class="card-image-placeholder"><img src="https://placehold.co/400x300/E8E8E0/555555/png?text=Betty+Boop" alt="Betty Boop Wallpaper"><h2>Betty Boop</h2></div> <div class="card-details"> <h3>Betty Boop and Bimbo</h3> <p>1933 - Fleischer Studios</p> </div> </article>
-                 <!-- More gallery items... -->
-             </div>
-
-             <!-- Distracted World Content -->
-             <div id="distracted-content" class="page-content hidden">
-                  <h1>IN A DISTRACTED WORLD...</h1>
-                  <img src="https://placehold.co/500x281/E8E8E0/777777/png?text=Distraction+Concept" alt="Concept image for Distracted World" class="placeholder-image">
-                  <!-- Content... -->
-             </div>
-
-             <!-- Organized World Content -->
-             <div id="organized-content" class="page-content hidden">
-                  <h1>Meet <strong>Di-Mind</strong></h1>
-                  <!-- Content... -->
-             </div>
-
-             <!-- Blog List Content -->
-             <div id="blog-content" class="page-content hidden">
-                 <h1>From The Desk of Di-Mind</h1>
-                 <!-- Content... -->
             </div>
 
-             <!-- Full Blog Post View -->
-             <div id="full-blog-post-view" class="page-content hidden"></div>
+            <!-- Card Grid (Wall Content) - HIDDEN by default -->
+            <div class="gallery-grid hidden" id="gallery-grid">
+                 <article class="cartoon-card" data-category="wall" data-tags="betty boop bimbo fleischer 1933 wallpaper"> <div class="card-image-placeholder"><img src="https://placehold.co/400x300/E8E8E0/555555/png?text=Betty+Boop" alt="Betty Boop Wallpaper"><h2>Betty Boop</h2></div> <div class="card-details"> <h3>Betty Boop and Bimbo</h3> <p>1933 - Fleischer Studios</p> </div> </article>
+                 <article class="cartoon-card" data-category="wall" data-tags="bosko talk-ink kid harman-ising 1930 wallpaper"> <div class="card-image-placeholder"><img src="https://placehold.co/400x300/E8E8E0/555555/png?text=Bosko" alt="Bosko Wallpaper"><h2>Bosko</h2></div> <div class="card-details"> <h3>Bosko the Talk-Ink Kid</h3> <p>1930 - Harman-Ising</p> </div> </article>
+                 <article class="cartoon-card" data-category="wall" data-tags="felix the cat pat sullivan 1925 wallpaper"> <div class="card-image-placeholder"><img src="https://placehold.co/400x300/E8E8E0/555555/png?text=Felix+The+Cat" alt="Felix The Cat Wallpaper"><h2>Felix The Cat</h2></div> <div class="card-details"> <h3>Felix The Cat</h3> <p>1925 - Pat Sullivan</p> </div> </article>
+                 <article class="cartoon-card" data-category="wall" data-tags="flip the frog ub iwerks 1930 wallpaper"> <div class="card-image-placeholder"><img src="https://placehold.co/400x300/E8E8E0/555555/png?text=Flip+the+Frog" alt="Flip the Frog Wallpaper"><h2>Flip the Frog</h2></div> <div class="card-details"> <h3>Flip the Frog</h3> <p>1930 - Ub Iwerks</p> </div> </article>
+                 <article class="cartoon-card" data-category="wall" data-tags="willie whopper ub iwerks 1933 wallpaper"> <div class="card-image-placeholder"><img src="https://placehold.co/400x300/E8E8E0/555555/png?text=Willie+Whopper" alt="Willie Whopper Wallpaper"><h2>Willie Whopper</h2></div> <div class="card-details"> <h3>Willie Whopper</h3> <p>1933 - Ub Iwerks</p> </div> </article>
+                 <article class="cartoon-card" data-category="wall" data-tags="cubby bear van beuren 1933 wallpaper"> <div class="card-image-placeholder"><img src="https://placehold.co/400x300/E8E8E0/555555/png?text=Cubby+Bear" alt="Cubby Bear Wallpaper"><h2>Cubby Bear</h2></div> <div class="card-details"> <h3>Cubby Bear</h3> <p>1933 - Van Beuren Studios</p> </div> </article>
+                 <article class="cartoon-card" data-category="wall" data-tags="oswald the lucky rabbit disney lantz 1927 wallpaper"> <div class="card-image-placeholder"><img src="https://placehold.co/400x300/E8E8E0/555555/png?text=Oswald" alt="Oswald Wallpaper"><h2>Oswald the Lucky Rabbit</h2></div> <div class="card-details"> <h3>Oswald the Lucky Rabbit</h3> <p>1927 - Disney/Lantz</p> </div> </article>
+                 <article class="cartoon-card" data-category="wall" data-tags="mickey mouse early disney 1928 steamboat willie wallpaper"> <div class="card-image-placeholder"><img src="https://placehold.co/400x300/E8E8E0/555555/png?text=Steamboat+Willie" alt="Steamboat Willie Wallpaper"><h2>Early Mickey Mouse</h2></div> <div class="card-details"> <h3>Steamboat Willie</h3> <p>1928 - Disney</p> </div> </article>
+                 <article class="cartoon-card" data-category="wall" data-tags="silly symphonies disney 1929 skeleton dance wallpaper"> <div class="card-image-placeholder"><img src="https://placehold.co/400x300/E8E8E0/555555/png?text=Silly+Symphonies" alt="Silly Symphonies Wallpaper"><h2>Silly Symphonies</h2></div> <div class="card-details"> <h3>Silly Symphonies</h3> <p>1929 - Disney</p> </div> </article>
+            </div>
 
-             <!-- Hidden Blog Post Content -->
-             <div style="display:none;" id="post-1-content">
-                 <!-- Content... -->
-             </div>
-             <!-- More hidden blog posts... -->
+            <!-- Distracted World Content - HIDDEN by default -->
+            <div id="distracted-content" class="page-content hidden">
+                  <h1>IN A DISTRACTED WORLD...</h1>
+                  <img src="https://placehold.co/500x281/E8E8E0/777777/png?text=Distraction+Concept" alt="Concept image for Distracted World" class="placeholder-image">
+                  <p>In a Distracted world, people often escape their day-to-day struggles by being preoccupied with the wrong things...</p>
+                  <p>Once people understand that 95% of success is mindset, they realize how little inner work they do...</p>
+                  <p>"Enter The Ki" symbolizes entering the state of Ki...</p>
+                  <h2>You Must Decide Now!</h2>
+                  <p>You must decide now! To become exceptional, focus on inner work...</p>
+                  <p>The Mind and the Body should be in balance... Level up, my friend. Become unfazed. The only thing holding you back is yourself.</p>
+                  <p>We exist in an era full of distractions...</p>
+                  <div class="centered-text"> It's <strong>TIME</strong> To...<br/> <strong>ESCAPE</strong> This <strong>Distracted WORLD</strong><br/> and...<br/> <strong>ENTER</strong> A<br/> New <strong>STATE</strong> of <strong>Consciousness</strong> </div>
+                  <img src="https://placehold.co/500x281/E8E8E0/777777/png?text=Consciousness+Concept" alt="Concept image for Consciousness" class="placeholder-image">
+                  <h2>Is This You?</h2>
+                  <p>Do you feel stuck, not knowing what to do? ...it's time to escape the system designed to distract you!</p>
+                  <!-- Link to Organized World page/section -->
+                  <a href="#" data-target-filter="organized" class="page-link read-more-btn">MEET DI-MIND</a> <!-- Changed to use data-filter -->
+                  <div class="about-section-separator"></div>
+            </div>
+
+            <!-- Organized World Content - HIDDEN by default -->
+            <div id="organized-content" class="page-content hidden">
+                  <h1>Meet <strong>Di-Mind</strong></h1> <img src="https://placehold.co/500x281/E8E8E0/777777/png?text=Di-Mind+Globe+Head+GIF" alt="Di-Mind with Globe Head" class="placeholder-image">
+                  <h2>The Tale of Di-Mind in Distracted WORLD</h2> <p>In the black-and-white world of the 1930s...</p>
+                  <h2>The Switch</h2> <img src="https://placehold.co/500x281/E8E8E0/777777/png?text=Di-Mind+Switch+GIF" alt="Di-Mind flipping a switch" class="placeholder-image">
+                  <h2>The Adventure of <strong>Di-Mind</strong></h2> <p>In the black and white land of Distracted WORLD, there lived <strong>Di-Mind</strong>...</p>
+                  <p>Di-Mind, he was different. He wanted to achieve...</p>
+                  <p>He would start his day with a list of goals...</p>
+                  <p>Until one day, something magical happened... <em>click</em>—the world changed.</p>
+                  <p>Suddenly, the jazz became a rhythm for his work...</p>
+                  <p>Now, Di-Mind could see through the distractions...</p>
+                  <p>Di-Mind became a legend in Distracted WORLD...</p>
+                  <p>And so, in this world where time seemed to stand still...</p>
+                  <p>But the real magic... was <strong>persistence</strong>...</p>
+                  <p>At the heart of this world is <strong>Di-Mind</strong>...</p>
+                  <p>Di-Mind isn't just a character; he's a reminder...</p>
+                  <p style="text-align: center; font-style: italic; margin: 15px 0 !important;"> 1.<br/> 2.<br/> 3.<br/> ...<br/> 10.? </p>
+                  <p>With batteries or a charge, Di-Mind keeps you on track...</p>
+                  <p>If you've succeeded, Di-Mind sings a jolly tune...</p>
+                  <p>In the surreal, exaggerated world of <strong>Distracted WORLD</strong>...</p>
+                  <!-- Example Link (if needed) -->
+                  <!-- <a href="https://dw.typedream.app/" target="_blank" rel="noopener noreferrer" class="page-link">Anti-Brain Rot</a> -->
+            </div>
+
+            <!-- Blog List Content - HIDDEN by default -->
+            <div id="blog-content" class="page-content hidden">
+                 <h1>From The Desk of Di-Mind</h1>
+                 <p style="text-align:center; margin-bottom: 30px !important; font-size: 1.2rem; color: #555 !important;">Insights, ramblings, and blueprints for escaping the noise.</p>
+                 <div class="blog-grid">
+                     <!-- Blog post cards use data-post-id for JS -->
+                     <article class="blog-post-card"> <a href="#" class="blog-card-link-wrapper" data-post-id="post-1"> <div class="blog-image-placeholder"><img src="https://placehold.co/400x225/E0E0D4/666666/png?text=Focus+Rituals" alt="Blog Post Image: Focus Rituals"></div> <div class="blog-card-details"> <h3>Mastering the 'Switch': Daily Focus Rituals</h3> <p>Explore the simple, yet powerful daily habits...</p> </div> </a> </article>
+                     <article class="blog-post-card"> <a href="#" class="blog-card-link-wrapper" data-post-id="post-2"> <div class="blog-image-placeholder"><img src="https://placehold.co/400x225/E0E0D4/666666/png?text=Persistence" alt="Blog Post Image: Persistence"></div> <div class="blog-card-details"> <h3>The Persistence Principle: Why Small Steps Win</h3> <p>Di-Mind didn't transform overnight...</p> </div> </a> </article>
+                     <article class="blog-post-card"> <a href="#" class="blog-card-link-wrapper" data-post-id="post-3"> <div class="blog-image-placeholder"><img src="https://placehold.co/400x225/E0E0D4/666666/png?text=Distractions" alt="Blog Post Image: Distractions"></div> <div class="blog-card-details"> <h3>Decoding Distractions: Know Your Enemy</h3> <p>From the blaring radio to endless notifications...</p> </div> </a> </article>
+                     <article class="blog-post-card"> <a href="#" class="blog-card-link-wrapper" data-post-id="post-4"> <div class="blog-image-placeholder"><img src="https://placehold.co/400x225/E0E0D4/666666/png?text=Intuition" alt="Blog Post Image: Intuition"></div> <div class="blog-card-details"> <h3>Beyond IQ: Tuning Into Your Body's Feedback</h3> <p>Di-Mind learned to listen intuitively...</p> </div> </a> </article>
+                 </div>
+            </div>
+
+            <!-- Full Blog Post View Container - HIDDEN by default, content injected by JS -->
+            <div id="full-blog-post-view" class="page-content hidden">
+                <!-- JS injects post content here -->
+            </div>
+
+            <!-- Hidden Blog Post Content Divs (for JS to copy from) -->
+            <div style="display:none;" id="post-1-content"> <button class="back-to-blog-btn">← Back to Blog List</button> <h1>Mastering the 'Switch': Daily Focus Rituals</h1> <p class="post-meta"><em>Posted on: October 26, 1934 | By: Di-Mind's Chronicle</em></p> <img src="https://placehold.co/600x337/E0E0D4/666666/png?text=Blog+Post+1+Main" alt="Focus Rituals Concept" class="placeholder-image"> <p>Flicking that switch isn't a one-time magic trick...</p> <p>Think of it like winding a clock...</p> <h2>The Morning Anchor</h2> <p>Before anything else pulls at your attention...</p> <h2>Time Blocking, 1930s Style</h2> <p>Assign specific blocks of time...</p> <img src="https://placehold.co/500x281/E0E0D4/666666/png?text=Time+Blocking" alt="Image related to time blocking" class="placeholder-image" style="height: auto; aspect-ratio: 16/9;"> <h2>The Midday Reset</h2> <p>Even the sharpest mind gets dull...</p> <p>These rituals, practiced daily...</p> </div>
+            <div style="display:none;" id="post-2-content"> <button class="back-to-blog-btn">← Back to Blog List</button> <h1>The Persistence Principle: Why Small Steps Win</h1> <p class="post-meta"><em>Posted on: November 12, 1934 | By: Di-Mind's Chronicle</em></p> <img src="https://placehold.co/600x337/E0E0D4/666666/png?text=Blog+Post+2+Main" alt="Persistence Concept" class="placeholder-image"> <p>Ah, persistence! It doesn't arrive with a trumpet fanfare...</p> <p>The grand achievements you see? They're built brick by tiny brick...</p> <h2>The Power of 'Non-Zero Days'</h2> <p>Forget perfection. Aim for progress, however small...</p> <img src="https://placehold.co/500x281/E0E0D4/666666/png?text=Small+Steps" alt="Image related to small steps" class="placeholder-image" style="height: auto; aspect-ratio: 16/9;"> <p>Distracted WORLD loves grand gestures that fizzle out...</p> </div>
+            <div style="display:none;" id="post-3-content"> <button class="back-to-blog-btn">← Back to Blog List</button> <h1>Decoding Distractions: Know Your Enemy</h1> <p class="post-meta"><em>Posted on: November 28, 1934 | By: Di-Mind's Chronicle</em></p> <img src="https://placehold.co/600x337/E0E0D4/666666/png?text=Blog+Post+3+Main" alt="Distractions Concept" class="placeholder-image"> <p>The jazz on the radio, the screaming headlines...</p> <p>Perhaps it's the endless scroll on that glowing rectangle? ...</p> <h2>Identify Your Personal Static</h2> <p>Take a moment. Be honest. What *truly* pulls you away...? </p> <img src="https://placehold.co/500x281/E0E0D4/666666/png?text=Fortress+Focus" alt="Image related to focus" class="placeholder-image" style="height: auto; aspect-ratio: 16/9;"> <h2>Build Your Fortress of Focus</h2> <p>Create an environment that supports...</p> </div>
+            <div style="display:none;" id="post-4-content"> <button class="back-to-blog-btn">← Back to Blog List</button> <h1>Beyond IQ: Tuning Into Your Body's Feedback</h1> <p class="post-meta"><em>Posted on: December 15, 1934 | By: Di-Mind's Chronicle</em></p> <img src="https://placehold.co/600x337/E0E0D4/666666/png?text=Blog+Post+4+Main" alt="Intuition Concept" class="placeholder-image"> <p>The thinkers and theorists focus heavily on the mind...</p> <p>Ignoring this feedback is like driving a motorcar...</p> <h2>The Gut Feeling & Energy Barometer</h2> <p>That "gut feeling" about a decision? ...</p> <img src="https://placehold.co/500x281/E0E0D4/666666/png?text=Body+Feedback" alt="Image related to body feedback" class="placeholder-image" style="height: auto; aspect-ratio: 16/9;"> <h2>Working Intuitively</h2> <p>Intuition isn't mystical mumbo-jumbo...</p> </div>
+
         </main>
 
-        <!-- Social Media -->
+        <!-- Social Media Icons Section -->
         <div class="social-icons-container">
              <a href="https://x.com/D_WORLDX" target="_blank" rel="noopener noreferrer" title="X / Twitter"><i class="fa-brands fa-x-twitter"></i></a>
              <a href="https://youtube.com/@D_WORLDX" target="_blank" rel="noopener noreferrer" title="YouTube"><i class="fa-brands fa-youtube"></i></a>
@@ -109,8 +168,11 @@
         <footer>
             <p>© <span id="copyright-year"></span> Distracted WORLD</p>
         </footer>
-    </div>
 
-    <script src="script.js"></script>
+    </div> <!-- end gallery-page-container -->
+
+    <!-- 4. Link to External JavaScript -->
+    <script src="script.js" defer></script>
+
 </body>
 </html>
