@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Redirecting...</title>
+    <script>
+      // Get the requested path from the URL the user tried to access
+      var path = window.location.pathname;
+      var query = window.location.search;
+      var hash = window.location.hash;
+
+      // Store the full path in sessionStorage
+      // Use a unique key, e.g., 'ghPagesPath'
+      sessionStorage.setItem('ghPagesPath', path + query + hash);
+
+      // Redirect to the root (where index.html is)
+      // Adjust '/your-repo-name/' if your site is NOT at the root of the domain
+      // If it's at username.github.io, just '/' is usually correct.
+      // If it's at username.github.io/my-repo/, use '/my-repo/'
+      var repoBasePath = '/'; // CHANGE if your site is in a subfolder like /my-repo/
+
+      window.location.replace(repoBasePath);
+
+    </script>
+  </head>
+  <body>
+    <p>If you are not redirected automatically, follow this <a id="redirect-link" href="/">link to the homepage</a>.</p>
+    <script>
+        // Update link href just in case script runs slowly
+        var repoBasePath = '/'; // CHANGE if your site is in a subfolder like /my-repo/
+        document.getElementById('redirect-link').href = repoBasePath;
+    </script>
+  </body>
+</html>
