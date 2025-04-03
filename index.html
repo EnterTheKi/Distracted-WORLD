@@ -5,6 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Distracted WORLD</title>
 
+    <!-- Favicon (Copied from first version) -->
+    <link rel="icon" type="image/jpeg" href="assets/images/dw-favicon.jpg">
+
     <!-- 1. Font Links (Google Fonts + Font Awesome) -->
     <link rel="preconnect" href="https://fonts.googleapis.com"/>
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous"/>
@@ -35,14 +38,14 @@
             <h1>Distracted WORLD</h1>
         </header>
 
-        <!-- Navigation: Using BUTTONS with data-filter for SPA behavior -->
+        <!-- Navigation: Added data-url attributes -->
         <nav class="filter-nav">
             <div class="filter-buttons">
-                <button class="filter-btn active" data-filter="about">ABOUT</button>
-                <button class="filter-btn" data-filter="distracted">Distracted WORLD</button>
-                <button class="filter-btn" data-filter="organized">Organized WORLD</button>
-                <button class="filter-btn" data-filter="blog">Blog</button>
-                <button class="filter-btn" data-filter="wall">Wall</button>
+                <button class="filter-btn active" data-filter="about" data-url="/about">ABOUT</button>
+                <button class="filter-btn" data-filter="distracted" data-url="/distracted-world">Distracted WORLD</button>
+                <button class="filter-btn" data-filter="organized" data-url="/organized-world">Organized WORLD</button>
+                <button class="filter-btn" data-filter="blog" data-url="/blog">Blog</button>
+                <button class="filter-btn" data-filter="wall" data-url="/wall">Wall</button>
             </div>
         </nav>
 
@@ -51,18 +54,64 @@
             <!-- ABOUT Content - Should be VISIBLE by default -->
             <div id="about-content" class="page-content">
                  <h2 class="about-intro-header">Welcome, Traveler, to a World… Distracted.</h2>
-                 <!-- Make sure this path is correct relative to index.html -->
-                 <img src="assets/images/distracted-world-main.jpg"
-     alt="Distracted WORLD illustration"
-     class="about-main-image vintage-double-frame"
-     loading="lazy">
-                 <p style="text-align: center; font-style: italic; margin-top: 30px;">
-                     Imagine going back in time, like in old black-and-white cartoons! Radios played jazz, but just like today, people often felt lost because of *distractions*.
-                 </p>
+                 <div class="image-container"> <!-- Added wrapper div like in v1 -->
+                    <!-- Added id="easter-egg-trigger-image" -->
+                    <img src="assets/images/distracted-world-main.jpg"
+                         alt="Distracted WORLD illustration with globe head character"
+                         class="placeholder-image about-main-image" id="easter-egg-trigger-image">
+                 </div>
+
+                 <!-- Vintage Safe Easter Egg (Copied from first version) -->
+                 <div id="secret-safe-container" class="hidden">
+                    <div class="safe" id="vintage-safe">
+                        <div class="safe-door" id="safe-door">
+                            <div class="safe-front">
+                                <div class="dial-display" id="dial-display-area">
+                                    <span class="dial-digit">-</span>
+                                    <span class="dial-digit">-</span>
+                                    <span class="dial-digit">-</span>
+                                </div>
+                                <div class="dial" id="safe-dial">
+                                    <button class="dial-number disabled" data-value="0">0</button>
+                                    <button class="dial-number disabled" data-value="1">1</button>
+                                    <button class="dial-number disabled" data-value="2">2</button>
+                                    <button class="dial-number enabled" data-value="3">3</button>
+                                    <button class="dial-number disabled" data-value="4">4</button>
+                                    <button class="dial-number disabled" data-value="5">5</button>
+                                    <button class="dial-number enabled" data-value="6">6</button>
+                                    <button class="dial-number disabled" data-value="7">7</button>
+                                    <button class="dial-number disabled" data-value="8">8</button>
+                                    <button class="dial-number enabled" data-value="9">9</button>
+                                </div>
+                                <div class="safe-controls">
+                                    <button id="safe-clear-button" class="safe-button">CLEAR</button>
+                                    <button id="safe-open-button" class="safe-button">OPEN</button>
+                                </div>
+                                <div id="safe-message" class="safe-message">Enter Code: 3-6-9</div>
+                            </div>
+                        </div>
+                        <div class="prize hidden" id="safe-prize">
+                            <div class="treasure-chest-glow">
+                                <img src="assets/images/treasure-chest.png" alt="Glowing Treasure Chest" class="treasure-chest-image">
+                            </div>
+                            <h3>CONGRATULATIONS!</h3>
+                            <p>You've unlocked the secret!</p>
+                            <div class="prize-content">
+                                <p>Here's a little something for your persistence...</p>
+                                <a href="#" download="secret_wallpaper.jpg">Download Secret Wallpaper</a>
+                            </div>
+                            <button id="close-safe-button" class="safe-button">CLOSE</button>
+                        </div>
+                    </div>
+                 </div>
+
+                 <p>
+    Imagine going back in time, like in old black-and-white cartoons! Radios played jazz, but just like today, people often felt lost because of *distractions*.
+</p>
                  <p>
                      This website is like a map to help you find your way when your brain feels pulled everywhere at once. Here, we learn how to quiet the noise around us, focus our minds, and get to know ourselves better.
                  </p>
-                 <p><strong>what is 'Distracted World'?</strong> It's a special way to think about how we can *wake up* and escape the things that stop us from doing our best work or reaching our goals. Things like getting easily side-tracked or spending too much time scrolling can really hold us back.</p>
+                 <p><strong>What is 'Distracted World'?</strong> It's a special way to think about how we can *wake up* and escape the things that stop us from doing our best work or reaching our goals. Things like getting easily side-tracked or spending too much time scrolling can really hold us back.</p>
                  <p>This site is full of ideas and information to help you improve yourself and grow. Becoming great isn't instant magic! It comes from the small, good choices and actions you take every single day.</p>
                  <p>Sometimes, it feels like our minds are always buzzing, looking for the next notification or exciting thing. This can make it hard to concentrate. But you *can* get your focus back! You can reset your mind and become the amazing person you're meant to be. It's time to level up!</p>
                  <p>Meet <strong>Di-Mind</strong>! He's a special character here to help you on this journey. Want to know more about him and how he helps organize thoughts? Check out the <strong>'Organized WORLD'</strong> section!</p>
@@ -90,58 +139,82 @@
             <!-- Distracted World Content - HIDDEN by default -->
             <div id="distracted-content" class="page-content hidden">
                   <h1>IN A DISTRACTED WORLD...</h1>
-<img 
-  src="assets/images/dworld-kid.png" 
-  alt="Di-Mind, the Distracted WORLD character, looking overwhelmed by modern distractions" 
-  class="placeholder-image"
-  loading="lazy" 
-  width="500" 
-  height="281"
->                  <p>In a Distracted world, people often escape their day-to-day struggles by being preoccupied with the wrong things...</p>
-                  <p>Once people understand that 95% of success is mindset, they realize how little inner work they do...</p>
-                  <p>"Enter The Ki" symbolizes entering the state of Ki...</p>
-                  <h2>You Must Decide Now!</h2>
-                  <p>You must decide now! To become exceptional, focus on inner work...</p>
-                  <p>The Mind and the Body should be in balance... Level up, my friend. Become unfazed. The only thing holding you back is yourself.</p>
-                  <p>We exist in an era full of distractions...</p>
+                  <img src="assets/images/dworld-kid.png" alt="Concept image for Distracted World" class="placeholder-image"> <!-- Updated placeholder link to local -->
+                  <p>In a Distracted World, people often Escape their day-to-day struggles by being preoccupied with the wrong things.</p>
+
+                  <p>Entering the state of Ki means radiating the highest Energy, Frequency, and Vibration to attract the right things into their lives. They become magnets. They need to rewire their Ki and reprogram their minds.</p>
+
+                  <p>Once people understand that 95% of success is mindset, they realize how little inner work they do.</p>
+
+                  <p>Success comes down to many small habits that form big habits. It's not one big thing or an overnight achievement. It's about thinking, believing, and acting in a certain way that creates these habits. It's a step-by-step process of understanding and trusting themselves and the process.</p>
+
+                  <h2>YOU MUST DECIDE NOW!</h2>
+                  <p>To become exceptional, focus on inner work, not just your IQ, but also your EQ and body feedback. Work intuitively.</p>
+
+                  <p>The Mind and the Body should be in balance. A healthy mind and a healthy body create a healthy lifestyle. Once you are in balance and develop your mind and skill-set, you start to notice that you attract certain things in your life.</p>
+
+                  <p>Visualize, grow, and develop your life. Self-analyze, self-reflect, and become your best self by updating your system that runs old, outdated beliefs. Update your Operating System (Your Mind) and quit having limiting beliefs. Life is a game. Learn to play it. Hack the system by reprogramming yourself.</p>
+
+                  <p>We exist in an era full of distractions. It's challenging to accomplish tasks when our minds are constantly occupied with various things.</p>
                   <div class="centered-text"> It's <strong>TIME</strong> To...<br/> <strong>ESCAPE</strong> This <strong>Distracted WORLD</strong><br/> and...<br/> <strong>ENTER</strong> A<br/> New <strong>STATE</strong> of <strong>Consciousness</strong> </div>
-                  <img 
-src="assets/images/drowningman.jpg" 
-  alt="A man drowning in distractions, symbolizing the struggle for consciousness in a chaotic world" 
-  class="placeholder-image"
-  loading="lazy"
-  width="500"
-  height="281"
->
+                  <img src="assets/images/drowningman.jpg" alt="Concept image for Consciousness" class="placeholder-image"> <!-- Updated placeholder link to local -->
                   <h2>Is This You?</h2>
                   <p>Do you feel stuck, not knowing what to do? ...it's time to escape the system designed to distract you!</p>
                   <!-- Link to Organized World page/section -->
-                  <a href="#" data-target-filter="organized" class="page-link read-more-btn">MEET DI-MIND</a> <!-- Changed to use data-filter -->
+                  <a href="#" data-target-filter="organized" class="page-link read-more-btn centered-button">MEET DI-MIND</a> <!-- Added centered-button class like v1 -->
                   <div class="about-section-separator"></div>
             </div>
 
             <!-- Organized World Content - HIDDEN by default -->
             <div id="organized-content" class="page-content hidden">
-                  <h1>Meet <strong>Di-Mind</strong></h1> <img src="https://placehold.co/500x281/E8E8E0/777777/png?text=Di-Mind+Globe+Head+GIF" alt="Di-Mind with Globe Head" class="placeholder-image">
-                  <h2>The Tale of Di-Mind in Distracted WORLD</h2> <p>In the black-and-white world of the 1930s...</p>
-                  <h2>The Switch</h2> <img src="https://placehold.co/500x281/E8E8E0/777777/png?text=Di-Mind+Switch+GIF" alt="Di-Mind flipping a switch" class="placeholder-image">
-                  <h2>The Adventure of <strong>Di-Mind</strong></h2> <p>In the black and white land of Distracted WORLD, there lived <strong>Di-Mind</strong>...</p>
-                  <p>Di-Mind, he was different. He wanted to achieve...</p>
-                  <p>He would start his day with a list of goals...</p>
-                  <p>Until one day, something magical happened... <em>click</em>—the world changed.</p>
-                  <p>Suddenly, the jazz became a rhythm for his work...</p>
-                  <p>Now, Di-Mind could see through the distractions...</p>
-                  <p>Di-Mind became a legend in Distracted WORLD...</p>
-                  <p>And so, in this world where time seemed to stand still...</p>
-                  <p>But the real magic... was <strong>persistence</strong>...</p>
-                  <p>At the heart of this world is <strong>Di-Mind</strong>...</p>
-                  <p>Di-Mind isn't just a character; he's a reminder...</p>
-                  <p style="text-align: center; font-style: italic; margin: 15px 0 !important;"> 1.<br/> 2.<br/> 3.<br/> ...<br/> 10.? </p>
-                  <p>With batteries or a charge, Di-Mind keeps you on track...</p>
-                  <p>If you've succeeded, Di-Mind sings a jolly tune...</p>
-                  <p>In the surreal, exaggerated world of <strong>Distracted WORLD</strong>...</p>
-                  <!-- Example Link (if needed) -->
-                  <!-- <a href="https://dw.typedream.app/" target="_blank" rel="noopener noreferrer" class="page-link">Anti-Brain Rot</a> -->
+                  <h1>Meet <strong>Di-Mind</strong></h1>
+                  <img src="https://placehold.co/500x281/E8E8E0/777777/png?text=Di-Mind+Globe+Head+GIF" alt="Di-Mind with Globe Head" class="placeholder-image">
+
+                  <h2>If You Don't Complete Your Tasks...</h2>
+                  <p>Di-Mind isn't just a character; he's a reminder, a bot with a purpose. Every hour, his globe head lights up, urging you with a voice straight from the 1930s, "What are your goals for today? List them, my friend!"</p>
+
+                  <p style="text-align: center; font-style: italic; margin: 15px 0 !important;">
+                      1.<br/>
+                      2.<br/>
+                      3.<br/>
+                      ...<br/>
+                      10.?
+                  </p>
+
+                  <p>With batteries or a charge, Di-Mind keeps you on track. He'll even read you audiobooks, making your daily grind a bit more bearable. But at the end of the day, at 23:30, he'll ask, "Have you completed your tasks?"</p>
+
+                  <p>If you've succeeded, Di-Mind sings a jolly tune, celebrating your achievements. But if you falter, his globe turns a fiery red, and with a voice that could belong to a stern 1930s schoolmaster, he'll give you a piece of his mind, not with harsh words, but with the kind of chiding that makes you laugh and then work harder.</p>
+
+                  <h2>The Tale of Di-Mind in Distracted WORLD</h2>
+                  <p>In the black-and-white world of the 1930s, where jazz tunes float through the air and every sound crackles with life, there lies the Distracted WORLD. Here, everyone is lost in a maze of noise and distraction, living in a matrix of their own making.</p>
+
+                  <p>At the heart of this world is Di-Mind, a peculiar figure with a globe for a head. Di-Mind is the beacon of hope, the guide to escape the endless rat race. With a simple flick of a switch on his chest, Di-Mind transforms from a Distracted to a Disciplined Mind, showing everyone the way out.</p>
+
+                  <h2>The Switch</h2>
+                  <img src="https://placehold.co/500x281/E8E8E0/777777/png?text=Di-Mind+Switch+GIF" alt="Di-Mind flipping a switch" class="placeholder-image">
+
+                  <h2>The Adventure of <strong>Di-Mind</strong></h2>
+                  <p>In the black and white land of Distracted WORLD, there lived Di-Mind, a fellow with a globe for a head and a brain full of dreams, but oh, how easily those dreams got lost in the noise! This place was full of NPCs, folks who just wandered around, not really doing much, caught in their own little worlds of distraction.</p>
+
+                  <p>Di-Mind, he was different. He wanted to achieve, to be someone, to make his mark. But every day was a battle. The radio blared with jazz that danced away his focus, the newspapers screamed headlines that weren't his to worry over, and the chatter of the street was like a never-ending spell of confusion.</p>
+
+                  <p>He would start his day with a list of goals, but by noon, he'd find himself staring at the clouds, lost in thought about anything but what he needed to do. It was like living in a maze where every turn led back to the start.</p>
+
+                  <p>Until one day, something magical happened. A little switch, hidden beneath the chaos of his thoughts, suddenly glowed with a bright, warm light. It was as if the sun had decided to shine inside his head. Di-Mind reached out, flicked the switch, and click—the world changed.</p>
+
+                  <p>Suddenly, the jazz became a rhythm for his work, the headlines inspired him, and the chatter of the NPCs turned into whispers of encouragement. His globe head spun around, and he felt a connection with everything around him, like he was one with the universe.</p>
+
+                  <p>Now, Di-Mind could see through the distractions. Each moment was clear, each goal within reach. He danced through his tasks with the grace of a 1930s star, his globe head lighting up with every small victory. The NPCs, they watched in awe. Here was someone who had cracked the code to the matrix of distraction.</p>
+
+                  <p>Di-Mind became a legend in Distracted WORLD, not just for his discipline but for how he turned distractions into tools for success. And every now and then, when someone else felt lost in the noise, Di-Mind would share his secret. "Look for the switch," he'd say, "it's there, waiting for you to make your world light up too."</p>
+
+                  <p>And so, in this world where time seemed to stand still, Di-Mind became the beacon, the hero who showed everyone that even in the most distracted of places, you could find your path, light up your mind, and become one with the universe, one task at a time.</p>
+
+                  <p>But the real magic, the key to Di-Mind's newfound joy, was persistence. He learned that sticking to his goals, day in and day out, was what truly mattered. He stopped focusing on unnecessary things, tuning out the noise that once distracted him. Instead, he had a real goal in mind, a clear vision of what he truly wanted to achieve. This routine, this steady rhythm of doing, was what brought him back to happiness.</p>
+
+                  <p>With persistence, Di-Mind wasn't just surviving in Distracted WORLD; he was thriving, proving that with every small, persistent step, one could dance their way to bliss.</p>
+
+                  <a href="https://dw.typedream.app/" target="_blank" rel="noopener noreferrer" class="page-link">Anti-Brain Rot</a>
             </div>
 
             <!-- Blog List Content - HIDDEN by default -->
@@ -183,10 +256,28 @@ src="assets/images/drowningman.jpg"
             <p>© <span id="copyright-year"></span> Distracted WORLD</p>
         </footer>
 
+        <!-- Audio Elements for Easter Egg (Copied from first version) -->
+        <!-- Make sure these files exist in assets/sounds/ relative to index.html -->
+        <audio id="audio-dial-turn" src="assets/sounds/dial_turn.wav" preload="auto"></audio>
+        <audio id="audio-safe-creak" src="assets/sounds/safe_creak.wav" preload="auto"></audio>
+        <audio id="audio-safe-unlock" src="assets/sounds/safe_unlock.wav" preload="auto"></audio>
+        <audio id="audio-safe-error" src="assets/sounds/safe_error.wav" preload="auto"></audio>
+        <audio id="audio-victory" src="assets/sounds/victory.wav" preload="auto"></audio>
+
     </div> <!-- end gallery-page-container -->
 
     <!-- 4. Link to External JavaScript -->
     <script src="script.js" defer></script>
+
+    <!-- Inline Easter Egg Script (Copied from first version, better practice is to move this logic into script.js) -->
+    <!-- NOTE: For cleaner code, this logic has been moved into the main script.js file in the provided solution.
+         Keeping it here is also possible, but less organized.
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // ... Safe Easter Egg JS Logic from First Version ...
+        });
+    </script>
+    -->
 
 </body>
 </html>
