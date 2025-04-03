@@ -32,7 +32,71 @@
     //     console.error("Essential content sections missing. Aborting script setup.");
     //     return;
     // }
+// Add this block near the top of your script.js, inside the IIFE
 
+// Check for redirect path from 404 page
+const ghPagesPath = sessionStorage.getItem('ghPagesPath');
+let initialPathToLoad = window.location.pathname; // Default to current path
+
+if (ghPagesPath) {
+    // If path found in storage, use it as the intended path
+    initialPathToLoad = ghPagesPath;
+    // Clear the stored path so it doesn't interfere on subsequent loads
+    sessionStorage.removeItem('ghPagesPath');
+    // Silently update the browser history to reflect the intended path
+    // Use replaceState so the 404->redirect->correct path isn't two history entries
+    window.history.replaceState(null, '', initialPathToLoad);
+}
+
+// NOW, use 'initialPathToLoad' instead of 'window.location.pathname'
+// in the part of your script that determines the initial view on load.
+// For example, modify the initial load logic within updateDisplay or before calling it:
+
+// --- Inside or before the initial updateDisplay call ---
+// (Adjust based on where your initial path detection happens)
+
+// Determine initial state based on the potentially corrected path
+let initialFilter = 'about';
+let initialPostId = null;
+let foundMatch = false;
+
+const blogPostMatch = initialPathToLoad.match(/^\/blog\/(post-\d+)$/);
+if (blogPostMatch && contentSections.post) {
+    // Check if post content exists before assuming match
+    const tempPostId = blogPostMatch[1];
+    if (document.getElementById(tempPostId + '-content')) {
+        initialFilter = 'blog';
+        initialPostId = tempPostId;
+        foundMatch = true;
+    }
+}
+
+if (!foundMatch) {
+    filterButtons.forEach(btn => {
+        const btnUrl = btn.getAttribute('data-url');
+        const btnFilter = btn.getAttribute('data-filter');
+        // Allow matching root path '/' to '/about'
+        if (btnUrl === initialPathToLoad || (initialPathToLoad === '/' && btnFilter === 'about')) {
+             if (contentSections[btnFilter]) { // Check section exists
+                initialFilter = btnFilter;
+                foundMatch = true;
+             }
+        }
+    });
+}
+
+// If still no match, default to 'about'
+if (!foundMatch) {
+    initialFilter = 'about';
+}
+
+// Initial display call using determined filter/postId
+updateDisplay(initialFilter, initialPostId, null, false); // false: don't push history on initial load
+
+// Remove the OLD initial updateDisplay call if it was separate
+// Example: // updateDisplay(null, null, null, false); // REMOVE this if it was outside logic block
+
+// --- Rest of your script.js ---
     const cartoonCards = contentSections.wall ? contentSections.wall.querySelectorAll('.cartoon-card') : [];
     const blogCardLinks = container.querySelectorAll('.blog-card-link-wrapper');
     const readMoreButtons = container.querySelectorAll('.read-more-btn'); // Includes those inside previews
