@@ -11,7 +11,7 @@
     // ==================================================
     const filterButtons = container.querySelectorAll('.filter-nav .filter-btn');
     const contentSections = {
-        about: container.querySelector('#about-content'),
+        home: container.querySelector('#home-content'),
         wall: container.querySelector('#gallery-grid'),
         distracted: container.querySelector('#distracted-content'),
         organized: container.querySelector('#organized-content'),
@@ -62,7 +62,7 @@
 
 
     // --- Determine Initial View Based on Path ---
-    let initialFilter = 'about';
+    let initialFilter = 'home';
     let initialPostId = null;
     let foundMatch = false;
 
@@ -85,8 +85,8 @@
         filterButtons.forEach(btn => {
             const btnUrl = btn.getAttribute('data-url');
             const btnFilter = btn.getAttribute('data-filter');
-            // Match exact path or root path '/' to '/about'
-            if (btnUrl === initialPathToLoad || (initialPathToLoad === '/' && btnFilter === 'about')) {
+            // Match exact path or root path '/' to '/home'
+            if (btnUrl === initialPathToLoad || (initialPathToLoad === '/' && btnFilter === 'home')) {
                 if (contentSections[btnFilter]) { // Ensure the section element exists
                     initialFilter = btnFilter;
                     foundMatch = true;
@@ -95,9 +95,9 @@
         });
     }
 
-    // If still no match after checking buttons and blog posts, default to 'about'
+    // If still no match after checking buttons and blog posts, default to 'home'
     if (!foundMatch) {
-        initialFilter = 'about';
+        initialFilter = 'home';
     }
     // --- End Initial View Determination ---
 
@@ -108,7 +108,7 @@
 
     // --- Fullscreen Image Functionality ---
     function setupFullscreenImages() {
-        const clickableImages = container.querySelectorAll('.card-image-placeholder img, .blog-image-placeholder img, #full-blog-post-view img.placeholder-image, #about-content .image-container img.about-main-image');
+        const clickableImages = container.querySelectorAll('.card-image-placeholder img, .blog-image-placeholder img, #full-blog-post-view img.placeholder-image, #home-content .image-container img.home-main-image');
         clickableImages.forEach(img => {
             if (!img.dataset.fullscreenListenerAdded) {
                 if (window.getComputedStyle(img).cursor !== 'pointer' && window.getComputedStyle(img).cursor !== 'url("assets/cursors/glove-pointer.png") 0 0, pointer') {
@@ -284,10 +284,10 @@
                  // Content was already loaded during initial check
              } else if (!contentSections[sectionToShowId]){
                   // Ultimate fallback if section determined initially doesn't exist
-                  console.error(`Fallback section element '#${sectionToShowId}' not found. Defaulting to 'about'.`);
-                  currentFilter = 'about';
-                  sectionToShowId = 'about';
-                  targetUrl = '/about';
+                  console.error(`Fallback section element '#${sectionToShowId}' not found. Defaulting to 'home'.`);
+                  currentFilter = 'home';
+                  sectionToShowId = 'home';
+                  targetUrl = '/home';
              }
         }
 
@@ -318,16 +318,16 @@
             } else {
                 sectionToShow.style.display = 'block';
             }
-            if (sectionToShowId === 'wall' || sectionToShowId === 'about' || isBlogPostView) { // Add isBlogPostView here
+            if (sectionToShowId === 'wall' || sectionToShowId === 'home' || isBlogPostView) { // Add isBlogPostView here
                 setTimeout(setupFullscreenImages, 50); // Ensure images setup on post view too
             }
         } else {
             console.error(`Target section element for ID '${sectionToShowId}' not found.`);
-            // If even the ultimate fallback 'about' is missing, log error.
-            if(contentSections.about) { // Try showing about if target is missing
-                 contentSections.about.classList.remove('hidden');
-                 contentSections.about.style.display = 'block';
-                 filterButtons.forEach(btn => btn.classList.toggle('active', btn.getAttribute('data-filter') === 'about'));
+            // If even the ultimate fallback 'home' is missing, log error.
+            if(contentSections.home) { // Try showing home if target is missing
+                 contentSections.home.classList.remove('hidden');
+                 contentSections.home.style.display = 'block';
+                 filterButtons.forEach(btn => btn.classList.toggle('active', btn.getAttribute('data-filter') === 'home'));
             }
         }
 
@@ -409,7 +409,7 @@
         const searchTerm = term.toLowerCase();
         const searchRegex = new RegExp(term.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'gi');
         const searchableConfig = [
-            { filter: 'about', name: 'About', selectors: ['#about-content h1', '#about-content h2', '#about-content h3', '#about-content p:not(.post-meta)', '.preview-section h3', '.preview-section p'] },
+            { filter: 'home', name: 'home', selectors: ['#home-content h1', '#home-content h2', '#home-content h3', '#home-content p:not(.post-meta)', '.preview-section h3', '.preview-section p'] },
             { filter: 'distracted', name: 'Distracted World', selectors: ['#distracted-content h1', '#distracted-content h2', '#distracted-content p:not(.post-meta)'] },
             { filter: 'organized', name: 'Organized World', selectors: ['#organized-content h1', '#organized-content h2', '#organized-content p:not(.post-meta)'] },
             { filter: 'blog', name: 'Blog List', selectors: ['#blog-content h1', '#blog-content .blog-post-card h3', '#blog-content .blog-post-card p'], isBlogList: true },
@@ -758,7 +758,7 @@
     window.addEventListener('popstate', (e) => {
         const state = e.state;
         const path = window.location.pathname;
-        let filter = 'about'; // Default filter
+        let filter = 'home'; // Default filter
         let postId = null;
         let needsUpdate = true; // Flag to prevent unnecessary updates if state is null but path matches current filter
 
@@ -788,14 +788,14 @@
                     }
                 });
             }
-            if (!foundMatch && path !== '/') { // If path isn't root and no match, default to about
-                 filter = 'about';
-            } else if (!foundMatch && path === '/') { // If root path and no explicit match, default to about
-                 filter = 'about';
+            if (!foundMatch && path !== '/') { // If path isn't root and no match, default to home
+                 filter = 'home';
+            } else if (!foundMatch && path === '/') { // If root path and no explicit match, default to home
+                 filter = 'home';
             }
              // Check if the determined state matches what's already displayed
              const currentActiveButton = container.querySelector('.filter-btn.active');
-             const currentFilterDisplayed = currentActiveButton ? currentActiveButton.dataset.filter : 'about';
+             const currentFilterDisplayed = currentActiveButton ? currentActiveButton.dataset.filter : 'home';
              const currentPostDisplayed = !contentSections.post.classList.contains('hidden');
 
              if (filter === currentFilterDisplayed && postId === null && !currentPostDisplayed) {
@@ -816,7 +816,7 @@
             const isNowExpanded = searchWidget.classList.toggle('expanded');
             if (isNowExpanded) {
                 pageSearchInput.focus();
-                let activeFilter = container.querySelector('.filter-btn.active')?.getAttribute('data-filter') || 'about';
+                let activeFilter = container.querySelector('.filter-btn.active')?.getAttribute('data-filter') || 'home';
                 pageSearchInput.placeholder = (activeFilter === 'wall') ? 'Search Wallpapers...' : 'Search Site...';
             } else {
                 pageSearchInput.value = ''; searchResultsContainer.innerHTML = '';
