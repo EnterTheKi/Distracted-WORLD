@@ -46,7 +46,11 @@ body, .gallery-page-container {
 .gallery-page-container .fullscreen-image,
 .gallery-page-container [onclick],
 .gallery-page-container [data-filter],
-.gallery-page-container [data-post-id] {
+.gallery-page-container [data-post-id],
+/* Added Easter Egg Cursors */
+.gallery-page-container #easter-egg-trigger-image,
+.gallery-page-container .dial-number.enabled,
+.gallery-page-container .safe-button {
     /* Ensure the path is relative to the CSS file if assets/ is in the root */
     cursor: url('assets/cursors/glove-pointer.png') 0 0, pointer;
 }
@@ -57,31 +61,6 @@ body, .gallery-page-container {
 }
 /* --- End Custom Cursors --- */
 
-/* ----- Hinge Hover Effect ----- */
-.vintage-photo-wrapper {
-  position: relative;
-  display: inline-block;
-  perspective: 1000px; /* For 3D effect */
-  margin: 30px 0;
-}
-
-/* Original border + subtle hover */
-.about-main-image {
-    display: block;
-    width: 100%;
-    max-width: 100%;
-    height: auto;
-    border: 1px solid var(--subtle-border-color) !important;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.15) !important;
-    margin: 30px auto 45px auto !important;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-/* Gentle hover effect */
-.about-main-image:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 6px 15px rgba(0,0,0,0.2) !important;
-}
 
 /* --- Vintage Effects --- */
 /* These apply to the container, which should wrap the body content in the HTML */
@@ -100,14 +79,6 @@ body, .gallery-page-container {
 @keyframes grain-flicker { 0% { transform: translate(0, 0); } 25% { transform: translate(-1px, 1px); } 50% { transform: translate(1px, -1px); } 75% { transform: translate(-1px, 0); } 100% { transform: translate(0, 1px); } }
 /* --- End Vintage Effects --- */
 
-/* Smooth hover effect for Distracted WORLD image */
-#distracted-content img.placeholder-image {
-  transition: transform 0.3s ease, filter 0.3s ease;
-}
-#distracted-content img.placeholder-image:hover {
-  transform: scale(1.02); /* Subtle zoom */
-  filter: brightness(1.05); /* Slight highlight */
-}
 
 /* Header Styling */
 .gallery-page-container header {
@@ -147,39 +118,6 @@ body, .gallery-page-container {
     box-shadow: 1px 1px 3px rgba(0,0,0,0.1); /* Reset hover shadow */
 }
 
-/* ----- Vintage Border & Hover Effect ----- */
-.about-main-image.vintage-border {
-    border: 12px double #5c5752 !important; /* Double-line border */
-    padding: 8px !important;
-    background-color: #e8e4d9 !important; /* Old paper tone */
-    box-shadow: 
-        0 0 0 4px #e8e4d9,               /* Inner glow */
-        0 8px 30px rgba(0, 0, 0, 0.25),  /* Soft shadow */
-        inset 0 0 20px rgba(0, 0, 0, 0.1); /* Inner vignette */
-    transition: all 0.4s ease;
-    position: relative;
-}
-
-/* Torn paper edge effect (optional) */
-.about-main-image.vintage-border::after {
-    content: "";
-    position: absolute;
-    top: -15px; left: -15px; right: -15px; bottom: -15px;
-    background: url('assets/textures/grunge-edge.png') center/cover no-repeat;
-    pointer-events: none;
-    opacity: 0.7;
-    z-index: -1;
-}
-
-/* Hover Effect */
-.about-main-image.vintage-border:hover {
-    transform: scale(1.02) rotate(-0.5deg); /* Slight tilt */
-    box-shadow: 
-        0 0 0 4px #e8e4d9,
-        0 12px 40px rgba(0, 0, 0, 0.3),
-        inset 0 0 30px rgba(0, 0, 0, 0.15);
-    filter: sepia(15%) contrast(105%) brightness(98%);
-}
 
 /* Main Content Area */
 .gallery-page-container .main-content-area { max-width: 1200px; margin: 0 auto !important; padding: 0 20px !important; }
@@ -197,16 +135,16 @@ body, .gallery-page-container {
      transform: translateY(-8px) scale(1.02);
 }
 .gallery-page-container .card-image-placeholder { height: 200px; background-color: #e8e8e0; display: flex; justify-content: center; align-items: center; text-align: center; margin-bottom: 0; border-bottom: 1px solid var(--subtle-border-color); position: relative; overflow: hidden; }
+/* Modified Image Hover from v1 */
 .gallery-page-container .card-image-placeholder img {
      display: block; width: 100%; height: 100%; object-fit: cover;
      filter: grayscale(80%) contrast(110%) brightness(100%);
-     transition: filter 0.4s ease, transform 0.4s ease;
-     /* cursor: pointer; /* Already targeted */
+     transition: transform 0.3s ease, filter 0.4s ease; /* Matched v1 */
 }
- .gallery-page-container .cartoon-card:hover .card-image-placeholder img {
-     filter: grayscale(0%) contrast(100%) brightness(100%);
-     transform: scale(1.03);
- }
+.gallery-page-container .cartoon-card:hover .card-image-placeholder img { /* Use card hover state */
+     transform: scale(1.1) rotate(2deg); /* Matched v1 */
+     filter: grayscale(0%) brightness(110%); /* Matched v1 */
+}
 .gallery-page-container .card-image-placeholder h2 { position: absolute; left: -9999px; }
 .gallery-page-container .card-details { padding: 15px !important; flex-grow: 1; }
 .gallery-page-container .card-details h3 { font-family: 'Oswald', sans-serif; font-size: 1.2rem; margin-bottom: 8px !important; font-weight: 700; color: var(--text-color) !important; text-transform: uppercase; }
@@ -243,21 +181,12 @@ body, .gallery-page-container {
 }
 
 
-/* --- Drop Cap Styling --- */
-.gallery-page-container .page-content h1 + p::first-letter,
-.gallery-page-container .page-content h2 + p::first-letter,
-.gallery-page-container .page-content img + p::first-letter,
-.gallery-page-container .page-content .centered-text + p::first-letter,
-.gallery-page-container .page-content .about-section-separator + h2 + p::first-letter,
-.gallery-page-container #distracted-content > p:first-of-type::first-letter,
-.gallery-page-container #full-blog-post-view p:first-of-type::first-letter,
-.gallery-page-container #about-content p:nth-of-type(1)::first-letter
  {
     font-family: 'EB Garamond', serif; font-size: 4em; font-weight: 700; line-height: 0.75;
     padding-top: 0.1em; color: #444 !important; float: left; margin-right: 0.1em; margin-bottom: -0.1em;
 }
 .gallery-page-container .page-content .post-meta::first-letter,
-#about-content p:nth-of-type(3)::first-letter,
+#about-content p:nth-of-type(3)::first-letter, /* Check this selector if layout changes */
 #distracted-content > p:not(:first-of-type)::first-letter,
 #distracted-content h1 + p:not(:first-of-type)::first-letter,
 #distracted-content h2 + p:not(:first-of-type)::first-letter,
@@ -265,30 +194,73 @@ body, .gallery-page-container {
 #distracted-content div + p:not(:first-of-type)::first-letter
 {
     all: initial !important;
+    /* Added fallback font-family */
+    font-family: inherit !important;
 }
-/* --- End Drop Cap Styling --- */
 
+ {
+    font-family: 'EB Garamond', serif;
+    font-size: 4em; /* <-- This makes it "giant" (4 times normal size) */
+    font-weight: 700;
+    line-height: 0.75;
+    padding-top: 0.1em;
+    color: #444 !important;
+    float: left;
+    margin-right: 0.1em;
+    margin-bottom: -0.1em;
+}
 
 /* General placeholder image style */
+/* REMOVED dashed border */
 .gallery-page-container .page-content img.placeholder-image {
     display: block; width: 80%; max-width: 500px; height: auto; aspect-ratio: 16 / 9; object-fit: cover; background-color: #e8e8e0;
-    border: 1px dashed #b0b0a0; margin: 30px auto 40px auto !important;
+    /* border: 1px dashed #b0b0a0; */ /* REMOVED */
+    margin: 30px auto 40px auto !important;
     filter: grayscale(80%) contrast(110%) brightness(100%);
-    transition: filter 0.4s ease, transform 0.4s ease;
+    transition: transform 0.3s ease, filter 0.4s ease; /* Matched v1 */
 }
-.gallery-page-container .page-content a:hover img.placeholder-image {
-    filter: grayscale(0%) contrast(100%) brightness(100%);
-    transform: scale(1.03);
+/* Modified Hover for placeholder images (excluding about-main) */
+/* Target :hover on the image itself or its link parent */
+.gallery-page-container .page-content a:hover img.placeholder-image,
+.gallery-page-container .page-content img.placeholder-image:hover {
+    transform: scale(1.1) rotate(2deg); /* Matched v1 */
+    filter: grayscale(0%) brightness(110%); /* Matched v1 */
 }
-.gallery-page-container #about-content img.about-main-image { /* Target specific image if needed */
-    display: block; width: 100%; max-width: 100%; height: auto; aspect-ratio: unset;
-    object-fit: contain; border: 1px solid var(--subtle-border-color);
-    box-shadow: 0 4px 10px rgba(0,0,0,0.15); filter: none; background-color: transparent;
-    margin: 30px auto 45px auto !important; transition: none;
+
+/* Specific styles for About Main Image - Adapted from v1 */
+.gallery-page-container #about-content img.about-main-image {
+    display: block;
+    width: 100%; /* Was width: 100% in v2, vs 100% max-width in v1. Keeping v2 width */
+    max-width: 100%;
+    height: auto;
+    aspect-ratio: unset; /* Matched v1 */
+    object-fit: contain; /* Matched v1 */
+    padding: 10px; /* Matched v1 */
+    background: var(--body-bg); /* Matched v1 */
+    border: 5px solid var(--header-footer-border); /* Matched v1 */
+    box-shadow: 0 0 0 5px var(--text-color-light), 0 0 0 10px var(--active-nav-bg), 0 10px 25px rgba(0, 0, 0, 0.4); /* Matched v1 - Using CSS vars where appropriate */
+    border-radius: 5px; /* Matched v1 */
+    margin: 30px auto 45px auto !important; /* Matched v1 margin */
+    filter: none; /* Override general placeholder filter */
+    transition: all 0.4s ease, opacity 0.5s ease, transform 0.5s ease; /* Matched v1 */
+    z-index: 1; /* Matched v1 */
 }
- .gallery-page-container #about-content img.about-main-image:hover {
-    filter: none; transform: none;
- }
+/* Hover effect for About Main Image - Adapted from v1 */
+.gallery-page-container #about-content img.about-main-image:not(.shake-and-fade):hover {
+    transform: perspective(1000px) rotateX(3deg) rotateY(3deg); /* Matched v1 */
+    box-shadow: 0 0 0 5px var(--text-color-light), 0 0 0 10px var(--active-nav-bg), 0 15px 35px rgba(0, 0, 0, 0.5); /* Matched v1 */
+    filter: none; /* Ensure no filter on hover */
+}
+
+/* Light-Up Effect (Copied from v1) */
+@keyframes lightUp {
+    0% { filter: brightness(100%) drop-shadow(0 0 0 rgba(255, 215, 0, 0)); }
+    50% { filter: brightness(130%) drop-shadow(0 0 15px rgba(255, 215, 0, 0.8)); }
+    100% { filter: brightness(100%) drop-shadow(0 0 0 rgba(255, 215, 0, 0)); }
+}
+#easter-egg-trigger-image.light-up {
+    animation: lightUp 0.5s ease-in-out;
+}
 
 
 .gallery-page-container .centered-text { text-align: center; font-family: 'EB Garamond', serif; font-size: 1.3rem; margin: 40px 0 !important; line-height: 1.9; font-weight: 400; color: var(--text-color) !important; }
@@ -296,6 +268,13 @@ body, .gallery-page-container {
 .gallery-page-container .page-link { /* For links styled as buttons within content */
     display: block; width: fit-content; margin: 40px auto !important; padding: 12px 30px !important; background-color: #444; color: var(--text-color-light) !important; text-decoration: none !important; font-family: 'Oswald', sans-serif; font-weight: 700; text-transform: uppercase; border-radius: 3px; transition: color 0.3s ease, background-color 0.3s ease, border-color 0.3s ease, transform 0.2s ease, box-shadow 0.2s ease; letter-spacing: 1px; box-shadow: 1px 1px 3px rgba(0,0,0,0.2); border: 1px solid #444; }
 .gallery-page-container .page-link:hover { background-color: #111; transform: scale(1.05); border-color: var(--hover-border-color); }
+/* Added from v1 */
+.gallery-page-container .centered-button {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+}
 .gallery-page-container .about-section-separator {
      border-top: none; border-bottom: 2px solid #bbb; opacity: 0.7;
      margin: 60px auto !important; width: 50%;
@@ -334,13 +313,15 @@ body, .gallery-page-container {
      border-color: var(--hover-border-color);
 }
 .gallery-page-container .blog-image-placeholder { height: 180px; background-color: #e0e0d4; display: flex; justify-content: center; align-items: center; text-align: center; color: #999; font-style: italic; font-family: 'EB Garamond', serif; border-bottom: 1px solid var(--subtle-border-color); overflow: hidden; }
+/* Modified Image Hover from v1 */
 .gallery-page-container .blog-image-placeholder img {
      display: block; width: 100%; height: 100%; object-fit: cover;
      filter: grayscale(80%) contrast(110%) brightness(100%);
-     transition: filter 0.4s ease, transform 0.4s ease;
+     transition: transform 0.3s ease, filter 0.4s ease; /* Matched v1 */
 }
-.gallery-page-container .blog-post-card:hover .blog-image-placeholder img {
-     filter: grayscale(0%) contrast(100%) brightness(100%); transform: scale(1.03);
+.gallery-page-container .blog-post-card:hover .blog-image-placeholder img { /* Use card hover */
+     transform: scale(1.1) rotate(2deg); /* Matched v1 */
+     filter: grayscale(0%) brightness(110%); /* Matched v1 */
 }
 .gallery-page-container .blog-image-placeholder span { font-size: 1.1rem; position: absolute; left:-9999px; }
 .gallery-page-container .blog-card-details { padding: 20px !important; flex-grow: 1; }
@@ -395,6 +376,7 @@ body, .gallery-page-container {
 
 /* Social Media Icons */
 .gallery-page-container .social-icons-container { text-align: center; padding: 25px 0 !important; margin: 30px auto 20px auto !important; max-width: 1100px; border-top: 1px solid var(--subtle-border-color); }
+/* Retained v2 style for social icons */
 .gallery-page-container .social-icons-container a { display: inline-flex; align-items: center; justify-content: center; text-decoration: none !important; color: var(--text-color-light) !important; background-color: #000 !important; width: 55px; height: 55px; border-radius: 50%; margin: 0 12px !important; transition: color 0.3s ease, background-color 0.3s ease, transform 0.2s ease, box-shadow 0.2s ease; box-shadow: 0 2px 5px rgba(0,0,0,0.2); }
 .gallery-page-container .social-icons-container a i { font-size: 1.8rem; line-height: 1; transition: color 0.3s ease; }
 .gallery-page-container .social-icons-container a:hover {
@@ -405,10 +387,26 @@ body, .gallery-page-container {
 
 /* Footer Styling */
 .gallery-page-container footer {
-     margin-top: 0 !important; padding: 15px 0 !important; background-color: var(--header-footer-bg); text-align: center;
-     border-top: 5px solid var(--header-footer-border); border-bottom: 5px solid var(--header-footer-border);
+     margin-top: 40px !important; /* Increased margin-top like v1 */
+     padding: 20px 0 !important; /* Matched v1 padding */
+     background-color: var(--header-footer-bg);
+     color: var(--text-color-light) !important; /* Added !important */
+     text-align: center;
+     border-top: 5px solid var(--header-footer-border);
+     /* Removed bottom border from v2, added shadow from v1 */
+     /* border-bottom: 5px solid var(--header-footer-border); */
+     box-shadow: 0 -2px 5px rgba(0,0,0,0.2);
 }
-.gallery-page-container footer p { font-family: 'EB Garamond', serif; color: var(--text-color-light) !important; font-size: 0.85rem; letter-spacing: 0.5px; font-weight: 400; text-shadow: none; margin: 0 !important; }
+/* Matched v1 font style */
+.gallery-page-container footer p {
+    font-family: 'Oswald', sans-serif;
+    font-size: 0.9rem;
+    margin: 0 !important;
+    letter-spacing: 0.5px;
+    /* color: var(--text-color-light) !important; */ /* Already set on footer */
+    /* font-weight: 400; */ /* Oswald 400 is default */
+    /* text-shadow: none; */ /* Already none */
+}
 
 
 /* Class to hide elements */
@@ -420,11 +418,236 @@ body, .gallery-page-container {
  .gallery-page-container .read-more-btn:active,
  .gallery-page-container .page-link:active,
  .gallery-page-container .social-icons-container a:active,
- .search-toggle-btn:active
+ .search-toggle-btn:active,
+ /* Added Easter Egg Buttons */
+ .gallery-page-container .safe-button:active,
+ .gallery-page-container .dial-number.enabled:active
   {
      transform: translateY(2px) scale(0.97); box-shadow: inset 1px 1px 5px rgba(0,0,0,0.2);
      transition-duration: 0.05s !important;
  }
+
+/* --- START EASTER EGG SAFE STYLING (Copied from v1) --- */
+.gallery-page-container #secret-safe-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.85);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 10002; /* Above grain, below search dropdown maybe? Check z-indexes */
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.5s ease;
+}
+.gallery-page-container #secret-safe-container.visible {
+    opacity: 1;
+    pointer-events: auto;
+}
+.gallery-page-container .safe {
+    background: #2f2f2f;
+    border: 5px solid #4a4642; /* uses variable */
+    border-radius: 10px;
+    padding: 20px;
+    width: 90%;
+    max-width: 500px;
+    box-shadow: 0 0 20px rgba(0,0,0,0.5), inset 0 0 10px rgba(255,255,255,0.1);
+    position: relative;
+}
+.gallery-page-container .safe.creak-in {
+    animation: creakIn 0.8s ease-out forwards;
+}
+@keyframes creakIn {
+    0% { transform: scale(0.5) rotate(-5deg); opacity: 0; }
+    50% { transform: scale(1.05) rotate(2deg); opacity: 1; }
+    100% { transform: scale(1) rotate(0); opacity: 1; }
+}
+.gallery-page-container .safe-door {
+    background: var(--active-nav-bg); /* uses variable */
+    padding: 20px;
+    border-radius: 5px;
+    border: 2px solid var(--hover-border-color); /* uses variable */
+}
+.gallery-page-container .dial-display {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 20px;
+    font-family: 'Oswald', sans-serif;
+    font-size: 2rem;
+    color: var(--text-color-light); /* uses variable */
+    background: #1a1a1a;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid var(--header-footer-border); /* uses variable */
+}
+.gallery-page-container .dial-digit {
+    width: 30px;
+    text-align: center;
+}
+.gallery-page-container .dial {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 10px;
+    margin-bottom: 20px;
+}
+.gallery-page-container .dial-number {
+    background: #555;
+    color: #fff;
+    border: 1px solid #777;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    font-family: 'Oswald', sans-serif;
+    font-size: 1rem;
+    cursor: not-allowed;
+    transition: background 0.3s ease, transform 0.2s ease;
+}
+.gallery-page-container .dial-number.enabled {
+    background: var(--text-color-light); /* uses variable */
+    color: #333;
+    border-color: var(--header-footer-border); /* uses variable */
+    cursor: pointer; /* Already handled by global rule */
+}
+.gallery-page-container .dial-number.enabled:hover {
+    background: #fff;
+    transform: scale(1.1);
+}
+.gallery-page-container .safe-controls {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    margin-bottom: 15px;
+}
+.gallery-page-container .safe-button {
+    flex: 1;
+    padding: 10px;
+    background: var(--header-footer-border); /* uses variable */
+    color: var(--text-color-light); /* uses variable */
+    border: 1px solid var(--hover-border-color); /* uses variable */
+    border-radius: 3px;
+    font-family: 'Oswald', sans-serif;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    cursor: pointer; /* Already handled by global rule */
+    transition: background 0.3s ease, transform 0.2s ease;
+}
+.gallery-page-container .safe-button:hover {
+    background: var(--hover-border-color); /* uses variable */
+    transform: scale(1.05);
+}
+.gallery-page-container .safe-button:disabled {
+    background: #333;
+    color: #777;
+    cursor: not-allowed;
+    transform: none;
+}
+.gallery-page-container .safe-message {
+    text-align: center;
+    font-family: 'Oswald', sans-serif;
+    font-size: 1rem;
+    color: var(--text-color-light); /* uses variable */
+    transition: color 0.3s ease;
+}
+.gallery-page-container .safe-message.error {
+    color: #ff5555;
+}
+.gallery-page-container .safe-message.success {
+    color: #55ff55;
+}
+.gallery-page-container .prize {
+    text-align: center;
+    padding: 20px;
+}
+.gallery-page-container .prize.visible { /* Needs JS to add .visible */
+    animation: prizeReveal 0.8s ease-out forwards;
+}
+@keyframes prizeReveal {
+    0% { transform: scale(0.8); opacity: 0; }
+    100% { transform: scale(1); opacity: 1; }
+}
+.gallery-page-container .treasure-chest-glow {
+    position: relative;
+    display: inline-block;
+}
+.gallery-page-container .treasure-chest-image {
+    width: 150px;
+    height: auto;
+    filter: drop-shadow(0 0 10px #ffd700);
+}
+.gallery-page-container .prize h3 {
+    font-family: 'Limelight', cursive;
+    font-size: 1.8rem;
+    color: #ffd700;
+    margin: 15px 0 !important;
+}
+.gallery-page-container .prize p {
+    font-family: 'EB Garamond', serif;
+    font-size: 1.1rem;
+    color: var(--text-color-light) !important; /* uses variable */
+    margin-bottom: 15px !important;
+    /* Reset dropcap */
+     all: unset !important;
+     font-family: 'EB Garamond', serif !important;
+     font-size: 1.1rem !important;
+     color: var(--text-color-light) !important;
+     margin-bottom: 15px !important;
+     text-align: center !important; /* Ensure centered */
+     hyphens: none !important;
+     line-height: 1.7 !important;
+}
+.gallery-page-container .prize a {
+    display: inline-block;
+    padding: 10px 20px !important;
+    background: #ffd700;
+    color: #333 !important;
+    text-decoration: none !important;
+    font-family: 'Oswald', sans-serif;
+    font-weight: 700;
+    border-radius: 3px;
+    transition: background 0.3s ease, transform 0.2s ease;
+}
+.gallery-page-container .prize a:hover {
+    background: #ffeb3b;
+    transform: scale(1.05);
+}
+/* --- END EASTER EGG SAFE STYLING --- */
+
+/* Easter Egg Organized Animation (Copied from v1) */
+@keyframes bounce1930s {
+    0% { transform: translate(-50%, -50%) scale(1); opacity: 1;} /* Start visible */
+    20% { transform: translate(-50%, -70%) scale(1.2) rotate(5deg); }
+    40% { transform: translate(-50%, -50%) scale(0.9) rotate(-5deg); }
+    60% { transform: translate(-50%, -60%) scale(1.1); }
+    80% { transform: translate(-50%, -50%) scale(1); }
+    100% { transform: translate(-50%, -50%) scale(1); opacity: 0; } /* Fade out at end */
+}
+.easter-egg-bounce {
+    animation: bounce1930s 3s ease-in-out forwards;
+    /* Added these styles from v1 JS inline styles for positioning */
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 10003; /* High z-index */
+    max-width: 200px; /* Added from v1 JS */
+    pointer-events: none; /* Prevent interaction */
+}
+
+/* Shake and Fade Animation (Copied from v1) */
+.gallery-page-container .shake-and-fade {
+    animation: shakeAndFade 0.8s ease-out forwards;
+}
+@keyframes shakeAndFade {
+    0% { transform: translateX(0); opacity: 1; }
+    25% { transform: translateX(-10px) rotate(-2deg); }
+    50% { transform: translateX(10px) rotate(2deg); }
+    75% { transform: translateX(-5px) rotate(-1deg); }
+    100% { transform: translateX(0); opacity: 0; }
+}
 
 /* --- RESPONSIVE ADJUSTMENTS --- */
 @media (max-width: 768px) {
@@ -441,7 +664,7 @@ body, .gallery-page-container {
     .gallery-page-container .blog-card-details h3 { font-size: 1.3rem; }
     .gallery-page-container .centered-text { font-size: 1.1rem; margin: 30px 0 !important;}
     /* Adjust drop cap size */
-    .gallery-page-container #about-content p:nth-of-type(1)::first-letter { font-size: 3.5em; }
+    .gallery-page-container #about-content .image-container + p::first-letter { font-size: 3.5em; }
     .gallery-page-container .social-icons-container a { width: 50px; height: 50px; margin: 5px 8px !important; }
     .gallery-page-container .social-icons-container a i { font-size: 1.6rem; }
     .search-widget-container { top: 15px; right: 15px; }
@@ -449,13 +672,16 @@ body, .gallery-page-container {
     .search-toggle-btn { width: 40px; height: 40px; font-size: 1.1rem;}
     #pageSearchInput { height: 40px; border-radius: 20px; }
     .gallery-page-container #full-blog-post-view h1 { font-size: 2rem; }
+    /* Responsive Safe */
+    .gallery-page-container .safe { max-width: 95%; }
+    .gallery-page-container .dial { grid-template-columns: repeat(4, 1fr); justify-content: center; } /* Adjust dial layout */
 }
 
 @media (max-width: 480px) {
     .gallery-page-container header h1 { font-size: 3.0rem; text-shadow: 1px 1px 0px var(--header-footer-border), 3px 3px 5px rgba(0, 0, 0, 0.5); letter-spacing: 2px; }
     .gallery-page-container footer p { font-size: 0.75rem; }
     .gallery-page-container .card-details h3 { font-size: 1rem; }
-    .gallery-page-container .filter-buttons { gap: 5px; }
+    .gallery-page-container .filter-buttons { gap: 5px; } /* Consider column layout if needed */
     .gallery-page-container .filter-nav .filter-btn { padding: 8px 12px; font-size: 0.85rem; }
     .gallery-page-container .gallery-grid { grid-template-columns: 1fr; gap: 15px; }
     .gallery-page-container .page-content { padding: 15px !important; } /* #about-content covered */
@@ -467,59 +693,82 @@ body, .gallery-page-container {
     .gallery-page-container .centered-text { font-size: 1rem; margin: 25px 0 !important; }
     .gallery-page-container .page-link { padding: 10px 20px !important; font-size: 0.9rem;}
      /* Adjust drop cap size */
-     .gallery-page-container #about-content p:nth-of-type(1)::first-letter { font-size: 3em; }
+     .gallery-page-container #about-content .image-container + p::first-letter { font-size: 3em; }
     .gallery-page-container .social-icons-container a { width: 45px; height: 45px; margin: 5px 6px !important;}
     .gallery-page-container .social-icons-container a i { font-size: 1.4rem; }
-    .search-widget-container.expanded #pageSearchInput { width: calc(100vw - 70px); }
+    .search-widget-container.expanded #pageSearchInput { width: calc(100vw - 70px); max-width: 200px; } /* Adjusted max-width */
     .search-widget-container { top: 10px; right: 10px; }
     #pageSearchInput { height: 40px; border-radius: 20px; }
     .gallery-page-container #full-blog-post-view h1 { font-size: 1.8rem; }
     .gallery-page-container .post-meta { font-size: 0.85rem; }
+    /* Responsive Safe */
+    .gallery-page-container .dial { grid-template-columns: repeat(3, 1fr); gap: 5px; } /* Further adjust dial */
+    .gallery-page-container .dial-number { width: 35px; height: 35px; font-size: 0.9rem; }
+    .gallery-page-container .safe-button { font-size: 0.8rem; padding: 8px; }
 }
 
-.about-main-image {
-    /* Distressed border effect */
-    border: 8px solid transparent !important;
-    padding: 6px !important;
-    background: 
-        linear-gradient(#e8e4d9, #e8e4d9) padding-box,
-        url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><path d="M0 0h100v100H0z" fill="none"/><path d="M20 0v20H0v60h20v20h60v-20h20V20H80V0H20z" fill="%235c5752"/></svg>') border-box !important;
-    box-shadow: 
-        0 5px 15px rgba(0,0,0,0.2),
-        inset 0 0 20px rgba(0,0,0,0.1) !important;
-    position: relative;
-}
-        /* Double Stacked Frame (Your Original Enhanced) */
-.vintage-double-frame {
-    /* INNER FRAME */
-    border: 12px solid #e8e4d9 !important;
-    padding: 8px !important;
-    background-color: #f7f5f0 !important;
-    box-shadow: 
-        inset 0 0 25px rgba(0,0,0,0.1),
-        0 0 0 10px #5c5752, /* OUTER FRAME */
-        0 8px 30px rgba(0,0,0,0.3) !important;
-    position: relative;
-    transition: all 0.4s ease;
+/* Add this rule to your style.css */
+/* Already present in v2, keep it */
+.gallery-page-container #distracted-content a.page-link.read-more-btn {
+    display: block; /* Crucial: Make it block-level for margin:auto centering */
+    /* The width: fit-content and margin: auto are likely inherited from .page-link */
+    /* If not, uncomment these: */
+    /* width: fit-content; */
+    /* margin-left: auto; */
+    /* margin-right: auto; */
 }
 
-/* Aged Frame Texture */
-.vintage-double-frame::before {
-    content: "";
-    position: absolute;
-    top: -10px; left: -10px; right: -10px; bottom: -10px;
-    border: 3px solid rgba(92, 87, 82, 0.4);
-    z-index: -1;
-    pointer-events: none;
+/* Ensure Cloudflare iframe is hidden (Copied from v1) */
+body > iframe {
+    display: none !important;
 }
 
-/* Hover Effect */
-.vintage-double-frame:hover {
-    transform: translateY(-5px);
-    box-shadow: 
-        inset 0 0 30px rgba(0,0,0,0.15),
-        0 0 0 10px #5c5752,
-        0 12px 40px rgba(0,0,0,0.4) !important;
+/* --- Drop Cap Styling (Corrected) --- */
+
+/* General rules for drop caps */
+.gallery-page-container .page-content h1 + p::first-letter,
+.gallery-page-container .page-content h2 + p::first-letter,
+/* This rule might be too general if not all images are followed by paragraphs needing drop caps */
+/* .gallery-page-container .page-content img + p::first-letter,  */
+.gallery-page-container .page-content .centered-text + p::first-letter,
+.gallery-page-container .page-content .about-section-separator + h2 + p::first-letter,
+.gallery-page-container #distracted-content > p:first-of-type::first-letter,
+.gallery-page-container #full-blog-post-view p:first-of-type::first-letter,
+
+/* SPECIFIC rule for the "Imagine..." paragraph in #about-content */
+/* It follows the #secret-safe-container */
+.gallery-page-container #about-content #secret-safe-container + p::first-letter {
+    font-family: 'EB Garamond', serif;
+    font-size: 4em; /* This makes it "giant" */
+    font-weight: 700;
+    line-height: 0.75;
+    padding-top: 0.1em;
+    color: #444 !important;
+    float: left;
+    margin-right: 0.1em;
+    margin-bottom: -0.1em;
 }
-        inset 0 0 40px rgba(0,0,0,0.15) !important;
+
+/* Exclusion rules - prevent drop caps where not wanted */
+.gallery-page-container .page-content .post-meta::first-letter,
+/* The "What is..." paragraph is the 3rd <p> inside #about-content */
+#about-content p:nth-of-type(3)::first-letter,
+#distracted-content > p:not(:first-of-type)::first-letter,
+#distracted-content h1 + p:not(:first-of-type)::first-letter,
+#distracted-content h2 + p:not(:first-of-type)::first-letter,
+#distracted-content img + p:not(:first-of-type)::first-letter,
+#distracted-content div + p:not(:first-of-type)::first-letter,
+/* Explicitly exclude prize paragraphs */
+.gallery-page-container .prize p::first-letter {
+    all: initial !important;
+    font-family: inherit !important; /* Add fallback */
+    /* Reset any potential inherited drop-cap styles */
+    font-size: inherit !important;
+    font-weight: inherit !important;
+    line-height: inherit !important;
+    padding: 0 !important;
+    color: inherit !important;
+    float: none !important;
+    margin: 0 !important;
 }
+/* --- End Drop Cap Styling --- */
