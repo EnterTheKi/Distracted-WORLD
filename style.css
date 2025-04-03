@@ -186,7 +186,7 @@ body, .gallery-page-container {
     padding-top: 0.1em; color: #444 !important; float: left; margin-right: 0.1em; margin-bottom: -0.1em;
 }
 .gallery-page-container .page-content .post-meta::first-letter,
-#about-content p:nth-of-type(3)::first-letter, /* Check this selector if layout changes */
+#home-content p:nth-of-type(3)::first-letter, /* Check this selector if layout changes */
 #distracted-content > p:not(:first-of-type)::first-letter,
 #distracted-content h1 + p:not(:first-of-type)::first-letter,
 #distracted-content h2 + p:not(:first-of-type)::first-letter,
@@ -219,7 +219,7 @@ body, .gallery-page-container {
     filter: grayscale(80%) contrast(110%) brightness(100%);
     transition: transform 0.3s ease, filter 0.4s ease; /* Matched v1 */
 }
-/* Modified Hover for placeholder images (excluding about-main) */
+/* Modified Hover for placeholder images (excluding home-main) */
 /* Target :hover on the image itself or its link parent */
 .gallery-page-container .page-content a:hover img.placeholder-image,
 .gallery-page-container .page-content img.placeholder-image:hover {
@@ -227,8 +227,8 @@ body, .gallery-page-container {
     filter: grayscale(0%) brightness(110%); /* Matched v1 */
 }
 
-/* Specific styles for About Main Image - Adapted from v1 */
-.gallery-page-container #about-content img.about-main-image {
+/* Specific styles for home Main Image - Adapted from v1 */
+.gallery-page-container #home-content img.home-main-image {
     display: block;
     width: 100%; /* Was width: 100% in v2, vs 100% max-width in v1. Keeping v2 width */
     max-width: 100%;
@@ -245,8 +245,8 @@ body, .gallery-page-container {
     transition: all 0.4s ease, opacity 0.5s ease, transform 0.5s ease; /* Matched v1 */
     z-index: 1; /* Matched v1 */
 }
-/* Hover effect for About Main Image - Adapted from v1 */
-.gallery-page-container #about-content img.about-main-image:not(.shake-and-fade):hover {
+/* Hover effect for home Main Image - Adapted from v1 */
+.gallery-page-container #home-content img.home-main-image:not(.shake-and-fade):hover {
     transform: perspective(1000px) rotateX(3deg) rotateY(3deg); /* Matched v1 */
     box-shadow: 0 0 0 5px var(--text-color-light), 0 0 0 10px var(--active-nav-bg), 0 15px 35px rgba(0, 0, 0, 0.5); /* Matched v1 */
     filter: none; /* Ensure no filter on hover */
@@ -275,15 +275,15 @@ body, .gallery-page-container {
     margin-right: auto;
     text-align: center;
 }
-.gallery-page-container .about-section-separator {
+.gallery-page-container .home-section-separator {
      border-top: none; border-bottom: 2px solid #bbb; opacity: 0.7;
      margin: 60px auto !important; width: 50%;
 }
 
-/* Styles for ABOUT View (#about-content div) */
-.gallery-page-container #about-content { max-width: 950px; padding-top: 10px !important; }
-.gallery-page-container .about-intro-header { font-family: 'Limelight', cursive; font-size: 2.0rem; text-align: center; margin-bottom: 15px !important; color: #444 !important; font-weight:normal; letter-spacing: 1px; }
-.gallery-page-container .preview-section { /* For sections within About page */
+/* Styles for home View (#home-content div) */
+.gallery-page-container #home-content { max-width: 950px; padding-top: 10px !important; }
+.gallery-page-container .home-intro-header { font-family: 'Limelight', cursive; font-size: 2.0rem; text-align: center; margin-bottom: 15px !important; color: #444 !important; font-weight:normal; letter-spacing: 1px; }
+.gallery-page-container .preview-section { /* For sections within home page */
      background-color: #fff; padding: 25px 30px !important; margin-bottom: 30px !important; border-radius: 3px;
      border: 1px solid var(--subtle-border-color); box-shadow: 0 4px 10px rgba(0,0,0,0.12);
 }
@@ -365,7 +365,7 @@ body, .gallery-page-container {
 /* Fade-In Animation */
 @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 /* Apply animation to content sections when they become visible */
-.gallery-page-container #about-content:not(.hidden),
+.gallery-page-container #home-content:not(.hidden),
 .gallery-page-container #gallery-grid:not(.hidden),
 .gallery-page-container #distracted-content:not(.hidden),
 .gallery-page-container #organized-content:not(.hidden),
@@ -656,15 +656,15 @@ body, .gallery-page-container {
     .gallery-page-container .gallery-grid { grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 20px; }
     .gallery-page-container footer p { font-size: 0.8rem; }
     .gallery-page-container .card-details h3 { font-size: 1.1rem; }
-    .gallery-page-container .page-content { padding: 20px !important; } /* #about-content already covered */
-    .gallery-page-container .page-content h1 { font-size: 2.2rem; } /* #about-content h1 covered */
-    .gallery-page-container .page-content h2 { font-size: 1.6rem; } /* #about-content h2 covered */
+    .gallery-page-container .page-content { padding: 20px !important; } /* #home-content already covered */
+    .gallery-page-container .page-content h1 { font-size: 2.2rem; } /* #home-content h1 covered */
+    .gallery-page-container .page-content h2 { font-size: 1.6rem; } /* #home-content h2 covered */
     .gallery-page-container .page-content p, .gallery-page-container .preview-section p, .gallery-page-container .blog-card-details p { font-size: 1rem; line-height: 1.7; }
     .gallery-page-container .preview-section h3 { font-size: 1.5rem; }
     .gallery-page-container .blog-card-details h3 { font-size: 1.3rem; }
     .gallery-page-container .centered-text { font-size: 1.1rem; margin: 30px 0 !important;}
     /* Adjust drop cap size */
-    .gallery-page-container #about-content .image-container + p::first-letter { font-size: 3.5em; }
+    .gallery-page-container #home-content .image-container + p::first-letter { font-size: 3.5em; }
     .gallery-page-container .social-icons-container a { width: 50px; height: 50px; margin: 5px 8px !important; }
     .gallery-page-container .social-icons-container a i { font-size: 1.6rem; }
     .search-widget-container { top: 15px; right: 15px; }
@@ -684,16 +684,16 @@ body, .gallery-page-container {
     .gallery-page-container .filter-buttons { gap: 5px; } /* Consider column layout if needed */
     .gallery-page-container .filter-nav .filter-btn { padding: 8px 12px; font-size: 0.85rem; }
     .gallery-page-container .gallery-grid { grid-template-columns: 1fr; gap: 15px; }
-    .gallery-page-container .page-content { padding: 15px !important; } /* #about-content covered */
-    .gallery-page-container .page-content h1 { font-size: 2rem; } /* #about-content h1 covered */
-    .gallery-page-container .page-content h2 { font-size: 1.4rem; } /* #about-content h2 covered */
+    .gallery-page-container .page-content { padding: 15px !important; } /* #home-content covered */
+    .gallery-page-container .page-content h1 { font-size: 2rem; } /* #home-content h1 covered */
+    .gallery-page-container .page-content h2 { font-size: 1.4rem; } /* #home-content h2 covered */
     .gallery-page-container .page-content p, .gallery-page-container .preview-section p, .gallery-page-container .blog-card-details p { font-size: 0.95rem; line-height: 1.6; }
     .gallery-page-container .preview-section h3 { font-size: 1.3rem; }
     .gallery-page-container .blog-card-details h3 { font-size: 1.2rem; }
     .gallery-page-container .centered-text { font-size: 1rem; margin: 25px 0 !important; }
     .gallery-page-container .page-link { padding: 10px 20px !important; font-size: 0.9rem;}
      /* Adjust drop cap size */
-     .gallery-page-container #about-content .image-container + p::first-letter { font-size: 3em; }
+     .gallery-page-container #home-content .image-container + p::first-letter { font-size: 3em; }
     .gallery-page-container .social-icons-container a { width: 45px; height: 45px; margin: 5px 6px !important;}
     .gallery-page-container .social-icons-container a i { font-size: 1.4rem; }
     .search-widget-container.expanded #pageSearchInput { width: calc(100vw - 70px); max-width: 200px; } /* Adjusted max-width */
@@ -731,13 +731,13 @@ body > iframe {
 /* This rule might be too general if not all images are followed by paragraphs needing drop caps */
 /* .gallery-page-container .page-content img + p::first-letter,  */
 .gallery-page-container .page-content .centered-text + p::first-letter,
-.gallery-page-container .page-content .about-section-separator + h2 + p::first-letter,
+.gallery-page-container .page-content .home-section-separator + h2 + p::first-letter,
 .gallery-page-container #distracted-content > p:first-of-type::first-letter,
 .gallery-page-container #full-blog-post-view p:first-of-type::first-letter,
 
-/* SPECIFIC rule for the "Imagine..." paragraph in #about-content */
+/* SPECIFIC rule for the "Imagine..." paragraph in #home-content */
 /* It follows the #secret-safe-container */
-.gallery-page-container #about-content #secret-safe-container + p::first-letter {
+.gallery-page-container #home-content #secret-safe-container + p::first-letter {
     font-family: 'EB Garamond', serif;
     font-size: 4em; /* This makes it "giant" */
     font-weight: 700;
@@ -751,8 +751,8 @@ body > iframe {
 
 /* Exclusion rules - prevent drop caps where not wanted */
 .gallery-page-container .page-content .post-meta::first-letter,
-/* The "What is..." paragraph is the 3rd <p> inside #about-content */
-#about-content p:nth-of-type(3)::first-letter,
+/* The "What is..." paragraph is the 3rd <p> inside #home-content */
+#home-content p:nth-of-type(3)::first-letter,
 #distracted-content > p:not(:first-of-type)::first-letter,
 #distracted-content h1 + p:not(:first-of-type)::first-letter,
 #distracted-content h2 + p:not(:first-of-type)::first-letter,
