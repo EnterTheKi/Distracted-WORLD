@@ -213,8 +213,13 @@ body, .gallery-page-container {
 /* General placeholder image style */
 /* REMOVED dashed border */
 .gallery-page-container .page-content img.placeholder-image {
-    display: block; width: 80%; max-width: 500px; height: auto; aspect-ratio: 16 / 9; object-fit: cover; background-color: #e8e8e0;
-    /* border: 1px dashed #b0b0a0; */ /* REMOVED */
+    display: block;
+    width: 80%;
+    max-width: 500px;
+    height: auto;
+    aspect-ratio: 16 / 9;
+    object-fit: contain; /* Changed from cover to contain */
+    background-color: #e8e8e0;
     margin: 30px auto 40px auto !important;
     filter: grayscale(80%) contrast(110%) brightness(100%);
     transition: transform 0.3s ease, filter 0.4s ease; /* Matched v1 */
