@@ -5,28 +5,29 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Distracted WORLD</title>
 
-    <!-- Favicon (Copied from first version) -->
+    <!-- Favicon -->
     <link rel="icon" type="image/jpeg" href="assets/images/dw-favicon.jpg">
 
-    <!-- 1. Font Links (Google Fonts + Font Awesome) -->
+    <!-- Font Links -->
     <link rel="preconnect" href="https://fonts.googleapis.com"/>
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous"/>
     <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,700;1,400&family=Limelight&family=Oswald:wght@400;700&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Courier+Prime&display=swap" rel="stylesheet">
+    <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
-    <!-- 2. Link to External CSS -->
+    <!-- Link to External CSS -->
     <link rel="stylesheet" href="style.css">
 
 </head>
 <body>
 
-    <!-- 3. HTML Structure -->
-    <div class="gallery-page-container">
+    <div class="gallery-page-container"> <!-- Main Container referenced in JS -->
 
-        <!-- Search Widget (Fixed Position) -->
+        <!-- Search Widget -->
         <div class="search-widget-container" id="search-widget">
              <div class="search-input-wrapper">
-                 <input type="search" id="pageSearchInput" class="search-input-field" placeholder="Search Site..." autocomplete="off"/>
+                 <input type="search" id="pageSearchInput" class="search-input-field" placeholder="Search or Ask..." autocomplete="off"/>
                  <div class="search-results" id="searchResults"></div>
              </div>
              <button class="search-toggle-btn" id="searchToggle" aria-label="Toggle Search">
@@ -38,76 +39,45 @@
             <h1>Distracted WORLD</h1>
         </header>
 
-        <!-- Navigation: Added data-url attributes -->
+        <!-- Navigation -->
         <nav class="filter-nav">
             <div class="filter-buttons">
                 <button class="filter-btn active" data-filter="home" data-url="/home">HOME</button>
                 <button class="filter-btn" data-filter="distracted" data-url="/dw">Distracted WORLD</button>
                 <button class="filter-btn" data-filter="organized" data-url="/ow">Organized WORLD</button>
                 <button class="filter-btn" data-filter="blog" data-url="/blog">Blog</button>
-                <button class="filter-btn" data-filter="wall" data-url="/wall">Wall</button>
+                <button class="filter-btn" data-filter="goals" data-url="/goals">Goals</button>
             </div>
         </nav>
 
         <main class="main-content-area">
 
-            <!-- HOME Content - Should be VISIBLE by default -->
+            <!-- HOME Content -->
             <div id="home-content" class="page-content">
                  <h2 class="home-intro-header">Welcome, Traveler, to a World… Distracted.</h2>
-                 <div class="image-container"> <!-- Added wrapper div like in v1 -->
-                    <!-- Added id="easter-egg-trigger-image" -->
+                 <div class="image-container">
                     <img src="assets/images/distracted-world-main.jpg"
                          alt="Distracted WORLD illustration with globe head character"
                          class="placeholder-image home-main-image" id="easter-egg-trigger-image">
                  </div>
-
-                 <!-- Vintage Safe Easter Egg (Copied from first version) -->
+                 <!-- Safe HTML -->
                  <div id="secret-safe-container" class="hidden">
-                    <div class="safe" id="vintage-safe">
-                        <div class="safe-door" id="safe-door">
-                            <div class="safe-front">
-                                <div class="dial-display" id="dial-display-area">
-                                    <span class="dial-digit">-</span>
-                                    <span class="dial-digit">-</span>
-                                    <span class="dial-digit">-</span>
-                                </div>
-                                <div class="dial" id="safe-dial">
-                                    <button class="dial-number disabled" data-value="0">0</button>
-                                    <button class="dial-number disabled" data-value="1">1</button>
-                                    <button class="dial-number disabled" data-value="2">2</button>
-                                    <button class="dial-number enabled" data-value="3">3</button>
-                                    <button class="dial-number disabled" data-value="4">4</button>
-                                    <button class="dial-number disabled" data-value="5">5</button>
-                                    <button class="dial-number enabled" data-value="6">6</button>
-                                    <button class="dial-number disabled" data-value="7">7</button>
-                                    <button class="dial-number disabled" data-value="8">8</button>
-                                    <button class="dial-number enabled" data-value="9">9</button>
-                                </div>
-                                <div class="safe-controls">
-                                    <button id="safe-clear-button" class="safe-button">CLEAR</button>
-                                    <button id="safe-open-button" class="safe-button">OPEN</button>
-                                </div>
-                                <div id="safe-message" class="safe-message">Enter Code: 3-6-9</div>
-                            </div>
+                    <div class="safe">
+                        <div class="safe-door">
+                            <div class="dial-display"><span class="dial-digit" id="digit-0">_</span><span class="dial-digit" id="digit-1">_</span><span class="dial-digit" id="digit-2">_</span><span class="dial-digit" id="digit-3">_</span><span class="dial-digit" id="digit-4">_</span></div>
+                            <div class="dial"><button class="dial-number" data-value="1">1</button><button class="dial-number" data-value="2">2</button><button class="dial-number" data-value="3">3</button><button class="dial-number" data-value="4">4</button><button class="dial-number" data-value="5">5</button><button class="dial-number" data-value="6">6</button><button class="dial-number" data-value="7">7</button><button class="dial-number" data-value="8">8</button><button class="dial-number" data-value="9">9</button><button class="dial-number" data-value="0">0</button></div>
+                            <div class="safe-controls"><button class="safe-button" id="safe-clear">Clear</button><button class="safe-button" id="safe-enter" disabled>Enter</button></div>
+                            <div class="safe-message" id="safe-message">Enter the 5-digit code</div>
                         </div>
-                        <div class="prize hidden" id="safe-prize">
-                            <div class="treasure-chest-glow">
-                                <img src="assets/images/treasure-chest.png" alt="Glowing Treasure Chest" class="treasure-chest-image">
-                            </div>
-                            <h3>CONGRATULATIONS!</h3>
-                            <p>You've unlocked the secret!</p>
-                            <div class="prize-content">
-                                <p>Here's a little something for your persistence...</p>
-                                <a href="#" download="secret_wallpaper.jpg">Download Secret Wallpaper</a>
-                            </div>
-                            <button id="close-safe-button" class="safe-button">CLOSE</button>
-                        </div>
+                         <div class="prize hidden" id="safe-prize">
+                             <div class="treasure-chest-glow"><img src="assets/images/treasure.png" alt="Treasure Chest" class="treasure-chest-image"></div>
+                             <h3>YOU FOUND IT!</h3> <p>The treasure awaits those who seek focus!</p> <a href="https://dw.typedream.app/" target="_blank" rel="noopener noreferrer">Claim Your Reward</a> <button class="safe-button" id="safe-close" style="margin-top: 15px;">Close Safe</button>
+                         </div>
                     </div>
                  </div>
-
-                 <p>
-    Imagine going back in time, like in old black-and-white cartoons! Radios played jazz, but just like today, people often felt lost because of *distractions*.
-</p>
+                 <p> <!-- First P after H2 - Should get drop cap -->
+                     Imagine going back in time, like in old black-and-white cartoons! Radios played jazz, but just like today, people often felt lost because of *distractions*.
+                 </p>
                  <p>
                      This website is like a map to help you find your way when your brain feels pulled everywhere at once. Here, we learn how to quiet the noise around us, focus our minds, and get to know ourselves better.
                  </p>
@@ -116,166 +86,216 @@
                  <p>Sometimes, it feels like our minds are always buzzing, looking for the next notification or exciting thing. This can make it hard to concentrate. But you *can* get your focus back! You can reset your mind and become the amazing person you're meant to be. It's time to level up!</p>
                  <p>Meet <strong>Di-Mind</strong>! He's a special character here to help you on this journey. Want to know more about him and how he helps organize thoughts? Check out the <strong>'Organized WORLD'</strong> section!</p>
                  <div class="home-section-separator" style="width: 40%; margin: 40px auto !important;"></div>
-                 <!-- Preview Sections Below - Buttons use data-target-filter for JS -->
                  <section class="preview-section"> <h3>Distracted WORLD</h3> <p>In a Distracted world, people often escape their day-to-day struggles by being preoccupied with the wrong things...</p> <button class="read-more-btn" data-target-filter="distracted">Read More</button> </section>
                  <section class="preview-section"> <h3>Organized WORLD (Meet Di-Mind)</h3> <p>In the black-and-white world of the 1930s, where jazz tunes float through the air... Meet Di-Mind...</p> <button class="read-more-btn" data-target-filter="organized">Read More</button> </section>
                  <section class="preview-section"> <h3>Blog</h3> <p>Latest thoughts, insights, and updates from the world of Ki, focus, and escaping distractions...</p> <button class="read-more-btn" data-target-filter="blog">Read More</button> </section>
-                 <section class="preview-section" style="text-align:center;"> <p style="text-align:center; margin-bottom: 15px !important;">Looking for wallpapers?</p> <button class="read-more-btn" data-target-filter="wall">Go to Wall</button> </section>
+                 <section class="preview-section centered-preview"> <p>Ready to chart your course?</p> <button class="read-more-btn" data-target-filter="goals">Go to Goals</button> </section>
             </div>
 
-            <!-- Card Grid (Wall Content) - HIDDEN by default -->
-            <div class="gallery-grid hidden" id="gallery-grid">
-                 <article class="cartoon-card" data-category="wall" data-tags="betty boop bimbo fleischer 1933 wallpaper"> <div class="card-image-placeholder"><img src="https://placehold.co/400x300/E8E8E0/555555/png?text=Betty+Boop" alt="Betty Boop Wallpaper"><h2>Betty Boop</h2></div> <div class="card-details"> <h3>Betty Boop and Bimbo</h3> <p>1933 - Fleischer Studios</p> </div> </article>
-                 <article class="cartoon-card" data-category="wall" data-tags="bosko talk-ink kid harman-ising 1930 wallpaper"> <div class="card-image-placeholder"><img src="https://placehold.co/400x300/E8E8E0/555555/png?text=Bosko" alt="Bosko Wallpaper"><h2>Bosko</h2></div> <div class="card-details"> <h3>Bosko the Talk-Ink Kid</h3> <p>1930 - Harman-Ising</p> </div> </article>
-                 <article class="cartoon-card" data-category="wall" data-tags="felix the cat pat sullivan 1925 wallpaper"> <div class="card-image-placeholder"><img src="https://placehold.co/400x300/E8E8E0/555555/png?text=Felix+The+Cat" alt="Felix The Cat Wallpaper"><h2>Felix The Cat</h2></div> <div class="card-details"> <h3>Felix The Cat</h3> <p>1925 - Pat Sullivan</p> </div> </article>
-                 <article class="cartoon-card" data-category="wall" data-tags="flip the frog ub iwerks 1930 wallpaper"> <div class="card-image-placeholder"><img src="https://placehold.co/400x300/E8E8E0/555555/png?text=Flip+the+Frog" alt="Flip the Frog Wallpaper"><h2>Flip the Frog</h2></div> <div class="card-details"> <h3>Flip the Frog</h3> <p>1930 - Ub Iwerks</p> </div> </article>
-                 <article class="cartoon-card" data-category="wall" data-tags="willie whopper ub iwerks 1933 wallpaper"> <div class="card-image-placeholder"><img src="https://placehold.co/400x300/E8E8E0/555555/png?text=Willie+Whopper" alt="Willie Whopper Wallpaper"><h2>Willie Whopper</h2></div> <div class="card-details"> <h3>Willie Whopper</h3> <p>1933 - Ub Iwerks</p> </div> </article>
-                 <article class="cartoon-card" data-category="wall" data-tags="cubby bear van beuren 1933 wallpaper"> <div class="card-image-placeholder"><img src="https://placehold.co/400x300/E8E8E0/555555/png?text=Cubby+Bear" alt="Cubby Bear Wallpaper"><h2>Cubby Bear</h2></div> <div class="card-details"> <h3>Cubby Bear</h3> <p>1933 - Van Beuren Studios</p> </div> </article>
-                 <article class="cartoon-card" data-category="wall" data-tags="oswald the lucky rabbit disney lantz 1927 wallpaper"> <div class="card-image-placeholder"><img src="https://placehold.co/400x300/E8E8E0/555555/png?text=Oswald" alt="Oswald Wallpaper"><h2>Oswald the Lucky Rabbit</h2></div> <div class="card-details"> <h3>Oswald the Lucky Rabbit</h3> <p>1927 - Disney/Lantz</p> </div> </article>
-                 <article class="cartoon-card" data-category="wall" data-tags="mickey mouse early disney 1928 steamboat willie wallpaper"> <div class="card-image-placeholder"><img src="https://placehold.co/400x300/E8E8E0/555555/png?text=Steamboat+Willie" alt="Steamboat Willie Wallpaper"><h2>Early Mickey Mouse</h2></div> <div class="card-details"> <h3>Steamboat Willie</h3> <p>1928 - Disney</p> </div> </article>
-                 <article class="cartoon-card" data-category="wall" data-tags="silly symphonies disney 1929 skeleton dance wallpaper"> <div class="card-image-placeholder"><img src="https://placehold.co/400x300/E8E8E0/555555/png?text=Silly+Symphonies" alt="Silly Symphonies Wallpaper"><h2>Silly Symphonies</h2></div> <div class="card-details"> <h3>Silly Symphonies</h3> <p>1929 - Disney</p> </div> </article>
+            <!-- *** GOALS Content - Combined with Telegram *** -->
+            <div id="goals-content" class="page-content hidden">
+                <h1>Di-Mind's Accountability Ledger</h1>
+                <img src="assets/images/Di-Mind2.gif" alt="Di-Mind with Globe Head" class="placeholder-image goal-section-image">
+                <p class="section-intro">
+                    Welcome to your ledger of discipline! List your daily goals (up to 10), mark them as complete, and stay the course, traveler! Summon Di-Mind when you're ready for review.
+                </p>
+                <div class="goal-input-area">
+                    <input type="text" id="newGoalInput" placeholder="Enter your goal..." maxlength="100" aria-label="New goal input">
+                    <button id="addGoalBtn" class="goal-button read-more-btn" aria-label="Add Goal">ADD GOAL</button>
+                </div>
+                <p id="goalError" class="error-message hidden" style="text-align: center;">Please enter a goal.</p>
+                <p id="goalLimit" class="error-message hidden" style="text-align: center;">Maximum 10 goals reached.</p>
+                <h2>Today's Objectives:</h2>
+                <ul id="goalList" class="goal-list-vintage">
+                    <!-- Goals added by JS here -->
+                </ul>
+                <div class="summon-button-container">
+                    <button id="summonDiMindBtn" class="di-mind-button page-link" aria-label="Summon Di-Mind for review">Summon Di-Mind</button>
+                </div>
+                <div id="diMindFeedback" class="di-mind-feedback hidden">
+                    <img id="diMindFeedbackImg" src="assets/images/Di-Mind2.gif" alt="Di-Mind Feedback" class="feedback-image">
+                    <p id="diMindMessage"></p>
+                </div>
+                <div class="goal-actions">
+                    <button id="exportGoalsBtn" class="page-link" aria-label="Export Goals to CSV">Export Goals</button>
+                </div>
+
+                <!-- Telegram Section -->
+                <div class="telegram-section">
+                    <h2>Traveler's Telegram</h2>
+                    <p class="telegram-intro">Define Your Focus. Lost in the static? Tell The Traveler what pulls you away, or state the peak you wish to conquer today. Clear thought precedes clear action.</p>
+                    <div class="telegram-input-area">
+                        <input type="text" id="focusInput" placeholder="What's stealing your focus today?">
+                        <button id="getAdviceBtn" class="read-more-btn" aria-label="Get Advice">Get Advice</button>
+                    </div>
+                    <div class="telegram-output-container">
+                        <div id="telegramResponseArea" class="telegram-response-area force-show">
+                            <h3 class="response-header">Your Way to Focus</h3>
+                            <p id="feedback" class="telegram-feedback">Type your distraction above and click "Get Advice" to receive personalized focus guidance.</p>
+                            <h3 class="response-header">Your Daily Steps</h3>
+                            <ul id="checklist" class="telegram-checklist">
+                                <li>Identify what's distracting you</li>
+                                <li>Use the Get Advice button for specific guidance</li>
+                                <li>Follow the suggested steps</li>
+                                <li>Return to your main task with renewed focus</li>
+                            </ul>
+                            <p id="nextQuestion" class="telegram-next-question">What is pulling your attention away right now?</p>
+                        </div>
+                        <hr class="telegram-divider">
+                        <div id="staticFocusCard" class="telegram-focus-card">
+                            <h2>Your Daily Focus Card</h2>
+                            <p>Imagine your goal clearly. Write it down. Read it often. Feel it as already yours. Here are three steps distilled from The Traveler's logbook to guide you:</p>
+                            <ul class="telegram-steps">
+                                <li><strong>Visualize Success:</strong> Spend 1 minute seeing your goal completed. Feel the accomplishment.</li>
+                                <li><strong>Single Task Focus:</strong> Dedicate the next focused block (e.g., 25-50 mins) ONLY to your main goal or task. No diversions.</li>
+                                <li><strong>Gratitude Break:</strong> After your focus block, pause. Appreciate one small step taken, one distraction resisted.</li>
+                            </ul>
+                            <p class="telegram-footer">Repeat these steps daily. Consistency is the engine of achievement.</p>
+                        </div>
+                    </div>
+                </div>
             </div>
 
-            <!-- Distracted World Content - HIDDEN by default -->
+            <!-- Distracted World Content -->
             <div id="distracted-content" class="page-content hidden">
                   <h1>IN A DISTRACTED WORLD...</h1>
-                  <img src="assets/images/dworld-kid.png" alt="Concept image for Distracted World" class="placeholder-image"> <!-- Updated placeholder link to local -->
-                  <p>In a Distracted World, people often <em>Escape</em> their day-to-day struggles by being <strong>preoccupied</strong> with the wrong things.</p>
-
+                  <img src="assets/images/dworld-kid.png" alt="Concept image for Distracted World" class="placeholder-image">
+                  <p> <!-- Drop Cap Applied by CSS -->
+                      In a Distracted World, people often <em>Escape</em> their day-to-day struggles by being <strong>preoccupied</strong> with the wrong things.
+                  </p>
                   <p>Entering the state of <em>Ki</em> means radiating the <strong>highest Energy, Frequency, and Vibration</strong> to attract the right things into their lives. They become <em>magnets</em>. They need to <strong>rewire</strong> their Ki and <strong>reprogram</strong> their minds.</p>
-
                   <p>Once people understand that <strong>95%</strong> of success is <strong>mindset</strong>, they realize how little <em>inner work</em> they do.</p>
-
                   <p>Success comes down to many <em>small habits</em> that form <strong>big habits</strong>. It's not <em>one big thing</em> or an overnight achievement. It's about thinking, believing, and acting in a certain way that creates these habits. It's a <em>step-by-step process</em> of understanding and trusting themselves and the process.</p>
-
                   <h2>YOU MUST DECIDE <strong>NOW!</strong></h2>
                   <p>To become <strong>exceptional</strong>, focus on <em>inner work</em>, not just your IQ, but also your EQ and body feedback. Work <em>intuitively</em>.</p>
-
                   <p>The <em>Mind</em> and the <em>Body</em> should be in <strong>balance</strong>. A healthy mind and a healthy body create a <strong>healthy lifestyle</strong>. Once you are in balance and develop your mind and skill-set, you start to notice that you <em>attract</em> certain things in your life.</p>
-
                   <p><strong>Visualize, grow, and develop</strong> your life. <strong>Self-analyze, self-reflect,</strong> and become your <em>best self</em> by updating your system that runs <em>old, outdated beliefs</em>. Update your <strong>Operating System (Your Mind)</strong> and quit having <strong>limiting beliefs</strong>. Life is a <em>game</em>. Learn to play it. <strong>Hack</strong> the system by <strong>reprogramming</strong> yourself.</p>
-
                   <p>We exist in an era full of <strong>distractions</strong>. It's <em>challenging</em> to accomplish tasks when our minds are <em>constantly occupied</em> with various things.</p>
                   <div class="centered-text"> It's <strong>TIME</strong> To...<br/> <strong>ESCAPE</strong> This <strong>Distracted WORLD</strong><br/> and...<br/> <strong>ENTER</strong> A<br/> New <strong>STATE</strong> of <strong>Consciousness</strong> </div>
-                  <img src="assets/images/drowningman.jpg" alt="Concept image for Consciousness" class="placeholder-image"> <!-- Updated placeholder link to local -->
+                  <img src="assets/images/drowningman.jpg" alt="Concept image for Consciousness" class="placeholder-image">
                   <h2>Is This You?</h2>
                   <p>Do you feel <em>stuck</em>, not knowing what to do? ...it's time to <strong>escape the system</strong> designed to distract you!</p>
-                  <!-- Link to Organized World page/section -->
-                  <a href="#" data-target-filter="organized" class="page-link read-more-btn centered-button">MEET DI-MIND</a> <!-- Added centered-button class like v1 -->
+                  <button data-target-filter="organized" class="page-link read-more-btn centered-button">MEET DI-MIND</button>
                   <div class="home-section-separator"></div>
             </div>
 
-            <!-- Organized World Content - HIDDEN by default -->
+            <!-- Organized World Content -->
             <div id="organized-content" class="page-content hidden">
-                  <h1>Meet <strong>Di-Mind</strong></h1>
+                 <h1>Meet <strong>Di-Mind</strong></h1>
                   <img src="assets/images/Di-Mind2.gif" alt="Di-Mind with Globe Head" class="placeholder-image">
-
-                  <h2>If You Don't Complete Your Tasks...</h2>
-                  <p>Di-Mind isn't <em>just a character</em>; he's a <strong>reminder</strong>, a bot with a <strong>purpose</strong>. Every hour, his globe head lights up, urging you with a voice <em>straight from the 1930s</em>, "What are your goals for today? List them, my friend!"</p>
-
-                  <p style="text-align: center; font-style: italic; margin: 15px 0 !important;">
-                      1.<br/>
-                      2.<br/>
-                      3.<br/>
-                      ...<br/>
-                      10.?
+                  <p> <!-- Drop Cap Applied by CSS -->
+                      Di-Mind isn't <em>just a character</em>; he's a <strong>reminder</strong>, a bot with a <strong>purpose</strong>. Every hour, his globe head lights up, urging you with a voice <em>straight from the 1930s</em>, "What are your goals for today? List them, my friend!"
                   </p>
-
+                  <p style="text-align: center; font-style: italic; margin: 15px 0 !important;">1.<br/>2.<br/>3.<br/>...<br/>10.?</p>
                   <p>With batteries or a charge, Di-Mind <strong>keeps you on track</strong>. He'll even read you <em>audiobooks</em>, making your daily grind a bit more bearable. But at the end of the day, at <strong>23:30</strong>, he'll ask, "Have you <em>completed</em> your tasks?"</p>
-
                   <p>If you've <strong>succeeded</strong>, Di-Mind sings a <em>jolly tune</em>, celebrating your achievements. But if you <strong>falter</strong>, his globe turns a <em>fiery red</em>, and with a voice that could belong to a stern 1930s schoolmaster, he'll give you a piece of his mind, not with harsh words, but with the kind of <em>chiding</em> that makes you laugh and then work harder.</p>
-
                   <h2>The Tale of Di-Mind in Distracted WORLD</h2>
                   <p>In the <em>black-and-white world of the 1930s</em>, where jazz tunes float through the air and every sound crackles with life, there lies the <strong>Distracted WORLD</strong>. Here, everyone is <strong>lost</strong> in a maze of noise and distraction, living in a <em>matrix of their own making</em>.</p>
-
                   <p>At the heart of this world is Di-Mind, a <em>peculiar figure</em> with a globe for a head. Di-Mind is the <strong>beacon of hope</strong>, the guide to escape the <em>endless rat race</em>. With a simple flick of a switch on his chest, Di-Mind <strong>transforms</strong> from a Distracted to a <strong>Disciplined Mind</strong>, showing everyone the way out.</p>
-
                   <h2>The Switch</h2>
                   <img src="assets/images/dw-people.gif" alt="Di-Mind NPCs" class="placeholder-image">
-
                   <h2>The Adventure of <strong>Di-Mind</strong></h2>
                   <p>In the black and white land of Distracted WORLD, there lived Di-Mind, a fellow with a globe for a head and a brain full of <strong>dreams</strong>, but oh, how easily those dreams got lost in the <em>noise</em>! This place was full of NPCs, folks who just wandered around, not really doing much, caught in their own little worlds of <em>distraction</em>.</p>
-
                   <p>Di-Mind, he was <em>different</em>. He wanted to <strong>achieve</strong>, to be someone, to make his mark. But every day was a <strong>battle</strong>. The radio blared with jazz that danced away his focus, the newspapers screamed headlines that weren't his to worry over, and the chatter of the street was like a <em>never-ending spell of confusion</em>.</p>
-
                   <p>He would start his day with a list of goals, but by noon, he'd find himself staring at the clouds, <strong>lost in thought</strong> about anything but what he needed to do. It was like living in a <em>maze</em> where every turn led back to the start.</p>
-
                   <p>Until one day, something <strong>magical</strong> happened. A little switch, hidden beneath the chaos of his thoughts, suddenly <em>glowed with a bright, warm light</em>. It was as if the sun had decided to shine inside his head. Di-Mind reached out, flicked the switch, and <em>click</em>—the <strong>world changed</strong>.</p>
-
                   <p><strong>Suddenly</strong>, the jazz became a <em>rhythm</em> for his work, the headlines <em>inspired</em> him, and the chatter of the NPCs turned into <em>whispers of encouragement</em>. His globe head spun around, and he felt a <strong>connection</strong> with everything around him, like he was <strong>one with the universe</strong>.</p>
-
                   <p><strong>Now</strong>, Di-Mind could see through the distractions. Each moment was <strong>clear</strong>, each goal <strong>within reach</strong>. He <em>danced</em> through his tasks with the grace of a 1930s star, his globe head lighting up with every <em>small victory</em>. The NPCs, they watched in <strong>awe</strong>. Here was someone who had <strong>cracked the code</strong> to the matrix of distraction.</p>
-
                   <p>Di-Mind became a <strong>legend</strong> in Distracted WORLD, not just for his <em>discipline</em> but for how he turned distractions into <strong>tools for success</strong>. And every now and then, when someone else felt lost in the noise, Di-Mind would share his <em>secret</em>. "Look for the <strong>switch</strong>," he'd say, "it's there, waiting for you to make your world light up too."</p>
-
                   <p>And so, in this world where time seemed to stand still, Di-Mind became the <em>beacon</em>, the hero who showed everyone that even in the most distracted of places, you could find your path, light up your mind, and become one with the universe, one task at a time.</p>
-
                   <p>But the <strong>real magic</strong>, the key to Di-Mind's newfound joy, was <strong>persistence</strong>. He learned that <em>sticking to his goals</em>, day in and day out, was what truly mattered. He <strong>stopped</strong> focusing on unnecessary things, <strong>tuning out</strong> the noise that once distracted him. Instead, he had a <em>real goal</em> in mind, a clear vision of what he truly wanted to achieve. This <strong>routine</strong>, this steady rhythm of doing, was what brought him back to happiness.</p>
                   <p>With persistence, Di-Mind wasn't just <em>surviving</em> in Distracted WORLD; he was <strong>thriving</strong>, proving that with every small, persistent step, one could <em>dance their way to bliss</em>.</p>
-
                   <a href="https://dw.typedream.app/" target="_blank" rel="noopener noreferrer" class="page-link">Anti-Brain Rot</a>
             </div>
 
-            <!-- Blog List Content - HIDDEN by default -->
+            <!-- Blog List Content -->
             <div id="blog-content" class="page-content hidden">
                  <h1>From The Desk of Di-Mind</h1>
-                 <p style="text-align:center; margin-bottom: 30px !important; font-size: 1.2rem; color: #555 !important;">Insights, ramblings, and blueprints for escaping the noise.</p>
+                 <p style="text-align:center; margin-bottom: 30px !important; font-size: 1.2rem; color: #555 !important;">Insights, ramblings, and blueprints for escaping the noise.</p> <!-- Drop Cap Applied by CSS -->
                  <div class="blog-grid">
-                     <!-- Blog post cards use data-post-id for JS -->
-                     <article class="blog-post-card"> <a href="#" class="blog-card-link-wrapper" data-post-id="post-1"> <div class="blog-image-placeholder"><img src="https://placehold.co/400x225/E0E0D4/666666/png?text=Focus+Rituals" alt="Blog Post Image: Focus Rituals"></div> <div class="blog-card-details"> <h3>Mastering the 'Switch': Daily Focus Rituals</h3> <p>Explore the simple, yet powerful daily habits...</p> </div> </a> </article>
-                     <article class="blog-post-card"> <a href="#" class="blog-card-link-wrapper" data-post-id="post-2"> <div class="blog-image-placeholder"><img src="https://placehold.co/400x225/E0E0D4/666666/png?text=Persistence" alt="Blog Post Image: Persistence"></div> <div class="blog-card-details"> <h3>The Persistence Principle: Why Small Steps Win</h3> <p>Di-Mind didn't transform overnight...</p> </div> </a> </article>
-                     <article class="blog-post-card"> <a href="#" class="blog-card-link-wrapper" data-post-id="post-3"> <div class="blog-image-placeholder"><img src="https://placehold.co/400x225/E0E0D4/666666/png?text=Distractions" alt="Blog Post Image: Distractions"></div> <div class="blog-card-details"> <h3>Decoding Distractions: Know Your Enemy</h3> <p>From the blaring radio to endless notifications...</p> </div> </a> </article>
-                     <article class="blog-post-card"> <a href="#" class="blog-card-link-wrapper" data-post-id="post-4"> <div class="blog-image-placeholder"><img src="https://placehold.co/400x225/E0E0D4/666666/png?text=Intuition" alt="Blog Post Image: Intuition"></div> <div class="blog-card-details"> <h3>Beyond IQ: Tuning Into Your Body's Feedback</h3> <p>Di-Mind learned to listen intuitively...</p> </div> </a> </article>
+                     <article class="blog-post-card"> <a href="#" class="blog-card-link-wrapper" data-post-id="post-1" aria-label="Read post: Mastering the 'Switch': Daily Focus Rituals"> <div class="blog-image-placeholder"><img src="https://placehold.co/400x225/E0E0D4/666666/png?text=Focus+Rituals" alt=""></div> <div class="blog-card-details"> <h3>Mastering the 'Switch': Daily Focus Rituals</h3> <p>Explore the simple, yet powerful daily habits...</p> </div> </a> </article>
+                     <article class="blog-post-card"> <a href="#" class="blog-card-link-wrapper" data-post-id="post-2" aria-label="Read post: The Persistence Principle: Why Small Steps Win"> <div class="blog-image-placeholder"><img src="https://placehold.co/400x225/E0E0D4/666666/png?text=Persistence" alt=""></div> <div class="blog-card-details"> <h3>The Persistence Principle: Why Small Steps Win</h3> <p>Di-Mind didn't transform overnight...</p> </div> </a> </article>
+                     <article class="blog-post-card"> <a href="#" class="blog-card-link-wrapper" data-post-id="post-3" aria-label="Read post: Decoding Distractions: Know Your Enemy"> <div class="blog-image-placeholder"><img src="https://placehold.co/400x225/E0E0D4/666666/png?text=Distractions" alt=""></div> <div class="blog-card-details"> <h3>Decoding Distractions: Know Your Enemy</h3> <p>From the blaring radio to endless notifications...</p> </div> </a> </article>
+                     <article class="blog-post-card"> <a href="#" class="blog-card-link-wrapper" data-post-id="post-4" aria-label="Read post: Beyond IQ: Tuning Into Your Body's Feedback"> <div class="blog-image-placeholder"><img src="https://placehold.co/400x225/E0E0D4/666666/png?text=Intuition" alt=""></div> <div class="blog-card-details"> <h3>Beyond IQ: Tuning Into Your Body's Feedback</h3> <p>Di-Mind learned to listen intuitively...</p> </div> </a> </article>
+                    <article class="blog-post-card"> <a href="#" class="blog-card-link-wrapper" data-post-id="post-5" aria-label="Read post: The Architect of Your Day – Building Focus Brick by Brick!"> <div class="blog-image-placeholder"><img src="https://placehold.co/400x225/E0E0D4/666666/png?text=Architecture" alt=""></div> <div class="blog-card-details"> <h3>The Architect of Your Day – Building Focus Brick by Brick!</h3> <p>Di-Mind designed days with intention...</p> </div> </a> </article>
+                    <article class="blog-post-card"> <a href="#" class="blog-card-link-wrapper" data-post-id="post-6" aria-label="Read post: Tuning Out the Static – Finding Your Signal in the Noise"> <div class="blog-image-placeholder"><img src="https://placehold.co/400x225/E0E0D4/666666/png?text=Static" alt=""></div> <div class="blog-card-details"> <h3>Tuning Out the Static – Finding Your Signal in the Noise</h3> <p>The world buzzes like a poorly tuned radio...</p> </div> </a> </article>
+                    <article class="blog-post-card"> <a href="#" class="blog-card-link-wrapper" data-post-id="post-7" aria-label="Read post: The Illusion of Multitasking – Why One Thing at a Time Works"> <div class="blog-image-placeholder"><img src="https://placehold.co/400x225/E0E0D4/666666/png?text=One+Thing" alt=""></div> <div class="blog-card-details"> <h3>The Illusion of Multitasking – Why One Thing at a Time Works</h3> <p>Juggling tasks is like juggling fragile glass...</p> </div> </a> </article>
+                    <article class="blog-post-card"> <a href="#" class="blog-card-link-wrapper" data-post-id="post-8" aria-label="Read post: Fueling the Engine – The Role of Rest in Peak Performance"> <div class="blog-image-placeholder"><img src="https://placehold.co/400x225/E0E0D4/666666/png?text=Rest" alt=""></div> <div class="blog-card-details"> <h3>Fueling the Engine – The Role of Rest in Peak Performance</h3> <p>Even the finest machine needs downtime...</p> </div> </a> </article>
+                    <article class="blog-post-card"> <a href="#" class="blog-card-link-wrapper" data-post-id="post-9" aria-label="Read post: Crafting Your 'Do Not Disturb' Sign for the Mind"> <div class="blog-image-placeholder"><img src="https://placehold.co/400x225/E0E0D4/666666/png?text=Boundaries" alt=""></div> <div class="blog-card-details"> <h3>Crafting Your 'Do Not Disturb' Sign for the Mind</h3> <p>Setting boundaries is crucial for focus...</p> </div> </a> </article>
+                    <article class="blog-post-card"> <a href="#" class="blog-card-link-wrapper" data-post-id="post-10" aria-label="Read post: The Power of 'No' – Reclaiming Your Time and Energy"> <div class="blog-image-placeholder"><img src="https://placehold.co/400x225/E0E0D4/666666/png?text=Saying+No" alt=""></div> <div class="blog-card-details"> <h3>The Power of 'No' – Reclaiming Your Time and Energy</h3> <p>Every 'yes' to something is a 'no' to something else...</p> </div> </a> </article>
+                    <article class="blog-post-card"> <a href="#" class="blog-card-link-wrapper" data-post-id="post-11" aria-label="Read post: Celebrating Small Wins – Momentum in the Making"> <div class="blog-image-placeholder"><img src="https://placehold.co/400x225/E0E0D4/666666/png?text=Small+Wins" alt=""></div> <div class="blog-card-details"> <h3>Celebrating Small Wins – Momentum in the Making</h3> <p>Acknowledge progress, no matter how small...</p> </div> </a> </article>
+                    <article class="blog-post-card"> <a href="#" class="blog-card-link-wrapper" data-post-id="post-12" aria-label="Read post: The Reflective Pause – Learning from Your Distracted Moments"> <div class="blog-image-placeholder"><img src="https://placehold.co/400x225/E0E0D4/666666/png?text=Reflection" alt=""></div> <div class="blog-card-details"> <h3>The Reflective Pause – Learning from Your Distracted Moments</h3> <p>Don't just fight distractions, understand them...</p> </div> </a> </article>
+                    <article class="blog-post-card"> <a href="#" class="blog-card-link-wrapper" data-post-id="post-13" aria-label="Read post: Di-Mind's Blueprint – A Life Designed, Not Defaulted"> <div class="blog-image-placeholder"><img src="https://placehold.co/400x225/E0E0D4/666666/png?text=Blueprint" alt=""></div> <div class="blog-card-details"> <h3>Di-Mind's Blueprint – A Life Designed, Not Defaulted</h3> <p>Take control, build your focus intentionally...</p> </div> </a> </article>
                  </div>
             </div>
 
-            <!-- Full Blog Post View Container - HIDDEN by default, content injected by JS -->
-            <div id="full-blog-post-view" class="page-content hidden">
+            <!-- Full Blog Post View Container -->
+            <div id="full-blog-post-view" class="page-content hidden blog-post-content">
                 <!-- JS injects post content here -->
             </div>
 
-            <!-- Hidden Blog Post Content Divs (for JS to copy from) -->
-            <div style="display:none;" id="post-1-content"> <button class="back-to-blog-btn">← Back to Blog List</button> <h1>Mastering the 'Switch': Daily Focus Rituals</h1> <p class="post-meta"><em>Posted on: October 26, 1934 | By: Di-Mind's Chronicle</em></p> <img src="https://placehold.co/600x337/E0E0D4/666666/png?text=Blog+Post+1+Main" alt="Focus Rituals Concept" class="placeholder-image"> <p>Flicking that switch isn't a one-time magic trick...</p> <p>Think of it like winding a clock...</p> <h2>The Morning Anchor</h2> <p>Before anything else pulls at your attention...</p> <h2>Time Blocking, 1930s Style</h2> <p>Assign specific blocks of time...</p> <img src="https://placehold.co/500x281/E0E0D4/666666/png?text=Time+Blocking" alt="Image related to time blocking" class="placeholder-image" style="height: auto; aspect-ratio: 16/9;"> <h2>The Midday Reset</h2> <p>Even the sharpest mind gets dull...</p> <p>These rituals, practiced daily...</p> </div>
-            <div style="display:none;" id="post-2-content"> <button class="back-to-blog-btn">← Back to Blog List</button> <h1>The Persistence Principle: Why Small Steps Win</h1> <p class="post-meta"><em>Posted on: November 12, 1934 | By: Di-Mind's Chronicle</em></p> <img src="https://placehold.co/600x337/E0E0D4/666666/png?text=Blog+Post+2+Main" alt="Persistence Concept" class="placeholder-image"> <p>Ah, persistence! It doesn't arrive with a trumpet fanfare...</p> <p>The grand achievements you see? They're built brick by tiny brick...</p> <h2>The Power of 'Non-Zero Days'</h2> <p>Forget perfection. Aim for progress, however small...</p> <img src="https://placehold.co/500x281/E0E0D4/666666/png?text=Small+Steps" alt="Image related to small steps" class="placeholder-image" style="height: auto; aspect-ratio: 16/9;"> <p>Distracted WORLD loves grand gestures that fizzle out...</p> </div>
-            <div style="display:none;" id="post-3-content"> <button class="back-to-blog-btn">← Back to Blog List</button> <h1>Decoding Distractions: Know Your Enemy</h1> <p class="post-meta"><em>Posted on: November 28, 1934 | By: Di-Mind's Chronicle</em></p> <img src="https://placehold.co/600x337/E0E0D4/666666/png?text=Blog+Post+3+Main" alt="Distractions Concept" class="placeholder-image"> <p>The jazz on the radio, the screaming headlines...</p> <p>Perhaps it's the endless scroll on that glowing rectangle? ...</p> <h2>Identify Your Personal Static</h2> <p>Take a moment. Be honest. What *truly* pulls you away...? </p> <img src="https://placehold.co/500x281/E0E0D4/666666/png?text=Fortress+Focus" alt="Image related to focus" class="placeholder-image" style="height: auto; aspect-ratio: 16/9;"> <h2>Build Your Fortress of Focus</h2> <p>Create an environment that supports...</p> </div>
-            <div style="display:none;" id="post-4-content"> <button class="back-to-blog-btn">← Back to Blog List</button> <h1>Beyond IQ: Tuning Into Your Body's Feedback</h1> <p class="post-meta"><em>Posted on: December 15, 1934 | By: Di-Mind's Chronicle</em></p> <img src="https://placehold.co/600x337/E0E0D4/666666/png?text=Blog+Post+4+Main" alt="Intuition Concept" class="placeholder-image"> <p>The thinkers and theorists focus heavily on the mind...</p> <p>Ignoring this feedback is like driving a motorcar...</p> <h2>The Gut Feeling & Energy Barometer</h2> <p>That "gut feeling" about a decision? ...</p> <img src="https://placehold.co/500x281/E0E0D4/666666/png?text=Body+Feedback" alt="Image related to body feedback" class="placeholder-image" style="height: auto; aspect-ratio: 16/9;"> <h2>Working Intuitively</h2> <p>Intuition isn't mystical mumbo-jumbo...</p> </div>
+            <!-- Hidden Blog Post Content Divs (1-13) -->
+            <div style="display:none;" id="post-1-content" class="blog-post-content">
+                <h1>Mastering the 'Switch': Daily Focus Rituals</h1>
+                <p class="post-meta">Posted on <time datetime="2024-03-15">March 15, 2024</time></p>
+                <img src="https://placehold.co/600x300/E0E0D4/555555/png?text=Post+1+Image" alt="Focus Rituals" class="placeholder-image">
+                <p class="first-paragraph">The first step to escaping the Distracted WORLD is recognizing the 'switch' within. Di-Mind found his, and so can you. It's not about a sudden epiphany, but about cultivating daily rituals that prime your mind for focus...</p>
+                <p>Start with intention. Before the day's noise begins, take five minutes. Breathe deeply. Ask yourself: "What single task, if completed, will make today successful?" Write it down. This is your North Star.</p>
+                <h2>The Morning Anchor</h2>
+                <p>Avoid the siren call of the phone for the first 30 minutes. Instead, hydrate, stretch, or simply sit in silence. Let your mind settle before the external world rushes in. This creates a buffer against immediate distraction.</p>
+                <ul>
+                    <li><strong>Hydrate:</strong> Water first, caffeine later.</li>
+                    <li><strong>Move Gently:</strong> A few stretches awaken the body-mind connection.</li>
+                    <li><strong>Single-Task Breakfast:</strong> Eat without screens. Notice the taste, the texture.</li>
+                </ul>
+                <p>These small acts build the foundation for a focused day. They are the first turns of the key in the ignition of your 'Disciplined Mind'.</p>
+                <p class="vintage-ps">P.S. The 'switch' isn't magic, it's muscle memory for your mind. Train it daily.</p>
+            </div>
+            <div style="display:none;" id="post-2-content"> <h1>The Persistence Principle: Why Small Steps Win</h1> <p class="post-meta">Posted on <time datetime="2024-03-18">March 18, 2024</time></p> <img src="https://placehold.co/600x300/E0E0D4/555555/png?text=Post+2+Image" alt="Persistence" class="placeholder-image"> <p>Di-Mind didn't conquer distraction overnight. His globe head didn't just *stay* disciplined. It was the steady, often unglamorous, act of persistence that truly changed his world. Grand plans often falter; consistent small steps build empires.</p> <p>Think of it like water carving stone. A single drop has little effect, but relentless dripping over time creates canyons. Your focus works the same way. Trying to maintain laser focus for 8 hours straight is a recipe for burnout. Aiming for focused 25-minute blocks (like the Pomodoro Technique) is achievable and sustainable.</p> <h2>Embrace Imperfect Action</h2> <p>Waiting for the 'perfect' moment or 'perfect' plan is procrastination in disguise. Start small, even if it's just 5 minutes on your most daunting task. The act of starting breaks inertia.</p> <ol> <li><strong>Break It Down:</strong> Divide large goals into tiny, actionable steps.</li> <li><strong>Schedule It:</strong> Put focus blocks on your calendar like important meetings.</li> <li><strong>Track It:</strong> Mark off completed steps. Visual progress is motivating.</li> <li><strong>Forgive & Reset:</strong> Distractions happen. Acknowledge them, then gently redirect your focus without self-criticism.</li> </ol> <p>Persistence isn't about never falling; it's about getting up one more time than you fall down. Keep stepping.</p> <div class="vintage-callout"> Di-Mind's Reminder: "Even the slowest progress is still progress. Don't stop the drip!" </div> </div>
+            <div style="display:none;" id="post-3-content"> <h1>Decoding Distractions: Know Your Enemy</h1> <p class="post-meta">Posted on <time datetime="2024-03-21">March 21, 2024</time></p> <img src="https://placehold.co/600x300/E0E0D4/555555/png?text=Post+3+Image" alt="Distractions" class="placeholder-image"> <p>To escape the Distracted WORLD, you must first understand its landscape. Distractions aren't always obvious; they masquerade as productivity, entertainment, or even obligations. Knowing your personal kryptonite is crucial.</p> <p>Are you pulled away by the endless scroll of social media? The constant ping of emails? The allure of breaking news? Or perhaps internal distractions like worry, daydreaming, or the urge to multitask?</p> <h2>The Distraction Audit</h2> <p>For one day, keep a simple log. Every time you get sidetracked from your intended task, note:</p> <ul> <li>What was the trigger? (e.g., phone notification, email alert, random thought)</li> <li>What was the distracting activity? (e.g., checking Instagram, reading news, browsing YouTube)</li> <li>How long did it last?</li> <li>What was the underlying *feeling* prompting the escape? (e.g., boredom, overwhelm, fear of the task)</li> </ul> <p>This isn't about judgment; it's about awareness. Once you see the patterns, you can build defenses. If notifications are the culprit, turn them off during focus blocks. If boredom leads to scrolling, have a pre-defined, short, alternative break activity ready (like stretching or getting water).</p> <p>Understanding the 'why' behind your distractions is as important as knowing the 'what'. Often, we seek distraction to avoid discomfort. Acknowledge the discomfort, then choose focus anyway.</p> </div>
+            <div style="display:none;" id="post-4-content"> <h1>Beyond IQ: Tuning Into Your Body's Feedback</h1> <p class="post-meta">Posted on <time datetime="2024-03-25">March 25, 2024</time></p> <img src="https://placehold.co/600x300/E0E0D4/555555/png?text=Post+4+Image" alt="Body Feedback" class="placeholder-image"> <p>In the quest for focus, we often neglect a powerful ally: our own body. Di-Mind learned that true discipline wasn't just mental willpower; it involved listening to the subtle (and sometimes not-so-subtle) signals his physical form provided. Your body is constantly communicating – are you listening?</p> <p>Fatigue, hunger, thirst, physical discomfort – these aren't weaknesses to be pushed through indefinitely. They are vital feedback mechanisms indicating needs that, if ignored, will inevitably sabotage your focus. Trying to concentrate when you're exhausted or your back aches is like driving with the handbrake on.</p> <h2>The Body Scan Break</h2> <p>Instead of immediately reaching for a distraction when focus wanes, take 60 seconds for a quick body scan:</p> <ul> <li><strong>Posture Check:</strong> Are you slumped? Shoulders tense? Adjust your position.</li> <li><strong>Hydration:</strong> Feeling sluggish or headachy? Drink some water.</li> <li><strong>Energy Levels:</strong> Is it genuine fatigue or just boredom? A short walk or a few jumping jacks can often reset energy if it's the latter. If truly tired, schedule a proper rest.</li> <li><strong>Physical Needs:</strong> Hungry? Need the restroom? Address basic needs promptly.</li> <li><strong>Breath:</strong> Is your breathing shallow? Take a few slow, deep breaths to calm the nervous system.</li> </ul> <p>Treating your body as a partner in focus, rather than an obstacle, unlocks a more sustainable and intuitive path to productivity. Listen closely; it often knows exactly what you need to get back on track.</p> </div>
+            <div style="display:none;" id="post-5-content"> <h1>The Architect of Your Day – Building Focus Brick by Brick!</h1> <p class="post-meta">Posted on <time datetime="2024-03-28">March 28, 2024</time></p> <img src="https://placehold.co/600x300/E0E0D4/555555/png?text=Post+5+Image" alt="Day Architecture" class="placeholder-image"> <p>Di-Mind realized that a focused life wasn't accidental; it was designed. Just as an architect blueprints a building, you must blueprint your day for focus. Leaving your schedule to chance is an open invitation for distraction to take over.</p> <p>This doesn't mean rigid, minute-by-minute planning (unless that works for you!). It means intentionally allocating time and energy to what matters most. Think of your focus as a finite resource – where will you invest it today?</p> <h2>Blueprint Basics</h2> <ul> <li><strong>Identify Your MITs:</strong> Determine your 1-3 Most Important Tasks for the day. These should align with your larger goals.</li> <li><strong>Time Blocking:</strong> Schedule specific blocks of time for deep work on your MITs. Treat these blocks like unbreakable appointments.</li> <li><strong>Batch Similar Tasks:</strong> Group shallow tasks like answering emails or making calls into dedicated blocks, rather than letting them interrupt deep work.</li> <li><strong>Plan Your Breaks:</strong> Intentionally schedule short breaks between focus blocks. Step away from your workspace, move around, hydrate.</li> <li><strong>Buffer Time:</strong> Allow for transitions between tasks and unexpected interruptions. Over-scheduling leads to stress.</li> <li><strong>Evening Review & Prep:</strong> Spend 5-10 minutes reviewing the day and outlining the next day's blueprint. This clears your mind for rest.</li> </ul> <p>Becoming the architect of your day empowers you to proactively place the "bricks" of focused work, rather than reactively dealing with the rubble of distractions. Build intentionally.</p> </div>
+            <div style="display:none;" id="post-6-content"> <h1>Tuning Out the Static – Finding Your Signal in the Noise</h1> <p class="post-meta">Posted on <time datetime="2024-04-01">April 1, 2024</time></p> <img src="https://placehold.co/600x300/E0E0D4/555555/png?text=Post+6+Image" alt="Signal Noise" class="placeholder-image"> <p>The modern world, much like the crackling radios of the 1930s, bombards us with static. Notifications, endless feeds, competing demands – they obscure the signal of what truly matters. Learning to tune out the noise is essential for hearing your own intentions.</p> <p>Di-Mind found that identifying his core goals acted like an antenna, helping him filter the irrelevant static. What's your primary signal today? Is it completing a project, learning a skill, or connecting meaningfully with someone? Clarify your signal first.</p> <h2>Techniques for Tuning</h2> <ul> <li><strong>Digital Minimalism:</strong> Ruthlessly prune apps, notifications, and subscriptions that don't serve your signal.</li> <li><strong>Information Diet:</strong> Be intentional about news and media consumption. Is it informing or just inflaming?</li> <li><strong>Dedicated Workspaces:</strong> Create physical and digital spaces free from common static sources.</li> <li><strong>Mindfulness Practice:</strong> Even brief meditation helps you notice when your mind drifts into static and gently bring it back.</li> </ul> <p>You control the dial. Choose the frequency of focus over the frequency of distraction. Find your signal amidst the noise.</p> </div>
+            <div style="display:none;" id="post-7-content"> <h1>The Illusion of Multitasking – Why One Thing at a Time Works</h1> <p class="post-meta">Posted on <time datetime="2024-04-04">April 4, 2024</time></p> <img src="https://placehold.co/600x300/E0E0D4/555555/png?text=Post+7+Image" alt="Single Tasking" class="placeholder-image"> <p>In our quest to do more, we often fall prey to the myth of multitasking. We juggle emails while on calls, draft reports while watching presentations. Di-Mind learned this the hard way – juggling looks impressive, but often leads to dropped balls and subpar results.</p> <p>True multitasking is a cognitive illusion. Our brain rapidly switches between tasks, incurring a 'switching cost' each time – loss of focus, increased errors, and mental fatigue. Doing one thing with full attention is almost always more efficient and produces higher quality work.</p> <h2>Embracing Monotasking</h2> <ul> <li><strong>Define the Task:</strong> Be crystal clear about the *one* thing you are working on right now.</li> <li><strong>Eliminate Temptations:</strong> Close unnecessary tabs, silence your phone, clear your desk.</li> <li><strong>Set a Timer:</strong> Commit to focusing solely on that one task for a set period (e.g., 25 or 50 minutes).</li> <li><strong>Batch Processing:</strong> Group similar *shallow* tasks together, but execute them one after another, not simultaneously.</li> </ul> <p>Resist the urge to juggle. Give each task the respect of your undivided attention. Quality and efficiency will follow.</p> </div>
+            <div style="display:none;" id="post-8-content"> <h1>Fueling the Engine – The Role of Rest in Peak Performance</h1> <p class="post-meta">Posted on <time datetime="2024-04-08">April 8, 2024</time></p> <img src="https://placehold.co/600x300/E0E0D4/555555/png?text=Post+8+Image" alt="Rest" class="placeholder-image"> <p>We often treat focus like a sprint, pushing ourselves relentlessly until exhaustion. But Di-Mind discovered that sustained focus is more like a marathon, requiring strategic periods of rest and recovery. Trying to run on an empty tank leads only to breakdown.</p> <p>Rest isn't laziness; it's essential maintenance. Sleep deprivation dulls cognitive function, impairs decision-making, and makes us more susceptible to distractions. Regular breaks throughout the day prevent burnout and allow the mind to consolidate information.</p> <h2>Integrating Rest Rituals</h2> <ul> <li><strong>Prioritize Sleep:</strong> Aim for 7-9 hours of quality sleep. Create a relaxing bedtime routine.</li> <li><strong>Micro-Breaks:</strong> After each focus block (e.g., Pomodoro), take a 5-minute break completely away from your work. Stretch, walk, look out a window.</li> <li><strong>Macro-Breaks:</strong> Schedule longer breaks (15-30 minutes) every few hours.</li> <li><strong>Digital Sunsets:</strong> Disconnect from screens at least an hour before bed.</li> <li><strong>True Downtime:</strong> Ensure you have leisure activities that genuinely recharge you, not just numb you (e.g., hobbies, nature, time with loved ones vs. endless scrolling).</li> </ul> <p>Fuel your focus engine with adequate rest. A well-rested mind is a focused mind.</p> </div>
+            <div style="display:none;" id="post-9-content"> <h1>Crafting Your 'Do Not Disturb' Sign for the Mind</h1> <p class="post-meta">Posted on <time datetime="2024-04-11">April 11, 2024</time></p> <img src="https://placehold.co/600x300/E0E0D4/555555/png?text=Post+9+Image" alt="Boundaries" class="placeholder-image"> <p>In the interconnected world, demands constantly knock at the door of our attention. To achieve deep focus, you need to metaphorically hang a 'Do Not Disturb' sign on your mind. This means setting clear boundaries – with technology, with others, and even with yourself.</p> <p>Di-Mind learned that without boundaries, his focus was constantly fragmented by external requests and internal whims. Protecting your focus time is not selfish; it's necessary for producing meaningful work.</p> <h2>Building Your Boundaries</h2> <ul> <li><strong>Communicate Availability:</strong> Let colleagues or family know your focus times and when you'll be available for interruptions.</li> <li><strong>Manage Notifications:</strong> Turn off non-essential alerts during work blocks. Check messages intentionally, not reactively.</li> <li><strong>Physical Space:</strong> If possible, work in a space where interruptions are less likely. Headphones can be a universal 'do not disturb' signal.</li> <li><strong>Time Boundaries:</strong> Define clear start and end times for your workday to prevent work from bleeding into personal time.</li> <li><strong>Internal Boundaries:</strong> When distracting thoughts arise during focus time, acknowledge them briefly and 'park' them (e.g., write them down) to address later.</li> </ul> <p>Hang your sign. Protect your focus. Your best work depends on it.</p> </div>
+            <div style="display:none;" id="post-10-content"> <h1>The Power of 'No' – Reclaiming Your Time and Energy</h1> <p class="post-meta">Posted on <time datetime="2024-04-15">April 15, 2024</time></p> <img src="https://placehold.co/600x300/E0E0D4/555555/png?text=Post+10+Image" alt="Saying No" class="placeholder-image"> <p>One of the most potent tools in Di-Mind's focus arsenal was surprisingly simple: the word 'No'. In a world that encourages us to say 'yes' to every opportunity and request, learning to decline strategically is vital for preserving the time and energy needed for our core priorities.</p> <p>Every 'yes' carries an implicit cost – the time and focus you *won't* be spending on something else. Over-commitment leads to scattered attention, mediocre results, and burnout. Saying 'no' isn't about being unhelpful; it's about being realistic and prioritizing effectively.</p> <h2>Wielding 'No' Wisely</h2> <ul> <li><strong>Align with Priorities:</strong> Does the request align with your main goals and values? If not, it's a candidate for 'no'.</li> <li><strong>Be Polite but Firm:</strong> You don't always need lengthy explanations. "Thank you for thinking of me, but I can't take that on right now," is often sufficient.</li> <li><strong>Offer Alternatives (Optional):</strong> If appropriate, suggest another resource, delegate, or propose involvement at a later time.</li> <li><strong>Protect Your Focus Blocks:</strong> Be particularly stringent about saying 'no' to interruptions during scheduled deep work time.</li> <li><strong>Say 'No' to Yourself:</strong> Decline the urge to chase every shiny new idea or distraction that pops into your head. Stick to the plan.</li> </ul> <p>Mastering the art of the graceful 'no' frees up invaluable resources for the things that truly move the needle. Reclaim your focus by reclaiming your right to decline.</p> </div>
+            <div style="display:none;" id="post-11-content"> <h1>Celebrating Small Wins – Momentum in the Making</h1> <p class="post-meta">Posted on <time datetime="2024-04-18">April 18, 2024</time></p> <img src="https://placehold.co/600x300/E0E0D4/555555/png?text=Post+11+Image" alt="Small Wins" class="placeholder-image"> <p>The journey out of the Distracted WORLD can feel long. Focusing solely on the distant finish line can be demotivating. Di-Mind found immense power in acknowledging and celebrating the small victories along the way. These small wins build momentum and fuel persistence.</p> <p>Completing a focus block, tackling a dreaded small task, resisting a distraction, sticking to a routine – these are all wins worth recognizing. They prove to your brain that progress is happening, reinforcing positive habits and making it easier to stay the course.</p> <h2>Building a Win Streak</h2> <ul> <li><strong>Track Progress Visibly:</strong> Use checklists, habit trackers, or simply mark off tasks. Seeing progress is inherently rewarding.</li> <li><strong>Acknowledge Effort:</strong> Congratulate yourself internally for sticking to your plan, even if the outcome wasn't perfect.</li> <li><strong>Share Wins (Appropriately):</strong> Mentioning progress to a supportive friend or mentor can amplify the positive feeling.</li> <li><strong>Tiny Rewards:</strong> Link completion of a challenging task or a consistent streak to a small, healthy reward (e.g., a short walk, listening to a favorite song, enjoying a cup of tea).</li> <li><strong>End-of-Day Review:</strong> Briefly list 1-3 things you accomplished or focused well on today.</li> </ul> <p>Don't wait for the mountain peak to celebrate. Acknowledge each successful step up the slope. Momentum is built one small win at a time.</p> </div>
+            <div style="display:none;" id="post-12-content"> <h1>The Reflective Pause – Learning from Your Distracted Moments</h1> <p class="post-meta">Posted on <time datetime="2024-04-22">April 22, 2024</time></p> <img src="https://placehold.co/600x300/E0E0D4/555555/png?text=Post+12+Image" alt="Reflection" class="placeholder-image"> <p>Getting distracted is inevitable; staying distracted is a choice. Di-Mind learned that moments of lost focus weren't failures, but valuable data points. Instead of self-criticism, he cultivated a habit of reflective pause to understand *why* the distraction occurred.</p> <p>When you find yourself off-task, resist the urge to jump back immediately with frustration. Take a breath and ask: What triggered this? Was the task unclear? Was I tired or hungry? Was I avoiding something difficult? What need was the distraction trying to meet?</p> <h2>Turning Distraction into Insight</h2> <ul> <li><strong>Non-Judgmental Observation:</strong> Notice the pattern without labeling it 'good' or 'bad'.</li> <li><strong>Identify the Root Cause:</strong> Look beyond the surface activity (e.g., scrolling) to the underlying reason (e.g., boredom, anxiety).</li> <li><strong>Adjust Strategy:</strong> Based on the insight, tweak your approach. Need clearer steps? A short break? A different environment?</li> <li><strong>Practice Self-Compassion:</strong> Acknowledge that focus is a skill under constant development. Be kind to yourself.</li> <li><strong>Keep a Brief Log:</strong> Jotting down recurring distraction patterns can reveal deeper issues to address.</li> </ul> <p>Use your distracted moments not as proof of failure, but as opportunities to refine your focus strategies and understand your own mind better.</p> </div>
+            <div style="display:none;" id="post-13-content"> <h1>Di-Mind's Blueprint – A Life Designed, Not Defaulted</h1> <p class="post-meta">Posted on <time datetime="2024-04-25">April 25, 2024</time></p> <img src="https://placehold.co/600x300/E0E0D4/555555/png?text=Post+13+Image" alt="Blueprint" class="placeholder-image"> <p>Ultimately, escaping the Distracted WORLD isn't just about managing tasks; it's about designing a life aligned with your values and intentions. Di-Mind's transformation wasn't just about productivity hacks; it was about consciously choosing how to spend his limited time and attention.</p> <p>Are you living by default, reacting to whatever the world throws at you? Or are you living by design, intentionally directing your focus towards what truly matters? This requires ongoing reflection and conscious choice.</p> <h2>Elements of a Designed Life</h2> <ul> <li><strong>Clarity of Values:</strong> What is genuinely important to you (e.g., growth, connection, creativity, health)?</li> <li><strong>Goal Alignment:</strong> Do your daily actions and focus areas support your core values and long-term goals?</li> <li><strong>Intentional Consumption:</strong> Choose information, entertainment, and relationships that nourish rather than drain you.</li> <li><strong>Regular Review:</strong> Periodically step back (weekly, monthly) to assess if your actions align with your blueprint. Adjust as needed.</li> <li><strong>Embracing Agency:</strong> Recognize that you have the power to choose where your attention goes, even amidst the noise.</li> </ul> <p>Don't just drift through the Distracted WORLD. Pick up your architect's tools – your values, your goals, your attention – and start designing a life of focus and purpose. Create your own blueprint.</p> </div>
 
         </main>
 
         <!-- Social Media Icons Section -->
         <div class="social-icons-container">
-             <a href="https://youtube.com/@D_WORLDX" target="_blank" rel="noopener noreferrer" title="YouTube"><i class="fa-brands fa-youtube"></i></a>
-             <a href="https://instagram.com/dworldx" target="_blank" rel="noopener noreferrer" title="Instagram"><i class="fa-brands fa-instagram"></i></a>
-             <a href="https://tiktok.com/@dworldx" target="_blank" rel="noopener noreferrer" title="TikTok"><i class="fa-brands fa-tiktok"></i></a>
+             <a href="https://youtube.com/@D.WORLDX" target="_blank" rel="noopener noreferrer" title="YouTube" aria-label="Distracted World on YouTube"><i class="fa-brands fa-youtube"></i></a>
+             <a href="https://instagram.com/dworldx" target="_blank" rel="noopener noreferrer" title="Instagram" aria-label="Distracted World on Instagram"><i class="fa-brands fa-instagram"></i></a>
+             <a href="https://tiktok.com/@dworldx" target="_blank" rel="noopener noreferrer" title="TikTok" aria-label="Distracted World on TikTok"><i class="fa-brands fa-tiktok"></i></a>
         </div>
 
         <!-- Footer -->
         <footer>
-            <p>© <span id="copyright-year"></span> Distracted WORLD</p>
+            <p>© <span id="copyright-year">2024</span> Distracted WORLD</p>
         </footer>
 
-        <!-- Audio Elements for Easter Egg (Copied from first version) -->
-        <!-- Make sure these files exist in assets/sounds/ relative to index.html -->
+        <!-- Audio Elements -->
         <audio id="audio-dial-turn" src="assets/sounds/dial_turn.wav" preload="auto"></audio>
         <audio id="audio-safe-creak" src="assets/sounds/safe_creak.wav" preload="auto"></audio>
         <audio id="audio-safe-unlock" src="assets/sounds/safe_unlock.wav" preload="auto"></audio>
         <audio id="audio-safe-error" src="assets/sounds/safe_error.wav" preload="auto"></audio>
         <audio id="audio-victory" src="assets/sounds/victory.wav" preload="auto"></audio>
+        <audio id="audio-goal-add" src="assets/sounds/typewriter_key.wav" preload="auto"></audio>
+        <audio id="audio-goal-complete" src="assets/sounds/chime_short.wav" preload="auto"></audio>
+        <audio id="audio-goal-remove" src="assets/sounds/paper_crumple.wav" preload="auto"></audio>
+        <audio id="audio-goal-export" src="assets/sounds/cha_ching.wav" preload="auto"></audio>
+        <audio id="audio-telegram-receive" src="assets/sounds/telegraph.wav" preload="auto"></audio>
+        <audio id="audio-dimind-success" src="assets/sounds/victory.wav" preload="auto"></audio>
+        <audio id="audio-dimind-failure" src="assets/sounds/safe_error.wav" preload="auto"></audio>
 
     </div> <!-- end gallery-page-container -->
 
-    <!-- 4. Link to External JavaScript -->
+    <!-- Link to External JavaScript -->
     <script src="script.js" defer></script>
-
-    <!-- Inline Easter Egg Script (Copied from first version, better practice is to move this logic into script.js) -->
-    <!-- NOTE: For cleaner code, this logic has been moved into the main script.js file in the provided solution.
-         Keeping it here is also possible, but less organized.
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            // ... Safe Easter Egg JS Logic from First Version ...
-        });
-    </script>
-    -->
 
 </body>
 </html>
