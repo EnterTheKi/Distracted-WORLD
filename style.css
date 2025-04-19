@@ -806,18 +806,14 @@ footer p::first-letter,
     box-shadow: 3px 3px 15px rgba(0, 0, 0, 0.15), inset 0 0 8px rgba(0,0,0,0.05); 
     position: relative; 
     color: #3c2f2f;
-    display: block; /* Ensure it's visible */
-    opacity: 1 !important; /* Force visibility even with JS issues */
-    height: auto !important; /* Ensure height is not collapsed */
-    min-height: 100px; /* Minimum height to show content */
 }
 
-/* FIX: Override the hidden class specificity to ensure response is visible */
+/* Remove the override that was forcing visibility */
 .telegram-response-area.hidden {
-    display: block !important; /* Override the general hidden class */
-    visibility: visible !important;
-    opacity: 1 !important;
-    height: auto !important;
+    display: none !important;
+    visibility: hidden !important;
+    opacity: 0 !important;
+    height: 0 !important;
 }
 
 /* Add vintage telegram decoration */
@@ -1258,8 +1254,6 @@ hr.telegram-divider {
      .di-mind-feedback { padding: 15px; }
      .feedback-image { width: 80px; }
      #diMindMessage { font-size: 1rem; }
-
-
 }
 
 /* Keep this rule */
@@ -1331,4 +1325,11 @@ body > iframe[src*="challenges.cloudflare.com"] { display: none !important; }
     background-color: transparent;
     box-shadow: none;
     border: none;
+}
+
+.feedback-image { 
+    width: 100px; 
+    max-width: 100%;
+    height: auto;
+    object-fit: contain;
 }
