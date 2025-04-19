@@ -236,11 +236,11 @@
         }
 
         // Always ensure the response area is visible in its initialized state
-        responseArea.classList.remove('hidden');
-        responseArea.classList.add('force-show');
-        responseArea.style.display = 'block';
-        responseArea.style.opacity = '1';
-        responseArea.style.visibility = 'visible';
+        responseArea.classList.add('hidden');
+        responseArea.classList.remove('force-show');
+        responseArea.style.display = 'none';
+        responseArea.style.opacity = '0';
+        responseArea.style.visibility = 'hidden';
         
         // Define the response database
         const responseDatabase = {
@@ -1332,20 +1332,20 @@
 
              if (totalGoals === 0) {
                  diMindMessageEl.textContent = "No goals set, friend! Add some tasks to begin your journey!";
-                 diMindFeedbackImgEl.src = 'assets/images/Di-Mind2.gif'; // Assume a default/neutral GIF
+                 diMindFeedbackImgEl.src = 'assets/images/Di-Mind2.gif'; // Neutral GIF
                  diMindFeedbackArea.classList.add('neutral');
                  // No sound for neutral state? Or a specific sound?
              } else if (completedCount === totalGoals) {
                  diMindMessageEl.textContent = "Bravo! All goals conquered! You're a star of discipline!";
-                 // Optional: Change image source for success state if available
-                 // diMindFeedbackImgEl.src = 'assets/images/Di-Mind-Success.gif';
+                 // Change image for success state
+                 diMindFeedbackImgEl.src = 'assets/images/di-happy.png';
                  diMindFeedbackArea.classList.add('success');
                  playSound(audioElements.dimindSuccess);
              } else {
                  const remaining = totalGoals - completedCount;
                  diMindMessageEl.textContent = `Some tasks remain (${remaining} left), traveler. Rally and complete your ledger!`;
-                 // Optional: Change image source for failure/incomplete state if available
-                 // diMindFeedbackImgEl.src = 'assets/images/Di-Mind-Failure.gif';
+                 // Change image for incomplete state
+                 diMindFeedbackImgEl.src = 'assets/images/di-angry.png';
                  diMindFeedbackArea.classList.add('failure');
                  playSound(audioElements.dimindFailure);
              }
