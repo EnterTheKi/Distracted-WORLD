@@ -1113,13 +1113,13 @@ hr.telegram-divider {
 
 /* NEW: Styling for the clickable copyright link */
 .gallery-page-container footer p a.copyright-link {
-    color: inherit; /* Inherit color from parent <p> (text-color-light) */
-    text-decoration: none; /* Remove underline by default */
-    margin-right: 4px; /* Add space between link and year */
+    color: inherit; /* Inherit the footer text color */
+    text-decoration: none; /* Remove default underline */
+    margin-right: 4px; /* Space between the link and the year */
     opacity: 0.8; /* Make it slightly subtle */
     transition: opacity 0.2s ease, transform 0.2s ease;
-    display: inline-block; /* Allows transform */
-    vertical-align: middle; /* Align better with text */
+    display: inline-block; /* Allows transform effects */
+    vertical-align: middle; /* Helps align vertically with the surrounding text */
 }
 
 .gallery-page-container footer p a.copyright-link:hover {
@@ -1127,17 +1127,16 @@ hr.telegram-divider {
     transform: scale(1.1); /* Subtle hover effect */
 }
 
-/* Adjust the SVG icon within the link */
+/* Adjust the SVG icon specifically within this link */
 .gallery-page-container footer p a.copyright-link .icon.cross-icon {
-    width: 0.8em; /* Size relative to link text */
+    width: 0.8em; /* Size relative to the parent font size */
     height: 0.8em;
-    vertical-align: baseline; /* Align with text baseline */
-    margin-right: 1px; /* Space between icon and underscore */
-    stroke: currentColor; /* Use the link's color */
-    fill: none;
-    stroke-width: 2;
-    stroke-linecap: round;
-    stroke-linejoin: round;
+    vertical-align: baseline; /* Align with the text baseline */
+    margin-right: 1px; /* Space between the cross and the underscore */
+    stroke: currentColor; /* Ensure the SVG stroke uses the link's color */
+    fill: none; /* Ensure the SVG has no fill */
+    stroke-width: 2; /* Keep a standard stroke width for visibility */
+    /* Keep stroke-linecap and stroke-linejoin from base .icon style if they exist */
 }
 
 
