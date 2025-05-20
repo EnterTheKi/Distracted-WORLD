@@ -1111,33 +1111,77 @@ hr.telegram-divider {
 .gallery-page-container .social-icons-container a:hover i { color: #000 !important; }
 
 
-/* Footer Styling */
-.gallery-page-container footer {
-     margin-top: 40px !important;
-     padding: 20px 0 !important;
-     background-color: var(--header-footer-bg); /* <-- Make sure this is present */
-     color: var(--text-color-light) !important;
-     text-align: center; /* <-- Make sure this is present */
-     border-top: 5px solid var(--header-footer-border);
-     box-shadow: 0 -2px 5px rgba(0,0,0,0.2);
+/* NEW: Styling for the clickable copyright link (Starts hidden) */
+.gallery-page-container footer p a.copyright-link {
+    color: inherit; /* Keep color inherited from parent <p> */
+    text-decoration: none; /* Ensure no underline */
+    margin-left: 0; /* Remove default margin */
+    opacity: 0; /* Start completely invisible */
+    transition: opacity 0.3s ease, margin-left 0.3s ease; /* Transition opacity and margin */
+    display: inline-block; /* Essential for interaction and transitions */
+    vertical-align: middle; /* Align with text */
+    /* Hide the underscore and cross by default */
+    /* We will hide the icon and underscore within the link */
+    /* The symbol '©' remains potentially visible based on the parent paragraph's text color */
 }
-/* ... rest of footer styles below, including .copyright-link ... */
 
+/* Make the link content (cross and underscore) invisible by default */
+ .gallery-page-container footer p a.copyright-link svg.cross-icon,
+ .gallery-page-container footer p a.copyright-link svg.cross-icon + span, /* If you added a span, target it */
+ .gallery-page-container footer p a.copyright-link svg.cross-icon + span + span, /* If you added another span */
+ .gallery-page-container footer p a.copyright-link svg.cross-icon + span + span + span, /* If you added another span */
+ .gallery-page-container footer p a.copyright-link svg.cross-icon + span + span + span + span, /* If you added another span */
+ .gallery-page-container footer p a.copyright-link svg.cross-icon + span + span + span + span + span, /* If you added another span */
+ .gallery-page-container footer p a.copyright-link svg.cross-icon + span + span + span + span + span + span, /* If you added another span */
+ .gallery-page-container footer p a.copyright-link svg.cross-icon ~ *, /* Catch anything after the icon */
+ .gallery-page-container footer p a.copyright-link_ { /* Specific target for the underscore if it's not in a span */
+      visibility: hidden;
+      opacity: 0;
+      transition: visibility 0s 0.3s, opacity 0.3s ease; /* Delayed hide transition */
+ }
+ /* Ensure the copyright symbol itself doesn't change color */
+ /* The color is inherited, so it will be whatever the footer text color is */
+ .gallery-page-container footer p a.copyright-link::before {
+     /* If using ::before for ©, style it here */
+ }
+
+
+/* Styling for the clickable copyright link on HOVER */
 .gallery-page-container footer p a.copyright-link:hover {
-    opacity: 1; /* More visible on hover */
-    transform: scale(1.1); /* Subtle hover effect */
+    color: var(--text-color-light); /* Ensure visible color on hover */
+    opacity: 1; /* Fully visible */
+    margin-left: 4px; /* Add space next to the copyright symbol */
+    transform: none; /* Remove hover transform from the link element itself */
+    text-decoration: underline; /* Add underline on hover if desired */
 }
 
-/* Adjust the SVG icon specifically within this link */
+/* Make the link content (cross and underscore) visible on HOVER */
+ .gallery-page-container footer p a.copyright-link:hover svg.cross-icon,
+ .gallery-page-container footer p a.copyright-link:hover svg.cross-icon + span,
+ .gallery-page-container footer p a.copyright-link:hover svg.cross-icon + span + span,
+ .gallery-page-container footer p a.copyright-link:hover svg.cross-icon + span + span + span,
+ .gallery-page-container footer p a.copyright-link:hover svg.cross-icon + span + span + span + span,
+ .gallery-page-container footer p a.copyright-link:hover svg.cross-icon + span + span + span + span + span,
+ .gallery-page-container footer p a.copyright-link:hover svg.cross-icon + span + span + span + span + span + span,
+ .gallery-page-container footer p a.copyright-link:hover svg.cross-icon ~ *,
+ .gallery-page-container footer p a.copyright-link:hover_ {
+      visibility: visible;
+      opacity: 1;
+      transition: visibility 0s, opacity 0.3s ease; /* Show immediately on hover */
+ }
+
+
+/* Adjust the SVG icon within the link (general style, applies on hover) */
 .gallery-page-container footer p a.copyright-link .icon.cross-icon {
-    width: 0.8em; /* Size relative to the parent font size */
+    width: 0.8em;
     height: 0.8em;
-    vertical-align: baseline; /* Align with the text baseline */
-    margin-right: 1px; /* Space between the cross and the underscore */
-    stroke: currentColor; /* Ensure the SVG stroke uses the link's color */
-    fill: none; /* Ensure the SVG has no fill */
-    stroke-width: 2; /* Keep a standard stroke width for visibility */
-    /* Keep stroke-linecap and stroke-linejoin from base .icon style if they exist */
+    vertical-align: baseline;
+    margin-right: 1px;
+    stroke: currentColor; /* Use the link's color */
+    fill: none;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
 }
 
 
