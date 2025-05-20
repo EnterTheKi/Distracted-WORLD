@@ -1126,55 +1126,24 @@ hr.telegram-divider {
 .gallery-page-container footer p a.copyright-symbol-link {
     color: inherit; /* Inherit the light text color from the parent <p> */
     text-decoration: none; /* Remove default underline */
-    /* No margin-right here initially, as we want the hover content to add it */
+    /* margin-right: 4px; */ /* Remove this margin */
     opacity: 0.9; /* Make the © slightly subtle by default */
     transition: opacity 0.2s ease, transform 0.2s ease; /* Smooth transition for subtlety */
-    display: inline-block; /* Needed for transform and vertical-align */
+    display: inline-block; /* Needed for transform and pointer cursor */
     vertical-align: middle; /* Align with the year/text */
     /* Optional: Add padding around the clickable area if needed */
-    /* padding: 0 2px; */
+    padding: 0 2px; /* Add a small clickable area */
+    border-radius: 2px; /* Match footer text style */
 }
 
-/* Styling for the clickable copyright SYMBOL on HOVER */
+/* Styling for the copyright SYMBOL on HOVER */
 .gallery-page-container footer p a.copyright-symbol-link:hover {
     opacity: 1; /* Make the © fully bright on hover */
     transform: scale(1.1); /* Subtle hover effect on the symbol itself */
-    /* text-decoration: underline; */ /* Optional underline on hover */
+    /* Optional: Add a subtle background or border on hover */
+    /* background-color: rgba(255, 255, 255, 0.1); */
+    /* border: 1px solid rgba(255, 255, 255, 0.2); */
 }
-
-/* Styling for the content that appears ON HOVER (cross + underscore) */
-.gallery-page-container footer p .link-hover-content { /* Target the span directly within the paragraph */
-    /* This span holds the SVG and underscore */
-    visibility: hidden; /* Hides the content completely by default */
-    opacity: 0; /* Starts transparent */
-    margin-left: 0; /* Start with no space */
-    transition: visibility 0s 0.3s, opacity 0.3s ease, margin-left 0.3s ease; /* Smooth fade-in and slide */
-    display: inline-block; /* Essential for correct display and positioning */
-    vertical-align: middle; /* Align with the surrounding text */
-    /* You might need a subtle transform here if the margin transition isn't enough */
-    /* transform: translateX(-5px); */
-}
-
-/* Make the hover content visible when the copyright SYMBOL LINK is hovered */
-.gallery-page-container footer p a.copyright-symbol-link:hover + .link-hover-content { /* Target the adjacent span */
-    visibility: visible; /* Make visible */
-    opacity: 1; /* Fade in */
-    transition-delay: 0s; /* Show immediately on hover */
-    margin-left: 4px; /* Add space between © and the hover content */
-    /* transform: translateX(0); */ /* Reset transform if used above */
-}
-
-/* Style the SVG icon specifically within the hover content span */
- .gallery-page-container footer p .link-hover-content .icon.cross-icon {
-    width: 0.8em; /* Size relative to the parent font size */
-    height: 0.8em;
-    vertical-align: baseline; /* Align with the text baseline */
-    margin-right: 1px; /* Space between the cross and the underscore */
-    stroke: currentColor; /* Use the inherited color */
-    fill: none; /* Ensure no fill */
-    stroke-width: 2; /* Keep a standard stroke width */
-    /* Keep stroke-linecap and stroke-linejoin from base .icon style if they exist */
- }
 
  /* Ensure the cursor is a pointer over the copyright link only */
  .gallery-page-container footer p a.copyright-symbol-link {
@@ -1182,10 +1151,13 @@ hr.telegram-divider {
  }
 
  /* Remove pointer cursor from other text in the footer paragraph if necessary */
- .gallery-page-container footer p:not(.footer-link-item) {
-      cursor: default; /* Ensure cursor is default for the paragraph itself */
+ .gallery-page-container footer p { /* Target the paragraph */
+      cursor: default; /* Ensure cursor is default for the entire paragraph */
  }
-
+ /* Specific override for the link within the paragraph */
+ .gallery-page-container footer p a.copyright-symbol-link {
+     cursor: url('assets/cursors/glove-pointer.png') 0 0, pointer; /* Re-apply pointer cursor to the link */
+ }
 
 /* ... other CSS rules ... */
 
