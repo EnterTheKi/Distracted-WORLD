@@ -1111,78 +1111,57 @@ hr.telegram-divider {
 .gallery-page-container .social-icons-container a:hover i { color: #000 !important; }
 
 
-/* NEW: Styling for the clickable copyright link (Starts hidden) */
-.gallery-page-container footer p a.copyright-link {
-    color: inherit; /* Keep color inherited from parent <p> */
-    text-decoration: none; /* Ensure no underline */
-    margin-left: 0; /* Remove default margin */
-    opacity: 0; /* Start completely invisible */
-    transition: opacity 0.3s ease, margin-left 0.3s ease; /* Transition opacity and margin */
-    display: inline-block; /* Essential for interaction and transitions */
-    vertical-align: middle; /* Align with text */
-    /* Hide the underscore and cross by default */
-    /* We will hide the icon and underscore within the link */
-    /* The symbol '©' remains potentially visible based on the parent paragraph's text color */
+/* NEW: Styling for the clickable copyright line */
+.gallery-page-container footer p a.footer-copyright-link {
+    /* Link itself */
+    color: inherit; /* Inherit color from parent <p> (text-color-light by default) */
+    text-decoration: none; /* Remove default underline */
+    display: inline-block; /* Make the link clickable area wrap content */
+    vertical-align: middle; /* Align with surrounding text */
+    opacity: 0.9; /* Start slightly subtle, but visible */
+    transition: opacity 0.2s ease, transform 0.2s ease;
+    padding: 0 4px; /* Add a small clickable area around the text */
+    border-radius: 2px;
 }
 
-/* Make the link content (cross and underscore) invisible by default */
- .gallery-page-container footer p a.copyright-link svg.cross-icon,
- .gallery-page-container footer p a.copyright-link svg.cross-icon + span, /* If you added a span, target it */
- .gallery-page-container footer p a.copyright-link svg.cross-icon + span + span, /* If you added another span */
- .gallery-page-container footer p a.copyright-link svg.cross-icon + span + span + span, /* If you added another span */
- .gallery-page-container footer p a.copyright-link svg.cross-icon + span + span + span + span, /* If you added another span */
- .gallery-page-container footer p a.copyright-link svg.cross-icon + span + span + span + span + span, /* If you added another span */
- .gallery-page-container footer p a.copyright-link svg.cross-icon + span + span + span + span + span + span, /* If you added another span */
- .gallery-page-container footer p a.copyright-link svg.cross-icon ~ *, /* Catch anything after the icon */
- .gallery-page-container footer p a.copyright-link_ { /* Specific target for the underscore if it's not in a span */
-      visibility: hidden;
-      opacity: 0;
-      transition: visibility 0s 0.3s, opacity 0.3s ease; /* Delayed hide transition */
- }
- /* Ensure the copyright symbol itself doesn't change color */
- /* The color is inherited, so it will be whatever the footer text color is */
- .gallery-page-container footer p a.copyright-link::before {
-     /* If using ::before for ©, style it here */
- }
-
-
-/* Styling for the clickable copyright link on HOVER */
-.gallery-page-container footer p a.copyright-link:hover {
-    color: var(--text-color-light); /* Ensure visible color on hover */
-    opacity: 1; /* Fully visible */
-    margin-left: 4px; /* Add space next to the copyright symbol */
-    transform: none; /* Remove hover transform from the link element itself */
-    text-decoration: underline; /* Add underline on hover if desired */
+.gallery-page-container footer p a.footer-copyright-link:hover {
+    opacity: 1; /* Fully visible on hover */
+    /* Add a subtle background or border change on hover if desired */
+    /* background-color: rgba(255, 255, 255, 0.1); */
+    /* border: 1px solid rgba(255, 255, 255, 0.2); */
+    /* transform: translateY(-1px); */ /* Example hover lift */
 }
 
-/* Make the link content (cross and underscore) visible on HOVER */
- .gallery-page-container footer p a.copyright-link:hover svg.cross-icon,
- .gallery-page-container footer p a.copyright-link:hover svg.cross-icon + span,
- .gallery-page-container footer p a.copyright-link:hover svg.cross-icon + span + span,
- .gallery-page-container footer p a.copyright-link:hover svg.cross-icon + span + span + span,
- .gallery-page-container footer p a.copyright-link:hover svg.cross-icon + span + span + span + span,
- .gallery-page-container footer p a.copyright-link:hover svg.cross-icon + span + span + span + span + span,
- .gallery-page-container footer p a.copyright-link:hover svg.cross-icon + span + span + span + span + span + span,
- .gallery-page-container footer p a.copyright-link:hover svg.cross-icon ~ *,
- .gallery-page-container footer p a.copyright-link:hover_ {
-      visibility: visible;
-      opacity: 1;
-      transition: visibility 0s, opacity 0.3s ease; /* Show immediately on hover */
- }
+/* NEW: Styling for the content that appears on hover (cross + underscore) */
+.gallery-page-container footer p a.footer-copyright-link .link-hover-content {
+    /* Content (SVG + _) */
+    visibility: hidden; /* Hide content by default */
+    opacity: 0; /* Start transparent */
+    margin-left: 4px; /* Space between the main text and the hover content */
+    transition: visibility 0s 0.3s, opacity 0.3s ease, transform 0.3s ease; /* Add transition */
+    display: inline-block; /* Ensure it's inline but can be transformed */
+    vertical-align: middle;
+}
 
+.gallery-page-container footer p a.footer-copyright-link:hover .link-hover-content {
+    visibility: visible; /* Make visible on link hover */
+    opacity: 1; /* Fade in */
+    transition-delay: 0s; /* Show immediately on hover */
+    transform: translateX(0); /* Ensure no leftover transform from previous attempts */
+}
 
-/* Adjust the SVG icon within the link (general style, applies on hover) */
-.gallery-page-container footer p a.copyright-link .icon.cross-icon {
-    width: 0.8em;
+/* Style the SVG icon within the hover content */
+ .gallery-page-container footer p a.footer-copyright-link .link-hover-content .icon.cross-icon {
+    width: 0.8em; /* Size relative to parent font size */
     height: 0.8em;
-    vertical-align: baseline;
-    margin-right: 1px;
+    vertical-align: baseline; /* Align with text baseline */
+    margin-right: 1px; /* Space between the cross and the underscore */
     stroke: currentColor; /* Use the link's color */
     fill: none;
     stroke-width: 2;
     stroke-linecap: round;
     stroke-linejoin: round;
-}
+ }
 
 
 /* Class to hide elements */
