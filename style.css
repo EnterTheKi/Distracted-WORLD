@@ -1111,16 +1111,17 @@ hr.telegram-divider {
 .gallery-page-container .social-icons-container a:hover i { color: #000 !important; }
 
 
-/* NEW: Styling for the clickable copyright link */
-.gallery-page-container footer p a.copyright-link {
-    color: inherit; /* Inherit the footer text color */
-    text-decoration: none; /* Remove default underline */
-    margin-right: 4px; /* Space between the link and the year */
-    opacity: 0.8; /* Make it slightly subtle */
-    transition: opacity 0.2s ease, transform 0.2s ease;
-    display: inline-block; /* Allows transform effects */
-    vertical-align: middle; /* Helps align vertically with the surrounding text */
+/* Footer Styling */
+.gallery-page-container footer {
+     margin-top: 40px !important;
+     padding: 20px 0 !important;
+     background-color: var(--header-footer-bg); /* <-- Make sure this is present */
+     color: var(--text-color-light) !important;
+     text-align: center; /* <-- Make sure this is present */
+     border-top: 5px solid var(--header-footer-border);
+     box-shadow: 0 -2px 5px rgba(0,0,0,0.2);
 }
+/* ... rest of footer styles below, including .copyright-link ... */
 
 .gallery-page-container footer p a.copyright-link:hover {
     opacity: 1; /* More visible on hover */
