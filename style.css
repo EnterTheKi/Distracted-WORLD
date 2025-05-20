@@ -1126,14 +1126,14 @@ hr.telegram-divider {
 .gallery-page-container footer p a.copyright-symbol-link {
     color: inherit; /* Inherit the light text color from the parent <p> */
     text-decoration: none; /* Remove default underline */
-    /* margin-right: 4px; */ /* Remove this margin */
+    /* Try text-bottom first for alignment, adjust if needed */
+    vertical-align: text-bottom; /* <<< Check this for alignment! */
     opacity: 0.9; /* Make the © slightly subtle by default */
-    transition: opacity 0.2s ease, transform 0.2s ease; /* Smooth transition for subtlety */
+    transition: opacity 0.2s ease, transform 0.2s ease; /* Smooth transition for subtlety and hover effect */
     display: inline-block; /* Needed for transform and pointer cursor */
-    vertical-align: middle; /* Align with the year/text */
-    /* Optional: Add padding around the clickable area if needed */
-    padding: 0 2px; /* Add a small clickable area */
-    border-radius: 2px; /* Match footer text style */
+    /* Optional: Add a little padding around the clickable area */
+    padding: 0 2px;
+    border-radius: 2px;
 }
 
 /* Styling for the copyright SYMBOL on HOVER */
@@ -1151,13 +1151,14 @@ hr.telegram-divider {
  }
 
  /* Remove pointer cursor from other text in the footer paragraph if necessary */
- .gallery-page-container footer p { /* Target the paragraph */
+ /* This ensures only the © has the pointer cursor */
+ .gallery-page-container footer p {
       cursor: default; /* Ensure cursor is default for the entire paragraph */
  }
- /* Specific override for the link within the paragraph */
  .gallery-page-container footer p a.copyright-symbol-link {
      cursor: url('assets/cursors/glove-pointer.png') 0 0, pointer; /* Re-apply pointer cursor to the link */
  }
+
 
 /* ... other CSS rules ... */
 
