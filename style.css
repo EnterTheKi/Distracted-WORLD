@@ -1111,9 +1111,34 @@ hr.telegram-divider {
 .gallery-page-container .social-icons-container a:hover i { color: #000 !important; }
 
 
-/* Footer Styling */
-.gallery-page-container footer { margin-top: 40px !important; padding: 20px 0 !important; background-color: var(--header-footer-bg); color: var(--text-color-light) !important; text-align: center; border-top: 5px solid var(--header-footer-border); box-shadow: 0 -2px 5px rgba(0,0,0,0.2); }
-.gallery-page-container footer p { font-family: 'Oswald', sans-serif; font-size: 0.9rem; margin: 0 !important; letter-spacing: 0.5px; }
+/* NEW: Styling for the clickable copyright link */
+.gallery-page-container footer p a.copyright-link {
+    color: inherit; /* Inherit color from parent <p> (text-color-light) */
+    text-decoration: none; /* Remove underline by default */
+    margin-right: 4px; /* Add space between link and year */
+    opacity: 0.8; /* Make it slightly subtle */
+    transition: opacity 0.2s ease, transform 0.2s ease;
+    display: inline-block; /* Allows transform */
+    vertical-align: middle; /* Align better with text */
+}
+
+.gallery-page-container footer p a.copyright-link:hover {
+    opacity: 1; /* More visible on hover */
+    transform: scale(1.1); /* Subtle hover effect */
+}
+
+/* Adjust the SVG icon within the link */
+.gallery-page-container footer p a.copyright-link .icon.cross-icon {
+    width: 0.8em; /* Size relative to link text */
+    height: 0.8em;
+    vertical-align: baseline; /* Align with text baseline */
+    margin-right: 1px; /* Space between icon and underscore */
+    stroke: currentColor; /* Use the link's color */
+    fill: none;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
 
 
 /* Class to hide elements */
