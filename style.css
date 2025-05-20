@@ -1111,57 +1111,83 @@ hr.telegram-divider {
 .gallery-page-container .social-icons-container a:hover i { color: #000 !important; }
 
 
-/* NEW: Styling for the clickable copyright line */
-.gallery-page-container footer p a.footer-copyright-link {
-    /* Link itself */
-    color: inherit; /* Inherit color from parent <p> (text-color-light by default) */
+/* Footer Styling */
+.gallery-page-container footer {
+     margin-top: 40px !important;
+     padding: 20px 0 !important;
+     background-color: var(--header-footer-bg); /* Make sure this is present */
+     color: var(--text-color-light) !important; /* This sets the text color for p and inherited by the link */
+     text-align: center; /* Make sure this centers the content */
+     border-top: 5px solid var(--header-footer-border);
+     box-shadow: 0 -2px 5px rgba(0,0,0,0.2);
+}
+
+/* Styling for the clickable copyright SYMBOL (the link) */
+.gallery-page-container footer p a.copyright-symbol-link {
+    color: inherit; /* Inherit the light text color from the parent <p> */
     text-decoration: none; /* Remove default underline */
-    display: inline-block; /* Make the link clickable area wrap content */
-    vertical-align: middle; /* Align with surrounding text */
-    opacity: 0.9; /* Start slightly subtle, but visible */
-    transition: opacity 0.2s ease, transform 0.2s ease;
-    padding: 0 4px; /* Add a small clickable area around the text */
-    border-radius: 2px;
+    /* No margin-right here initially, as we want the hover content to add it */
+    opacity: 0.9; /* Make the © slightly subtle by default */
+    transition: opacity 0.2s ease, transform 0.2s ease; /* Smooth transition for subtlety */
+    display: inline-block; /* Needed for transform and vertical-align */
+    vertical-align: middle; /* Align with the year/text */
+    /* Optional: Add padding around the clickable area if needed */
+    /* padding: 0 2px; */
 }
 
-.gallery-page-container footer p a.footer-copyright-link:hover {
-    opacity: 1; /* Fully visible on hover */
-    /* Add a subtle background or border change on hover if desired */
-    /* background-color: rgba(255, 255, 255, 0.1); */
-    /* border: 1px solid rgba(255, 255, 255, 0.2); */
-    /* transform: translateY(-1px); */ /* Example hover lift */
+/* Styling for the clickable copyright SYMBOL on HOVER */
+.gallery-page-container footer p a.copyright-symbol-link:hover {
+    opacity: 1; /* Make the © fully bright on hover */
+    transform: scale(1.1); /* Subtle hover effect on the symbol itself */
+    /* text-decoration: underline; */ /* Optional underline on hover */
 }
 
-/* NEW: Styling for the content that appears on hover (cross + underscore) */
-.gallery-page-container footer p a.footer-copyright-link .link-hover-content {
-    /* Content (SVG + _) */
-    visibility: hidden; /* Hide content by default */
-    opacity: 0; /* Start transparent */
-    margin-left: 4px; /* Space between the main text and the hover content */
-    transition: visibility 0s 0.3s, opacity 0.3s ease, transform 0.3s ease; /* Add transition */
-    display: inline-block; /* Ensure it's inline but can be transformed */
-    vertical-align: middle;
+/* Styling for the content that appears ON HOVER (cross + underscore) */
+.gallery-page-container footer p .link-hover-content { /* Target the span directly within the paragraph */
+    /* This span holds the SVG and underscore */
+    visibility: hidden; /* Hides the content completely by default */
+    opacity: 0; /* Starts transparent */
+    margin-left: 0; /* Start with no space */
+    transition: visibility 0s 0.3s, opacity 0.3s ease, margin-left 0.3s ease; /* Smooth fade-in and slide */
+    display: inline-block; /* Essential for correct display and positioning */
+    vertical-align: middle; /* Align with the surrounding text */
+    /* You might need a subtle transform here if the margin transition isn't enough */
+    /* transform: translateX(-5px); */
 }
 
-.gallery-page-container footer p a.footer-copyright-link:hover .link-hover-content {
-    visibility: visible; /* Make visible on link hover */
+/* Make the hover content visible when the copyright SYMBOL LINK is hovered */
+.gallery-page-container footer p a.copyright-symbol-link:hover + .link-hover-content { /* Target the adjacent span */
+    visibility: visible; /* Make visible */
     opacity: 1; /* Fade in */
     transition-delay: 0s; /* Show immediately on hover */
-    transform: translateX(0); /* Ensure no leftover transform from previous attempts */
+    margin-left: 4px; /* Add space between © and the hover content */
+    /* transform: translateX(0); */ /* Reset transform if used above */
 }
 
-/* Style the SVG icon within the hover content */
- .gallery-page-container footer p a.footer-copyright-link .link-hover-content .icon.cross-icon {
-    width: 0.8em; /* Size relative to parent font size */
+/* Style the SVG icon specifically within the hover content span */
+ .gallery-page-container footer p .link-hover-content .icon.cross-icon {
+    width: 0.8em; /* Size relative to the parent font size */
     height: 0.8em;
-    vertical-align: baseline; /* Align with text baseline */
+    vertical-align: baseline; /* Align with the text baseline */
     margin-right: 1px; /* Space between the cross and the underscore */
-    stroke: currentColor; /* Use the link's color */
-    fill: none;
-    stroke-width: 2;
-    stroke-linecap: round;
-    stroke-linejoin: round;
+    stroke: currentColor; /* Use the inherited color */
+    fill: none; /* Ensure no fill */
+    stroke-width: 2; /* Keep a standard stroke width */
+    /* Keep stroke-linecap and stroke-linejoin from base .icon style if they exist */
  }
+
+ /* Ensure the cursor is a pointer over the copyright link only */
+ .gallery-page-container footer p a.copyright-symbol-link {
+      cursor: url('assets/cursors/glove-pointer.png') 0 0, pointer;
+ }
+
+ /* Remove pointer cursor from other text in the footer paragraph if necessary */
+ .gallery-page-container footer p:not(.footer-link-item) {
+      cursor: default; /* Ensure cursor is default for the paragraph itself */
+ }
+
+
+/* ... other CSS rules ... */
 
 
 /* Class to hide elements */
