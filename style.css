@@ -325,6 +325,24 @@ footer p::first-letter,
     border: none;
 }
 
+/* SPECIFICALLY REMOVE DROP CAP FROM "A" AND "L" IN ORGANIZED WORLD INTRO */
+.gallery-page-container .centered-text.ow-ki-intro p:first-child::first-letter,
+.gallery-page-container .centered-text.ow-ki-intro p:nth-child(2)::first-letter {
+    font-size: inherit !important;
+    line-height: inherit !important;
+    float: none !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    font-family: inherit !important;
+    font-weight: inherit !important;
+    color: inherit !important;
+    text-shadow: none !important;
+    display: inline !important;
+    position: static !important;
+    background: none !important;
+    border: none !important;
+}
+
 .gallery-page-container .filter-nav .filter-btn:hover:not(.active) {
      background-color: #e8e4d9; border-color: var(--hover-border-color); color: #111;
      transform: translateY(-2px); box-shadow: 2px 2px 4px rgba(0,0,0,0.15);
@@ -1276,13 +1294,22 @@ hr.telegram-divider {
     .gallery-page-container .centered-text { font-size: 1.1rem; margin: 30px 0 !important;}
     .gallery-page-container .social-icons-container a { width: 50px; height: 50px; margin: 5px 8px !important; }
     .gallery-page-container .social-icons-container a i { font-size: 1.6rem; }
-    .search-widget-container { top: 15px; right: 15px; }
+
+    /* IMPROVED SEARCH WIDGET FOR MOBILE */
+    .search-widget-container { top: 15px; right: 15px; display: block !important; }
     .search-widget-container.expanded #pageSearchInput { width: 180px; }
-    .search-toggle-btn { width: 40px; height: 40px; font-size: 1.1rem;}
-    #pageSearchInput { height: 40px; border-radius: 20px; }
+    .search-toggle-btn { width: 44px; height: 44px; font-size: 1.1rem;}
+    #pageSearchInput { height: 44px; border-radius: 22px; }
+
     .gallery-page-container #full-blog-post-view h1 { font-size: 2rem; }
     .gallery-page-container .safe { max-width: 95%; }
     .gallery-page-container .dial { grid-template-columns: repeat(3, 1fr); }
+
+    /* IMPROVED BLOG GRID FOR MOBILE */
+    .gallery-page-container .blog-grid {
+        grid-template-columns: 1fr !important;
+        gap: 20px !important;
+    }
 
     #goals-content h1 { font-size: 2.2rem !important;}
     #goals-content h2 { font-size: 1.6rem !important; }
@@ -1290,13 +1317,61 @@ hr.telegram-divider {
     .goal-list-vintage li { padding: 10px 12px; /* Adjust padding */ }
     .goal-list-vintage li .goal-text { font-size: 1rem; }
 
+    /* IMPROVED TELEGRAM SECTION FOR MOBILE */
     #telegram-content h1 { font-size: 2.2rem !important; }
+    .telegram-input-area { flex-direction: column; gap: 15px; }
+    #focusInput { width: 100%; }
+    #getAdviceBtn { width: 100%; padding: 12px; }
     .telegram-response-area h3.response-header { font-size: 1.4rem !important; }
     .telegram-response-area p, .telegram-response-area li { font-size: 0.95rem !important; }
     .telegram-focus-card h2 { font-size: 1.6rem !important; }
     .telegram-focus-card p, .telegram-focus-card li { font-size: 1rem !important; }
     .di-mind-feedback { max-width: 90%; }
     .feedback-image { width: 100px; }
+
+    /* IMPROVED NAVIGATION FOR MOBILE */
+    .gallery-page-container .filter-nav .filter-btn {
+        padding: 10px 12px;
+        font-size: 0.85rem;
+        min-width: 80px;
+    }
+
+    /* BETTER SPACING FOR MOBILE */
+    .gallery-page-container .main-content-area { padding: 15px !important; }
+    .gallery-page-container .page-content { margin: 15px auto !important; }
+
+    /* PERFORMANCE OPTIMIZATIONS FOR MOBILE */
+    .gallery-page-container .placeholder-image {
+        image-rendering: -webkit-optimize-contrast; /* Better image rendering on mobile */
+    }
+
+    /* DISABLE HOVER EFFECTS ON TOUCH DEVICES */
+    @media (hover: none) and (pointer: coarse) {
+        .gallery-page-container .placeholder-image:hover,
+        .gallery-page-container .blog-post-card:hover,
+        .gallery-page-container .filter-btn:hover:not(.active),
+        .gallery-page-container .read-more-btn:hover:not([disabled]),
+        .gallery-page-container .page-link:hover:not([disabled]),
+        .gallery-page-container .social-icons-container a:hover {
+            transform: none !important;
+            filter: none !important;
+            box-shadow: none !important;
+        }
+    }
+
+    /* IMPROVED TOUCH TARGETS */
+    .gallery-page-container .filter-btn,
+    .gallery-page-container .read-more-btn,
+    .gallery-page-container .page-link {
+        min-height: 48px !important; /* Larger touch targets */
+        min-width: 48px !important;
+    }
+
+    /* BETTER TEXT READABILITY ON MOBILE */
+    .gallery-page-container .page-content p {
+        word-spacing: 0.1em; /* Better word spacing for readability */
+        letter-spacing: 0.01em;
+    }
 }
 
 @media (max-width: 480px) {
@@ -1707,16 +1782,16 @@ body > iframe[src*="challenges.cloudflare.com"] { display: none !important; }
 }
 
 .ow-final-btn {
-    background: linear-gradient(135deg, #722f37 0%, #800020 100%);
-    color: #ff8888 !important;
+    background: linear-gradient(135deg, #B8860B 0%, #DAA520 100%);
+    color: #2a2725 !important;
     padding: 20px 35px;
     border-radius: 10px;
     font-size: 1.3rem;
     text-decoration: none;
     display: inline-block;
     transition: all 0.3s ease;
-    box-shadow: 0 6px 20px rgba(114, 47, 55, 0.3), inset 0 0 0 2px rgba(255, 255, 255, 0.1);
-    border: 2px solid #a04040;
+    box-shadow: 0 6px 20px rgba(184, 134, 11, 0.3), inset 0 0 0 2px rgba(255, 255, 255, 0.1);
+    border: 2px solid #8B4513;
     position: relative;
     overflow: hidden;
     text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
@@ -1774,30 +1849,149 @@ body > iframe[src*="challenges.cloudflare.com"] { display: none !important; }
     box-shadow: 0 4px 15px rgba(114, 47, 55, 0.6), inset 0 0 0 2px rgba(255, 255, 255, 0.3);
 }
 
+/* ENHANCED DROP CAPS - LARGER AND BETTER STRUCTURED */
+.gallery-page-container .centered-text p::first-letter {
+    all: initial !important;
+    font-family: 'EB Garamond', serif !important;
+    font-size: 6em !important;
+    font-weight: 700 !important;
+    line-height: 0.8 !important;
+    color: #333 !important;
+    margin-right: 8px !important;
+    float: left !important;
+    padding-top: 0.08em !important;
+    padding-right: 0.15em !important;
+    margin-bottom: -0.15em !important;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.15) !important;
+    position: relative !important;
+    display: block !important;
+    background: none !important;
+    border: none !important;
+}
+
+.gallery-page-container #distracted-content > h1 + p::first-letter {
+    all: initial !important;
+    font-family: 'EB Garamond', serif !important;
+    font-size: 6em !important;
+    font-weight: 700 !important;
+    line-height: 0.8 !important;
+    color: #333 !important;
+    margin-right: 8px !important;
+    float: left !important;
+    padding-top: 0.08em !important;
+    padding-right: 0.15em !important;
+    margin-bottom: -0.15em !important;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.15) !important;
+    position: relative !important;
+    display: block !important;
+    background: none !important;
+    border: none !important;
+}
+
+/* Additional specificity for distracted content paragraph */
+.gallery-page-container #distracted-content p:first-child::first-letter,
+.gallery-page-container #distracted-content p:first-of-type::first-letter,
+.gallery-page-container #distracted-content > h1 + p::first-letter {
+    all: initial !important;
+    font-family: 'EB Garamond', serif !important;
+    font-size: 6em !important;
+    font-weight: 700 !important;
+    line-height: 0.8 !important;
+    color: #333 !important;
+    margin-right: 8px !important;
+    float: left !important;
+    padding-top: 0.08em !important;
+    padding-right: 0.15em !important;
+    margin-bottom: -0.15em !important;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.15) !important;
+    position: relative !important;
+    display: block !important;
+    background: none !important;
+    border: none !important;
+}
+
+/* ULTRA SPECIFIC RULE FOR DISTRACTED CONTENT DROP CAP */
+.gallery-page-container #distracted-content > h1 + p:first-letter {
+    all: initial !important;
+    font-family: 'EB Garamond', serif !important;
+    font-size: 6em !important;
+    font-weight: 700 !important;
+    line-height: 0.8 !important;
+    color: #333 !important;
+    margin-right: 8px !important;
+    float: left !important;
+    padding-top: 0.08em !important;
+    padding-right: 0.15em !important;
+    margin-bottom: -0.15em !important;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.15) !important;
+    position: relative !important;
+    display: block !important;
+    background: none !important;
+    border: none !important;
+}
+
+.gallery-page-container #organized-content .ow-tagline::first-letter {
+    all: initial !important;
+    font-family: 'EB Garamond', serif !important;
+    font-size: 6em !important;
+    font-weight: 700 !important;
+    line-height: 0.8 !important;
+    color: #333 !important;
+    margin-right: 8px !important;
+    float: left !important;
+    padding-top: 0.08em !important;
+    padding-right: 0.15em !important;
+    margin-bottom: -0.15em !important;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.15) !important;
+    position: relative !important;
+    display: block !important;
+    background: none !important;
+    border: none !important;
+}
+
+.gallery-page-container #goals-content .section-intro::first-letter {
+    all: initial !important;
+    font-family: 'EB Garamond', serif !important;
+    font-size: 6em !important;
+    font-weight: 700 !important;
+    line-height: 0.8 !important;
+    color: #333 !important;
+    margin-right: 8px !important;
+    float: left !important;
+    padding-top: 0.08em !important;
+    padding-right: 0.15em !important;
+    margin-bottom: -0.15em !important;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.15) !important;
+    position: relative !important;
+    display: block !important;
+    background: none !important;
+    border: none !important;
+}
+
 /* Responsive Design for Ki Section */
 @media (max-width: 768px) {
     .ki-content-grid {
         grid-template-columns: 1fr;
         gap: 20px;
     }
-    
+
     .dw-lander-section {
         padding: 20px;
         margin: 20px 0;
     }
-    
+
     .ki-cta-box {
         padding: 20px;
     }
-    
+
     .testimonial-grid {
         grid-template-columns: 1fr;
     }
-    
+
     .ki-final-cta {
         padding: 20px;
     }
-    
+
     .ki-primary-btn,
     .ki-final-btn {
         padding: 15px 25px;
