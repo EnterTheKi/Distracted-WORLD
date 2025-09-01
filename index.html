@@ -19,6 +19,132 @@
     <!-- Link to External CSS -->
     <link rel="stylesheet" href="style.css">
 
+    <style>
+        .placeholder-image:hover {
+            transform: scale(1.05);
+            transition: all 0.3s ease;
+            filter: sepia(20%) contrast(1.1);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+        }
+
+        /* Mobile Optimization */
+        @media (max-width: 768px) {
+            body {
+                font-size: 16px;
+                line-height: 1.6;
+            }
+
+            .gallery-page-container {
+                padding: 10px;
+            }
+
+            header h1 {
+                font-size: 2rem;
+                margin: 20px 0;
+            }
+
+            .filter-nav .filter-buttons {
+                flex-wrap: wrap;
+                gap: 8px;
+            }
+
+            .filter-btn {
+                padding: 8px 12px;
+                font-size: 0.9rem;
+                min-width: auto;
+                flex: 1 1 auto;
+            }
+
+            .home-intro-header {
+                font-size: 1.8rem;
+            }
+
+            .placeholder-image {
+                max-width: 100%;
+                height: auto;
+            }
+
+            .ow-hero-section img {
+                width: 100%;
+                max-width: 300px;
+            }
+
+            .ow-features-grid {
+                grid-template-columns: 1fr;
+                gap: 15px;
+            }
+
+            .ow-ki-main {
+                flex-direction: column;
+            }
+
+            .ow-ki-left, .ow-ki-right {
+                width: 100%;
+            }
+
+            .ow-testimonial-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .blog-grid {
+                grid-template-columns: 1fr;
+                gap: 15px;
+            }
+
+            .social-icons-container {
+                justify-content: center;
+                gap: 20px;
+            }
+
+            .social-icons-container a {
+                font-size: 1.5rem;
+            }
+
+            /* Improve touch targets */
+            button, .filter-btn, .read-more-btn {
+                min-height: 44px;
+                min-width: 44px;
+            }
+
+            /* Better spacing for mobile */
+            .main-content-area {
+                padding: 15px;
+            }
+
+            .ow-final-cta {
+                padding: 20px;
+            }
+
+            /* Hide search on mobile for cleaner look */
+            .search-widget-container {
+                display: none;
+            }
+        }
+
+        @media (max-width: 480px) {
+            header h1 {
+                font-size: 1.5rem;
+            }
+
+            .home-intro-header {
+                font-size: 1.5rem;
+            }
+
+            .filter-btn {
+                padding: 6px 10px;
+                font-size: 0.8rem;
+            }
+
+            .ow-hero-section h1 {
+                font-size: 1.8rem;
+            }
+
+            .ow-features-grid .ow-feature-card h3 {
+                font-size: 1rem;
+            }
+        }
+    </style>
+
 </head>
 <body>
 
@@ -55,6 +181,9 @@
             <!-- HOME Content -->
             <div id="home-content" class="page-content">
                  <h2 class="home-intro-header">Welcome, Traveler, to a World… Distracted.</h2>
+                 <div class="centered-text">
+                     <p>The Distracted WORLD ends here. Your Organized WORLD begins now.</p>
+                 </div>
                  <div class="image-container">
                     <img src="assets/images/distracted-world-main.jpg"
                          alt="Distracted WORLD illustration with globe head character"
@@ -87,7 +216,7 @@
                  <p>Meet <strong>Di-Mind</strong>! He's a special character here to help you on this journey. Want to know more about him and how he helps organize thoughts? Check out the <strong>'Organized WORLD'</strong> section!</p>
                  <div class="home-section-separator" style="width: 40%; margin: 40px auto !important;"></div>
                  <section class="preview-section"> <h3>Distracted WORLD</h3> <p>In a Distracted world, people often escape their day-to-day struggles by being preoccupied with the wrong things...</p> <button class="read-more-btn" data-target-filter="distracted">Read More</button> </section>
-                 <section class="preview-section"> <h3>Organized WORLD (Meet Di-Mind)</h3> <p>In the black-and-white world of the 1930s, where jazz tunes float through the air... Meet Di-Mind...</p> <button class="read-more-btn" data-target-filter="organized">Read More</button> </section>
+                 <section class="preview-section"> <h3>Organized WORLD (Enter The Ki)</h3> <p>Meet Di-Mind and discover how to Enter The Ki state. Transform your mind and escape the system designed to distract you...</p> <button class="read-more-btn" data-target-filter="organized">Read More</button> </section>
                  <section class="preview-section"> <h3>Blog</h3> <p>Latest thoughts, insights, and updates from the world of Ki, focus, and escaping distractions...</p> <button class="read-more-btn" data-target-filter="blog">Read More</button> </section>
                  <section class="preview-section centered-preview"> <p>Ready to chart your course?</p> <button class="read-more-btn" data-target-filter="goals">Go to Goals</button> </section>
             </div>
@@ -181,31 +310,157 @@
 
             <!-- Organized World Content -->
             <div id="organized-content" class="page-content hidden">
-                 <h1>Meet <strong>Di-Mind</strong></h1>
-                  <img src="assets/images/Di-Mind2.gif" alt="Di-Mind with Globe Head" class="placeholder-image">
-                  <p> <!-- Drop Cap Applied by CSS -->
-                      Di-Mind isn't <em>just a character</em>; he's a <strong>reminder</strong>, a bot with a <strong>purpose</strong>. Every hour, his globe head lights up, urging you with a voice <em>straight from the 1930s</em>, "What are your goals for today? List them, my friend!"
-                  </p>
-                  <p style="text-align: center; font-style: italic; margin: 15px 0 !important;">1.<br/>2.<br/>3.<br/>...<br/>10.?</p>
-                  <p>With batteries or a charge, Di-Mind <strong>keeps you on track</strong>. He'll even read you <em>audiobooks</em>, making your daily grind a bit more bearable. But at the end of the day, at <strong>23:30</strong>, he'll ask, "Have you <em>completed</em> your tasks?"</p>
-                  <p>If you've <strong>succeeded</strong>, Di-Mind sings a <em>jolly tune</em>, celebrating your achievements. But if you <strong>falter</strong>, his globe turns a <em>fiery red</em>, and with a voice that could belong to a stern 1930s schoolmaster, he'll give you a piece of his mind, not with harsh words, but with the kind of <em>chiding</em> that makes you laugh and then work harder.</p>
-                  <h2>The Tale of Di-Mind in Distracted WORLD</h2>
-                  <p>In the <em>black-and-white world of the 1930s</em>, where jazz tunes float through the air and every sound crackles with life, there lies the <strong>Distracted WORLD</strong>. Here, everyone is <strong>lost</strong> in a maze of noise and distraction, living in a <em>matrix of their own making</em>.</p>
-                  <p>At the heart of this world is Di-Mind, a <em>peculiar figure</em> with a globe for a head. Di-Mind is the <strong>beacon of hope</strong>, the guide to escape the <em>endless rat race</em>. With a simple flick of a switch on his chest, Di-Mind <strong>transforms</strong> from a Distracted to a <strong>Disciplined Mind</strong>, showing everyone the way out.</p>
-                  <h2>The Switch</h2>
-                  <img src="assets/images/dw-people.gif" alt="Di-Mind NPCs" class="placeholder-image">
-                  <h2>The Adventure of <strong>Di-Mind</strong></h2>
-                  <p>In the black and white land of Distracted WORLD, there lived Di-Mind, a fellow with a globe for a head and a brain full of <strong>dreams</strong>, but oh, how easily those dreams got lost in the <em>noise</em>! This place was full of NPCs, folks who just wandered around, not really doing much, caught in their own little worlds of <em>distraction</em>.</p>
-                  <p>Di-Mind, he was <em>different</em>. He wanted to <strong>achieve</strong>, to be someone, to make his mark. But every day was a <strong>battle</strong>. The radio blared with jazz that danced away his focus, the newspapers screamed headlines that weren't his to worry over, and the chatter of the street was like a <em>never-ending spell of confusion</em>.</p>
-                  <p>He would start his day with a list of goals, but by noon, he'd find himself staring at the clouds, <strong>lost in thought</strong> about anything but what he needed to do. It was like living in a <em>maze</em> where every turn led back to the start.</p>
-                  <p>Until one day, something <strong>magical</strong> happened. A little switch, hidden beneath the chaos of his thoughts, suddenly <em>glowed with a bright, warm light</em>. It was as if the sun had decided to shine inside his head. Di-Mind reached out, flicked the switch, and <em>click</em>—the <strong>world changed</strong>.</p>
-                  <p><strong>Suddenly</strong>, the jazz became a <em>rhythm</em> for his work, the headlines <em>inspired</em> him, and the chatter of the NPCs turned into <em>whispers of encouragement</em>. His globe head spun around, and he felt a <strong>connection</strong> with everything around him, like he was <strong>one with the universe</strong>.</p>
-                  <p><strong>Now</strong>, Di-Mind could see through the distractions. Each moment was <strong>clear</strong>, each goal <strong>within reach</strong>. He <em>danced</em> through his tasks with the grace of a 1930s star, his globe head lighting up with every <em>small victory</em>. The NPCs, they watched in <strong>awe</strong>. Here was someone who had <strong>cracked the code</strong> to the matrix of distraction.</p>
-                  <p>Di-Mind became a <strong>legend</strong> in Distracted WORLD, not just for his <em>discipline</em> but for how he turned distractions into <strong>tools for success</strong>. And every now and then, when someone else felt lost in the noise, Di-Mind would share his <em>secret</em>. "Look for the <strong>switch</strong>," he'd say, "it's there, waiting for you to make your world light up too."</p>
-                  <p>And so, in this world where time seemed to stand still, Di-Mind became the <em>beacon</em>, the hero who showed everyone that even in the most distracted of places, you could find your path, light up your mind, and become one with the universe, one task at a time.</p>
-                  <p>But the <strong>real magic</strong>, the key to Di-Mind's newfound joy, was <strong>persistence</strong>. He learned that <em>sticking to his goals</em>, day in and day out, was what truly mattered. He <strong>stopped</strong> focusing on unnecessary things, <strong>tuning out</strong> the noise that once distracted him. Instead, he had a <em>real goal</em> in mind, a clear vision of what he truly wanted to achieve. This <strong>routine</strong>, this steady rhythm of doing, was what brought him back to happiness.</p>
-                  <p>With persistence, Di-Mind wasn't just <em>surviving</em> in Distracted WORLD; he was <strong>thriving</strong>, proving that with every small, persistent step, one could <em>dance their way to bliss</em>.</p>
-                  <a href="https://dw.typedream.app/" target="_blank" rel="noopener noreferrer" class="page-link">Anti-Brain Rot</a>
+                <!-- Hero Section -->
+                <div class="ow-hero-section">
+                    <h1>Meet <strong>Di-Mind</strong></h1>
+                    <img src="assets/images/Di-Mind2.gif" alt="Di-Mind with Globe Head" class="placeholder-image ow-hero-image">
+                    <div class="ow-intro-text">
+                        <p class="ow-tagline"><!-- Drop Cap Applied by CSS -->
+                            Di-Mind isn't <em>just a character</em>; he's a <strong>reminder</strong>, a bot with a <strong>purpose</strong>.
+                        </p>
+                        <div class="ow-goal-list" style="text-align: center; font-style: italic; margin: 15px 0 !important;">
+                            <p>Di-Mind's 10 Core Purposes:</p>
+                            <ol>
+                                <li>Daily Goal Setting & Tracking</li>
+                                <li>Hourly Focus Reminders</li>
+                                <li>Progress Monitoring & Feedback</li>
+                                <li>Motivation & Encouragement</li>
+                                <li>Habit Formation Assistance</li>
+                                <li>Distraction Detection & Alerts</li>
+                                <li>Evening Achievement Review</li>
+                                <li>Audiobook Recommendations</li>
+                                <li>Community Connection Guidance</li>
+                                <li>Achievement Celebration</li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Di-Mind Features -->
+                <div class="ow-features-section">
+                    <h2>Di-Mind's <strong>Daily Routine</strong></h2>
+                    <div class="ow-features-grid">
+                        <div class="ow-feature-card">
+                            <h3>⏰ Hourly Reminders</h3>
+                            <p>Every hour, his globe head lights up with a voice <em>straight from the 1930s</em>: "What are your goals for today?"</p>
+                        </div>
+                        <div class="ow-feature-card">
+                            <h3>🎵 Audiobook Companion</h3>
+                            <p>With batteries or a charge, Di-Mind reads you <em>audiobooks</em>, making your daily grind more bearable.</p>
+                        </div>
+                        <div class="ow-feature-card">
+                            <h3>🌙 Evening Review</h3>
+                            <p>At <strong>23:30</strong>, he'll ask: "Have you <em>completed</em> your tasks?" Success brings celebration!</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="home-section-separator"></div>
+
+                <!-- The Story Section -->
+                <div class="ow-story-section">
+                    <h2>The Tale of <strong>Di-Mind</strong></h2>
+                    <div class="ow-story-intro">
+                        <p>In the <em>black-and-white world of the 1930s</em>, where jazz tunes float through the air and every sound crackles with life, there lies the <strong>Distracted WORLD</strong>.</p>
+                        <p>Here, everyone is <strong>lost</strong> in a maze of noise and distraction, living in a <em>matrix of their own making</em>.</p>
+                    </div>
+
+                    <div class="ow-story-content">
+                        <h3>The Lost Bot</h3>
+                        <p>In this land lived Di-Mind, a helpful bot with a globe for a head and a brain full of <strong>dreams</strong>. But oh, how easily those dreams got lost in the <em>noise</em>!</p>
+                        <p>The radio blared with jazz that danced away his focus, newspapers screamed headlines that weren't his to worry over, and the chatter of the street was like a <em>never-ending spell of confusion</em>.</p>
+
+                        <h3>The Magical Switch</h3>
+                        <img src="assets/images/dw-people.gif" alt="Di-Mind NPCs" class="placeholder-image ow-story-image">
+                        <p>Until one day, something <strong>magical</strong> happened. A little switch, hidden beneath the chaos of his thoughts, suddenly <em>glowed with a bright, warm light</em>.</p>
+                        <p>Di-Mind reached out, flicked the switch, and <em>click</em>—the <strong>world changed</strong>. The jazz became a <em>rhythm</em> for his work, headlines <em>inspired</em> him, and chatter turned into <em>whispers of encouragement</em>.</p>
+
+                        <h3>The Transformation</h3>
+                        <p><strong>Now</strong>, Di-Mind could see through the distractions. Each moment was <strong>clear</strong>, each goal <strong>within reach</strong>. He <em>danced</em> through his tasks with the grace of a 1930s star.</p>
+                        <p>Di-Mind became a <strong>legend</strong> in Distracted WORLD, not just for his <em>discipline</em> but for how he turned distractions into <strong>tools for success</strong>.</p>
+                    </div>
+
+                    <div class="ow-story-moral">
+                        <h3>The Real Magic: <strong>Persistence</strong></h3>
+                        <p>The key to Di-Mind's newfound joy was <strong>persistence</strong>. He learned that <em>sticking to his goals</em>, day in and day out, was what truly mattered.</p>
+                        <p>With persistence, Di-Mind wasn't just <em>surviving</em> in Distracted WORLD; he was <strong>thriving</strong>, proving that with every small, persistent step, one could <em>dance their way to bliss</em>.</p>
+                    </div>
+                </div>
+
+                <div class="home-section-separator"></div>
+
+                <!-- Enter The Ki Section -->
+                <div class="ow-ki-section">
+                    <div class="ow-ki-hero">
+                        <img src="assets/images/dw-lander-hero.png" alt="Distracted WORLD - Enter The Ki" class="placeholder-image ow-ki-hero-image">
+                        <h2>Are You Ready To <strong>Escape The Distracted World</strong>?</h2>
+                        <div class="centered-text ow-ki-intro">
+                            <p><em><strong>Are You Ready To Escape The System Created To Enslave You And Enter A Different State Of Mind?</strong></em></p>
+                            <p><strong>Let's Do It!</strong></p>
+                        </div>
+                    </div>
+
+                    <div class="ow-ki-content">
+                        <div class="ow-ki-main">
+                            <div class="ow-ki-left">
+                                <img src="assets/images/dworld-wp.png" alt="Brain Functionality - Enter The Ki State" class="placeholder-image ow-ki-brain">
+                                <h3>The <strong>Ki</strong> State</h3>
+                                <p>Entering the state of <em>Ki</em> means radiating the <strong>highest Energy, Frequency, and Vibration</strong> to attract the right things into your life.</p>
+                                <p>You become a <em>magnet</em> for success, focus, and purpose. It's time to <strong>rewire</strong> your Ki and <strong>reprogram</strong> your mind.</p>
+                            </div>
+
+                            <div class="ow-ki-right">
+                                <h3>What You'll <strong>Discover</strong></h3>
+                                <ul class="ow-ki-benefits">
+                                    <li><strong>🧠 Mental Clarity:</strong> Cut through the noise and find your true purpose</li>
+                                    <li><strong>🎯 Unstoppable Focus:</strong> Build the discipline to achieve anything</li>
+                                    <li><strong>⚡ Energy Mastery:</strong> Harness your inner power and direct it intentionally</li>
+                                    <li><strong>🏗️ Life Design:</strong> Stop drifting, start building the life you deserve</li>
+                                    <li><strong>🤝 Community:</strong> Connect with others on the same journey</li>
+                                </ul>
+
+                                <div class="ow-ki-cta">
+                                    <h4>Ready to <strong>Transform</strong> Your Life?</h4>
+                                    <p>Join the <strong>Distracted WORLD</strong> community and discover what happens when you stop being a victim of distraction and start being the architect of your destiny.</p>
+                                    <p class="ow-ki-note"><em>Limited spots available. The journey to mental freedom starts now.</em></p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="ow-testimonials">
+                            <img src="assets/images/dw-lander-solitude.jpg" alt="Solitude and Focus - The Ki State" class="placeholder-image ow-testimonial-image">
+                            <h3>What Members Are <strong>Saying</strong></h3>
+                            <div class="ow-testimonial-grid">
+                                <div class="ow-testimonial-card">
+                                    <p>"Finally found a community that understands the struggle. The Ki state is real, and it's life-changing."</p>
+                                    <span class="ow-testimonial-author">- Focus Seeker</span>
+                                </div>
+                                <div class="ow-testimonial-card">
+                                    <p>"Di-Mind's principles helped me break free from social media addiction. I'm now 10x more productive."</p>
+                                    <span class="ow-testimonial-author">- Digital Escape Artist</span>
+                                </div>
+                                <div class="ow-testimonial-card">
+                                    <p>"The 1930s aesthetic and mindset shift approach is genius. It's like having a wise mentor in your pocket."</p>
+                                    <span class="ow-testimonial-author">- Vintage Mindset Enthusiast</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="ow-final-cta" style="background-color: #000000; color: #ffffff; padding: 30px; border-radius: 10px; text-align: center;">
+                            <a href="https://dw.typedream.app/" target="_blank" rel="noopener noreferrer">
+                                <img src="assets/images/dw-lander-animation.gif" alt="Animation - Enter The Ki State" class="placeholder-image ow-final-image">
+                            </a>
+    <h2 style="color: #ffffff;">Your <strong>Mental Freedom</strong> Awaits</h2>
+    <p style="color: #ffffff; text-align: center;">The Distracted WORLD ends here. Your Organized WORLD begins now.</p>
+                            <div style="text-align: center;">
+                                <a href="https://whop.com/distractedworld/" target="_blank" rel="noopener noreferrer" class="page-link ow-final-btn">
+                                    <strong>Anti-Brainrot</strong><br/>
+                                    <span class="ow-subtitle">Silence the Noise Within</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
 
             <!-- Blog List Content -->
@@ -271,6 +526,13 @@
              <a href="https://youtube.com/@DiMindX" target="_blank" rel="noopener noreferrer" title="YouTube" aria-label="Distracted WORLD on YouTube"><i class="fa-brands fa-youtube"></i></a>
              <a href="https://instagram.com/dworldx" target="_blank" rel="noopener noreferrer" title="Instagram" aria-label="Distracted World on Instagram"><i class="fa-brands fa-instagram"></i></a>
              <a href="https://tiktok.com/@dimindx" target="_blank" rel="noopener noreferrer" title="TikTok" aria-label="Distracted World on TikTok"><i class="fa-brands fa-tiktok"></i></a>
+        </div>
+
+        <!-- Contact Section -->
+        <div class="contact-section">
+            <p style="text-align: center; margin: 20px 0;">
+                Got Questions? Ask away! <a href="mailto:ki@entertheki.com" style="color: #3f3a36;">ki@entertheki.com</a>
+            </p>
         </div>
 
         <!-- Footer -->
